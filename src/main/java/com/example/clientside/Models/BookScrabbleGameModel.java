@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class BookScrabbleGameModel {
     ArrayList<PlayerModel> gamePlayers;
+    BoardModel board_game = new BoardModel();
+
     public BookScrabbleGameModel(ArrayList<PlayerModel> gamePlayers) {
         this.gamePlayers = gamePlayers;
     }

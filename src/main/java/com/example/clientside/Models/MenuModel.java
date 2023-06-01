@@ -7,7 +7,10 @@ public class MenuModel {
         this.player = new HostModeModel(); //
         ((HostModeModel) player).initNewGame();
     }
-    public void startGuestMode(){}
+    public void startGuestMode(){
+        this.player = new GuestModeModel();
+        player.connectServer(); //this func make the connection to host server
+    }
 
 
 }
