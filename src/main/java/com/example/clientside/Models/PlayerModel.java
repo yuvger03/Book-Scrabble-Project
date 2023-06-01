@@ -35,11 +35,20 @@ public abstract class PlayerModel {
     }
 
     public abstract void connectServer();
-//TODO:implement the server connection funcs.
-//    public int getScoreFromServer(){};
-//
-//    public List getLocationFromServer(){};
-//    public boolean isWordValid(ArrayList<> word)
 
+
+//TODO:implement the server connection funcs.
+//    public abstract void connectServer();
+//    public boolean isWordValid(ArrayList<> word)
+//    public int isLocationValid(ArrayList<> Location) -list [x,y] or (int x, int y)
+//    public int getScoreFromServer(){};- no need for now-getting score from location func.
+    // the flow of connection:
+    // pre game- all players get from server 7 random tiles from bag
+    // a player want to locate word-> sent word to server
+    //server returns valid/not valid
+    //if valid- player wants so locate word-> player send location
+    //server returns valid/not valid for location of the word.
+    // if location is valid server returns the score that the player gets after locating this word. if not valid-server return -1.
+    // server completes the players tiles to 7 tiles.
 
 }
