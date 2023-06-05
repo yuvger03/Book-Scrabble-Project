@@ -5,4 +5,5 @@ module com.example.clientside {
                             
     opens com.example.clientside to javafx.fxml;
     exports com.example.clientside;
+    exports com.example.clientside.viewmodel;
 }

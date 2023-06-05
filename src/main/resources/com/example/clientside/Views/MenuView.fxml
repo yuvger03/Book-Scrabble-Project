@@ -6,8 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="603.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.example.clientside.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.viewmodel.MenuViewModel">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the game!" wrappingWidth="361.84941601753235" BorderPane.alignment="CENTER">
          <font>
@@ -16,14 +15,14 @@
       </Text>
    </top>
    <center>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ButtonBar prefHeight="382.0" prefWidth="460.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="421.0" text="Host Mode - Start new game">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedHost" prefHeight="38.0" prefWidth="221.0" text="Guest Mode - Join game">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Guest Mode - Join game">
+          <Button mnemonicParsing="false" onAction="#pressedHost" prefHeight="38.0" prefWidth="421.0" text="Host Mode - Start new game">
                <font>
                   <Font size="17.0" />
                </font>
