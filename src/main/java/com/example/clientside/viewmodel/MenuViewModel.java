@@ -2,12 +2,14 @@ package com.example.clientside.viewmodel;
 
 import com.example.clientside.Models.MenuModel;
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import java.util.Observable;
+
+import java.util.Observer;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import java.util.Observer;
 
-public class MenuViewModel implements Observer, Observable {
+public class MenuViewModel extends Observable implements Observer {
     MenuModel mm;
     public StringProperty name;
 
@@ -22,15 +24,7 @@ public class MenuViewModel implements Observer, Observable {
 
     }
 
-    @Override
-    public void addListener(InvalidationListener invalidationListener) {
 
-    }
-
-    @Override
-    public void removeListener(InvalidationListener invalidationListener) {
-
-    }
     public void pressedHost(){
         mm.startHostMode();
     }

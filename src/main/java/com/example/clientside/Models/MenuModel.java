@@ -1,11 +1,11 @@
 package com.example.clientside.Models;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
+//import javafx.beans.Observable;
 import java.util.Observer;
+import java.util.Observable;
 
-public class MenuModel implements Observable {
+public class MenuModel extends Observable {
     PlayerModel player;
 
     public MenuModel(){
@@ -24,14 +24,8 @@ public class MenuModel implements Observable {
     }
 
 
-    @Override
-    public void addListener(InvalidationListener invalidationListener) {
 
-    }
 
-    @Override
-    public void removeListener(InvalidationListener invalidationListener) {
 
-    }
 }
 //start new game-> what's your name-> score etc
