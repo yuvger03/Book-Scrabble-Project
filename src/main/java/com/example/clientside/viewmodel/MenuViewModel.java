@@ -28,5 +28,7 @@ public class MenuViewModel extends Observable implements Observer {
     public void pressedHost(){
         mm.startHostMode();
     }
-
+    public void pressedGuest(){
+        mm.startGuestMode();
+    }
 }

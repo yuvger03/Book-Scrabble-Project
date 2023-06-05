@@ -17,7 +17,7 @@
    <center>
       <ButtonBar prefHeight="382.0" prefWidth="460.0" BorderPane.alignment="CENTER">
         <buttons>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedHost" prefHeight="38.0" prefWidth="221.0" text="Guest Mode - Join game">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedGuest" prefHeight="38.0" prefWidth="221.0" text="Guest Mode - Join game">
                <font>
                   <Font size="17.0" />
                </font>
