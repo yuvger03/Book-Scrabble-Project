@@ -1,6 +1,7 @@
 package com.example.clientside;
 
 import com.example.clientside.Models.MenuModel;
+import com.example.clientside.view.menuViewController;
 import com.example.clientside.viewmodel.MenuViewModel;
 import javafx.application.Application;
 import java.util.Observable;
@@ -22,6 +23,9 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+        menuViewController mvc = fxmlLoader.getController();
+        mvc.setMenuVM(menuVM);
+        menuVM.addObserver(mvc);
     }
 
     public static void main(String[] args) {
