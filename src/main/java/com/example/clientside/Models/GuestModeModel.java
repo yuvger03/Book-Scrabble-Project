@@ -34,11 +34,11 @@ public class GuestModeModel extends PlayerModel {
     private String guestName;
 
 
-    public GuestModeModel(String host, int hostPort, String guestName) {
-        this.host = "localhost";
-        this.hostPort = hostPort;
-        this.guestName = guestName;
-    }
+//    public GuestModeModel(String host, int hostPort, String guestName) {
+//        this.host = "localhost";
+//        this.hostPort = hostPort;
+//        this.guestName = guestName;
+//    }
 
     //TODO:implement- connect the server
     @Override

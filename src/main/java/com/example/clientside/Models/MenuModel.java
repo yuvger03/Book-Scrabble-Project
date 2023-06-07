@@ -21,10 +21,13 @@ public class MenuModel extends Observable {
         this.player = new GuestModeModel();
         player.connectServer(); //this func make the connection to host server
         notifyObservers();
+    }
+    public String getName(){
+        return name;
 
     }
-    public String getName(String name){
-        return name;
+    public void setName(String name){
+        this.name=name;
     }
 
 

@@ -28,7 +28,7 @@
                   <Font size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="name" onInputMethodTextChanged="#gotName" promptText="enter your name" >
+            <TextField fx:id="name"  promptText="enter your name" >
                <font>
                   <Font size="18.0" />
                </font>

@@ -13,11 +13,17 @@ import javafx.scene.control.Label;
 import java.util.Observer;
 
 public class MenuViewModel extends Observable implements Observer {
-    MenuModel mm;
-    public StringProperty name;
+   private MenuModel mm;
+   public StringProperty name;
 
     public MenuViewModel(){
         this.mm = new MenuModel();
+        //this.mm.addObserver(this);
+        name = new SimpleStringProperty();
+    }
+    public MenuViewModel(MenuModel m){
+        this.mm=m;
+        //this.mm.addObserver(this);
         name = new SimpleStringProperty();
     }
     public String getName() {
@@ -30,33 +36,33 @@ public class MenuViewModel extends Observable implements Observer {
 
     public void setName(String name) {
         this.name.set(name);
+        setChanged();
+        notifyObservers();
     }
 
 
 
-    public void pressedHost(){
-        System.out.println(name);
+    public void pressedHost() {
+        mm.setName(name.get());
+        System.out.println(name.get());
 //        mm.startHostMode();
     }
     public void pressedGuest(){
-        System.out.println(name.toString() + "a");
+        System.out.println(name.get() + "a");
 //        mm.startGuestMode();
     }
 
-
-
     public void gotName(){
-        mm.getName(name.get());
+        mm.getName();
     }
 
     @Override
     public void update(java.util.Observable o, Object arg) {
         if (o==mm){
-
-            //set mode
+            name.set(mm.getName());}
         }
     }
 
 
 
-}
+

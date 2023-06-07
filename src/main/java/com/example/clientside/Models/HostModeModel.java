@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class HostModeModel extends PlayerModel {
     ArrayList<PlayerModel> game_players;
     BookScrabbleGameModel game;
-    private MyServer server; //TODO: where to locate myServer
+    //private MyServer server; //TODO: where to locate myServer
     private int serverPort;
     private List<GuestHandler> guestHandlers;
     private Timer timeoutTimer;
@@ -45,15 +45,15 @@ public class HostModeModel extends PlayerModel {
     public HostModeModel() {
         this.game_players = new ArrayList<PlayerModel>();
         this.guestHandlers = new ArrayList<GuestHandler>();
-        int port = 6000 + r.nextInt(1000);
-        this.serverPort = port;
-        this.server = new MyServer(port, new HostClientHandler(), 3); // TODO: here or in startHost?
+       // int port = 6000 + r.nextInt(1000);
+       // this.serverPort = port;
+        //this.server = new MyServer(port, new HostClientHandler(), 3); // TODO: here or in startHost?
 
     }
 
     //TODO: IMPORTANT - how players connect host?
     // 1. Listen func/option- to let new players to connect host -every new player will be insert into game_players list
-    public void addPlayersToGame(){
+    public void addPlayersToGame() {
     }
 
     //TODO: this func will initialize a new game:
@@ -73,26 +73,26 @@ public class HostModeModel extends PlayerModel {
 
 
     public void startHost() {
-        server = new MyServer(serverPort, new ClientHandler(), 10); // Adjust the thread pool size as needed
-        server.start();
+        //server = new MyServer(serverPort, new ClientHandler(), 10); // Adjust the thread pool size as needed
+        //server.start();
         startGuestListener();
 //        startTimeoutTimer();
     }
 
     private void startGuestListener() {
-        new Thread(() -> {
-            try {
-                ServerSocket guestServerSocket = new ServerSocket(serverPort+10); // another random port- host port
-                while (true) {
-                    Socket guestSocket = guestServerSocket.accept();
-                    GuestHandler guestHandler = new GuestHandler(guestSocket);
-                    guestHandlers.add(guestHandler);
-                    guestHandler.start();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                ServerSocket guestServerSocket = new ServerSocket(serverPort + 10); // another random port- host port
+//                while (true) {
+//                    Socket guestSocket = guestServerSocket.accept();
+//                    GuestHandler guestHandler = new GuestHandler(guestSocket);
+//                    guestHandlers.add(guestHandler);
+//                    guestHandler.start();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 
     private void startTimeoutTimer() {
@@ -106,16 +106,16 @@ public class HostModeModel extends PlayerModel {
     }
 
     public void stop() {
-//        timeoutTimer.cancel();
-        server.close();
-        closeGuestHandlers();
+////        timeoutTimer.cancel();
+//        server.close();
+//        closeGuestHandlers();
     }
 
     private void closeGuestHandlers() {
-        for (GuestHandler guestHandler : guestHandlers) {
-            guestHandler.close();
-        }
-        guestHandlers.clear();
+//        for (GuestHandler guestHandler : guestHandlers) {
+//            guestHandler.close();
+//        }
+//        guestHandlers.clear();
     }
 
     private class GuestHandler extends Thread {
@@ -124,4 +124,5 @@ public class HostModeModel extends PlayerModel {
         private ObjectOutputStream output;
 
 
+    }
 }
