@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-public class BookScrabbleHandler implements ClientHandler {
+public class BookScrabbleHandler implements IClientHandler {
 
 	BufferedReader in;
 	PrintWriter out;

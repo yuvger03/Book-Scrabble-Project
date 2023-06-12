@@ -1,14 +1,24 @@
 package com.example.clientside.Models;
 
+import com.example.clientside.Game.Tile;
+import com.example.clientside.Game.Word;
+
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public abstract class PlayerModel {
     String name = null;
     int score = 0;
+    private BoardModel board_game = new BoardModel();
     ArrayList<TileModel> p_tiles;
-    //TODO: understand how server connection works
-    //Server server; each player has a instance of its server.
+     int serverPort;
+    Scanner inFromServer;
+    PrintWriter outToServer;
+
+    //TODO: understand how gameServer connection works
+    //Server gameServer; each player has a instance of its gameServer.
 
     public String getName() {
         return name;
@@ -34,21 +44,49 @@ public abstract class PlayerModel {
         this.p_tiles = p_tiles;
     }
 
-    public abstract void connectServer();
+    //TODO:implement- connect the gameServer-to MyServer
+    public void connectServer(){
+            new Thread(
+                    ()->{
+                        try{
+                            Socket server=new Socket("localhost", serverPort);
+                            this.outToServer=new PrintWriter(server.getOutputStream());
+                            this.inFromServer=new Scanner(server.getInputStream());
+                            //StartGame();
+                        }catch (Exception e){}
+                    }).start();
+        }
 
+    public  int tryToPlace(String tryToPlace ,Word word){
+        String s=word.toString();
+        outToServer.println("tryToPlace"+","+s);
+        outToServer.flush();
+        return Integer.parseInt(inFromServer.next());
+    }
 
-//TODO:implement the server connection funcs.
+    public Tile getTileFromBag(){
+        outToServer.println("getTileFromBag,");
+        outToServer.flush();
+        //TODO- how send tile from server?
+        return null;
+    }
+
+    public void close() {
+        inFromServer.close();
+        outToServer.close();
+    }
+//TODO:implement the gameServer connection funcs.
 //    public abstract void connectServer();
 //    public boolean isWordValid(ArrayList<> word)
 //    public int isLocationValid(ArrayList<> Location) -list [x,y] or (int x, int y)
 //    public int getScoreFromServer(){};- no need for now-getting score from location func.
     // the flow of connection:
-    // pre game- all players get from server 7 random tiles from bag
-    // a player want to locate word-> sent word to server
-    //server returns valid/not valid
+    // pre game- all players get from gameServer 7 random tiles from bag
+    // a player want to locate word-> sent word to gameServer
+    //gameServer returns valid/not valid
     //if valid- player wants so locate word-> player send location
-    //server returns valid/not valid for location of the word.
-    // if location is valid server returns the score that the player gets after locating this word. if not valid-server return -1.
-    // server completes the players tiles to 7 tiles.
+    //gameServer returns valid/not valid for location of the word.
+    // if location is valid gameServer returns the score that the player gets after locating this word. if not valid-gameServer return -1.
+    // gameServer completes the players tiles to 7 tiles.
 
 }

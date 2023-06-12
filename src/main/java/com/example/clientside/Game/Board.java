@@ -10,7 +10,7 @@ public class Board {
 	final byte dw = 20; // double word
 	final byte tw = 30; // triple word
 
-	private byte[][] bonus = {
+	public byte[][] bonus = {
 			{ tw, 0, 0, dl, 0, 0, 0, tw, 0, 0, 0, dl, 0, 0, tw },
 			{ 0, dw, 0, 0, 0, tl, 0, 0, 0, tl, 0, 0, 0, dw, 0 },
 			{ 0, 0, dw, 0, 0, 0, dl, 0, dl, 0, 0, 0, dw, 0, 0 },
@@ -28,9 +28,9 @@ public class Board {
 			{ tw, 0, 0, dl, 0, 0, 0, tw, 0, 0, 0, dl, 0, 0, tw }
 	};
 
-	Tile[][] tiles;
+	 public Tile[][] tiles;
 
-	boolean isEmpty;
+	public boolean isEmpty;
 
 	public Board() {
 		tiles = new Tile[15][15];

@@ -9,14 +9,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MyServer {
-    private int port;
-    private ClientHandler clientHandler;
+    public int port;
+    IClientHandler clientHandler;
     private int maxThreads;
-    private ServerSocket serverSocket;
+    protected ServerSocket serverSocket;
     private ExecutorService executorService;
-    private volatile boolean stop;
+    protected volatile boolean stop;
 
-    public MyServer(int port, ClientHandler clientHandler, int maxThreads) {
+    public MyServer(int port, IClientHandler clientHandler, int maxThreads) {
         this.port = port;
         this.clientHandler = clientHandler;
         this.maxThreads = maxThreads;
@@ -28,9 +28,10 @@ public class MyServer {
         executorService.execute(() -> startServer());
     }
 
-    private void startServer() {
+    protected void startServer() {
         try {
             serverSocket = new ServerSocket(port);
+            System.out.println("Server started on port " +port);
             serverSocket.setSoTimeout(1000);
             while (!stop) {
                 try {
@@ -40,7 +41,6 @@ public class MyServer {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     finally {
                         try {
                             clientHandler.close();

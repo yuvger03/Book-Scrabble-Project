@@ -12,14 +12,14 @@ public class MenuModel extends Observable {
 
     }
     public void startHostMode(){
-        this.player = new HostModeModel(); //
-        ((HostModeModel) player).initNewGame();
+        this.player = new HostModeModel(8080); //enter game port
+        //((HostModeModel) player).initNewGame();
         notifyObservers();
 
     }
     public void startGuestMode(){
         this.player = new GuestModeModel();
-        player.connectServer(); //this func make the connection to host server
+        //player.connectServer(); //this func make the connection to host gameServer
         notifyObservers();
     }
     public String getName(){
