@@ -8,11 +8,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class PlayerModel {
+public class PlayerModel {
     String name = null;
     int score = 0;
     private BoardModel board_game = new BoardModel();
-    ArrayList<TileModel> p_tiles;
+    ArrayList<Tile> p_tiles;
      int serverPort;
     Scanner inFromServer;
     PrintWriter outToServer;
@@ -28,7 +28,7 @@ public abstract class PlayerModel {
         return score;
     }
 
-    public ArrayList<TileModel> getP_tiles() {
+    public ArrayList<Tile> getP_tiles() {
         return p_tiles;
     }
 
@@ -40,7 +40,7 @@ public abstract class PlayerModel {
         this.score = score;
     }
 
-    public void setP_tiles(ArrayList<TileModel> p_tiles) {
+    public void setP_tiles(ArrayList<Tile> p_tiles) {
         this.p_tiles = p_tiles;
     }
 
@@ -58,7 +58,8 @@ public abstract class PlayerModel {
         }
 
     public  int tryToPlace(String tryToPlace ,Word word){
-        String s=word.toString();
+        //String s=word.toString();
+        String s=WordToString(word);
         outToServer.println("tryToPlace"+","+s);
         outToServer.flush();
         return Integer.parseInt(inFromServer.next());
@@ -69,6 +70,33 @@ public abstract class PlayerModel {
         outToServer.flush();
         //TODO- how send tile from server?
         return null;
+    }
+
+    //TODO: think of good location
+    public String WordToString(Word word) { //make obj WORD to string- "row,col,verticl,word"
+        int row=word.getRow();
+        int col= word.getCol();
+        String direction;
+        if(word.isVertical()){
+            direction="vertical";
+        }
+        else{
+            direction="horizontal";
+        }
+        int word_len = word.getTiles().length;
+        String txt[]=new String[word_len];
+        Tile tile;
+        for(int i=0;i<txt.length;i++) {
+            tile = word.getTiles()[i];
+            txt[i] = ""+ tile.letter;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(row).append(",").append(col);
+        sb.append(",").append(direction).append(",");
+        for (String text : txt) {
+            sb.append(text);
+        }
+        return sb.toString();
     }
 
     public void close() {

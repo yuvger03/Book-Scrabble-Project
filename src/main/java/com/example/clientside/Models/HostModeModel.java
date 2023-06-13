@@ -30,26 +30,7 @@ public class HostModeModel extends PlayerModel {
         outToServer.close();
         hostServer.close();
     }
-    //TODO: think of good location
-    public static String[] writeFileWord(String file_name, ArrayList<TileModel> p_tiles) {
-        int word_len = p_tiles.size();
-        String txt[]=new String[word_len];
-        TileModel tile;
-        for(int i=0;i<txt.length;i++) {
-            tile = p_tiles.get(i);
-            txt[i] = ""+ tile.getLetter();
-        }
-        try {
-            PrintWriter out=new PrintWriter(new FileWriter(name));
-            for(String s : txt) {
-                out.print(s+" ");
-            }
-            out.println();
-            out.close();
-        }catch(Exception e) {}
 
-        return txt;
-    }
 }
 
 

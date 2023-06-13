@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class HostManager {
     Tile.Bag b;
@@ -18,12 +19,14 @@ public class HostManager {
     Scanner inFromServer;
     PrintWriter outToServer;
     Socket serverSocket;
+    private CountDownLatch connectionLatch; // added field
     public HostManager(int serverPort){
         this.gameboard= new Board();
         this.b=new Tile.Bag();
         playersList=new ArrayList<>();
         this.i=0;
         this.serverPort=serverPort;
+        connectionLatch = new CountDownLatch(1); // initialize the latch
        connectToGameServer();
     }
 
@@ -34,11 +37,17 @@ public class HostManager {
                        this.serverSocket = new Socket("localhost", serverPort);
                         this.outToServer = new PrintWriter(serverSocket.getOutputStream());
                         this.inFromServer = new Scanner(serverSocket.getInputStream());
+                        connectionLatch.countDown(); // signal that the connection is established
                     } catch (Exception e) {
                     }
                 }).start();
     }
     public boolean dictionaryLegal(String word){//TODO : how implement this func
+        try {
+            connectionLatch.await(); // wait for the connection to be established
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         outToServer.println(word);
         outToServer.flush();
         String result=inFromServer.next();
