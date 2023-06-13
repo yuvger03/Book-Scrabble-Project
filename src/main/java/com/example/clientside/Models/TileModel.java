@@ -8,5 +8,8 @@ public class TileModel {
         this.letter = letter;
         this.score = score;
     }
+    public char getLetter() {
+        return letter;
+    }
 
 }
