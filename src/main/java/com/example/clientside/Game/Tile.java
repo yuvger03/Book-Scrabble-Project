@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Tile {
 
-	public final char letter;
-	public final int score;
+	public char letter;
+	public int score;
 
-	private Tile(char letter, int score) {
+	public Tile(char letter, int score) {
 		super();
 		this.letter = letter;
 		this.score = score;
@@ -105,7 +105,5 @@ public class Tile {
 		public int[] getQuantities() {
 			return quantities.clone();
 		}
-
 	}
-
 }
