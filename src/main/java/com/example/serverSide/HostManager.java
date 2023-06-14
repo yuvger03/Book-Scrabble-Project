@@ -1,8 +1,8 @@
 package com.example.serverSide;
 
-import com.example.clientside.Game.Board;
-import com.example.clientside.Game.Tile;
-import com.example.clientside.Game.Word;
+import com.example.Game.Board;
+import com.example.Game.Tile;
+import com.example.Game.Word;
 
 import java.io.PrintWriter;
 import java.net.Socket;

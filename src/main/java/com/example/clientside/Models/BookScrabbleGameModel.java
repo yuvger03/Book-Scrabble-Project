@@ -1,10 +1,12 @@
 package com.example.clientside.Models;
 
+import com.example.Game.Board;
+
 import java.util.ArrayList;
 
 public class BookScrabbleGameModel {
     ArrayList<PlayerModel> gamePlayers;
-    BoardModel board_game = new BoardModel();
+    Board board_game = new Board();
 
     public BookScrabbleGameModel(ArrayList<PlayerModel> gamePlayers) {
         this.gamePlayers = gamePlayers;

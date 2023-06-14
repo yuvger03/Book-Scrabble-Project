@@ -1,4 +1,4 @@
-package com.example.clientside.Game;
+package com.example.Game;
 
 import java.util.Arrays;
 import java.util.Objects;

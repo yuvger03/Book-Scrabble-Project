@@ -18,7 +18,7 @@ public class MenuModel extends Observable {
 
     }
     public void startGuestMode(){
-        this.player = new GuestModeModel();
+       // this.player = new GuestModeModel();
         //player.connectServer(); //this func make the connection to host gameServer
         notifyObservers();
     }
