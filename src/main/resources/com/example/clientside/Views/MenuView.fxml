@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.menuViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="603.0" styleClass="bodybg" stylesheets="@backgrounds/Menu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.menuViewController">
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the game!" wrappingWidth="361.84941601753235" BorderPane.alignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our game!" textAlignment="CENTER" wrappingWidth="389.84941601753235" BorderPane.alignment="CENTER">
          <font>
-            <Font size="35.0" />
+            <Font size="38.0" />
          </font>
       </Text>
    </top>
    <center>
       <ButtonBar prefHeight="382.0" prefWidth="460.0" BorderPane.alignment="CENTER">
         <buttons>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedGuest" prefHeight="38.0" prefWidth="221.0" text="Guest Mode - Join game">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedGuest" prefHeight="39.0" prefWidth="221.0" text="Guest Mode - Join game">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-          <Button mnemonicParsing="false" onAction="#pressedHost" prefHeight="38.0" prefWidth="421.0" text="Host Mode - Start new game">
+          <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedHost" prefHeight="39.0" prefWidth="421.0" text="Host Mode - Start new game">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="name"  promptText="enter your name" >
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
         </buttons>
       </ButtonBar>
    </center>
+   <bottom>
+      <TextField fx:id="name" alignment="CENTER" onInputMethodTextChanged="#gotName" prefHeight="143.0" prefWidth="603.0" promptText="enter your name" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Italic" size="34.0" />
+         </font>
+      </TextField>
+   </bottom>
 </BorderPane>

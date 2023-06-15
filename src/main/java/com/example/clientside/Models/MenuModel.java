@@ -14,6 +14,7 @@ public class MenuModel extends Observable {
     public void startHostMode(){
         this.player = new HostModeModel(8080); //enter game port
         //((HostModeModel) player).initNewGame();
+
         notifyObservers();
 
     }

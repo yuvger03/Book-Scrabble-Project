@@ -94,59 +94,20 @@ public class Service {
     private int calculateScore(char c) {
         {
             switch (Character.toUpperCase(c)) {
-                case 'A':
+                case 'A', 'L', 'E', 'I', 'N', 'O', 'R', 'S', 'T', 'U':
                     return 1;
-                case 'B':
+                case 'B', 'C', 'M', 'P':
                     return 3;
-                case 'C':
-                    return 3;
-                case 'D':
+                case 'D', 'G':
                     return 2;
-                case 'E':
-                    return 1;
-                case 'F':
+                case 'F', 'W', 'H', 'V', 'Y':
                     return 4;
-                case 'G':
-                    return 2;
-                case 'H':
-                    return 4;
-                case 'I':
-                    return 1;
-                case 'J':
+                case 'J', 'X':
                     return 8;
                 case 'K':
                     return 5;
-                case 'L':
-                    return 1;
-                case 'M':
-                    return 3;
-                case 'N':
-                    return 1;
-                case 'O':
-                    return 1;
-                case 'P':
-                    return 3;
-                case 'Q':
+                case 'Q', 'Z':
                     return 10;
-                case 'R':
-                    return 1;
-                case 'S':
-                    return 1;
-                case 'T':
-                    return 1;
-                case 'U':
-                    return 1;
-                case 'V':
-                    return 4;
-                case 'W':
-                    return 4;
-                case 'X':
-                    return 8;
-                case 'Y':
-                    return 4;
-                case 'Z':
-                    return 10;
-
             }
             return 0;
         }

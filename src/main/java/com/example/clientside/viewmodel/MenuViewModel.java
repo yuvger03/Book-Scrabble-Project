@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import java.util.Observer;
 
 public class MenuViewModel extends Observable implements Observer {
-   private MenuModel mm;
-   public StringProperty name;
+    private MenuModel mm;
+    public StringProperty name;
 
     public MenuViewModel(){
         this.mm = new MenuModel();
@@ -60,9 +60,8 @@ public class MenuViewModel extends Observable implements Observer {
     public void update(java.util.Observable o, Object arg) {
         if (o==mm){
             name.set(mm.getName());}
-        }
     }
-
+}
 
 
 
