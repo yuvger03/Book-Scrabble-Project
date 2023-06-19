@@ -25,7 +25,7 @@ public class BookScrabbleHandler implements IClientHandler {
 			String[] lineAsList = line.split(",");
 			String[] args = Arrays.copyOfRange(lineAsList, 1, lineAsList.length);
 			if (key == 'Q') {
-				 System.out.println("Q");
+				// System.out.println("Q");
 				// System.out.println("args:");
 				// for(String arg: args)
 				// System.out.print(arg + " ");
