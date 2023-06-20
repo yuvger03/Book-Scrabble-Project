@@ -8,7 +8,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class GameScreenViewController {
+import java.util.Observer;
+
+public class GameScreenViewController implements Observer {
     @FXML
     TextField word;
     @FXML
@@ -32,5 +34,17 @@ public class GameScreenViewController {
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(gvm.scoreResult);
     }
+//    public void gotWord(){
+//        GVM.gotWord();
+//    }
+//    public void gotRow(){ GVM.gotRow(); }
+//
+//    public void gotCol(){GVM.gotCol();}
+//    public void checkboxPressed(){GVM.checkboxPressed();}
+//    public void pressedSend(){GVM.pressedSend();}
 
+    @Override
+    public void update(java.util.Observable o, Object arg) {
+
+    }
 }

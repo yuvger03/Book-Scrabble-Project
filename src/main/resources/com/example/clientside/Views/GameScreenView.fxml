@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/gameview.css"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-  <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-  </content>
-</ScrollPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.BoardViewController">
+  <children>
+    <HBox layoutX="166.0" layoutY="200.0" prefHeight="41.0" prefWidth="200.0">
+      <children>
+        <Canvas id="T" fx:id="TilesView" height="45.0" width="300.0" />
+      </children>
+    </HBox>
+    <Canvas fx:id="BoardView" height="200.0" layoutX="158.0" width="252.0" />
+    <HBox layoutX="136.0" layoutY="255.0" prefHeight="41.0" prefWidth="321.0">
+      <children>
+        <TextField onInputMethodTextChanged="#gotWord" prefHeight="25.0" prefWidth="86.0" promptText="enter word" />
+        <TextField onInputMethodTextChanged="#gotRow" prefHeight="25.0" prefWidth="38.0" promptText="row" />
+        <TextField onInputMethodTextChanged="#gotCol" prefHeight="25.0" prefWidth="37.0" promptText="col" />
+        <CheckBox mnemonicParsing="false" onAction="#checkboxPressed" prefHeight="25.0" prefWidth="70.0" text="vertical" />
+        <Button mnemonicParsing="false" onAction="#pressedSend" text="send" />
+        <TextField prefHeight="25.0" prefWidth="49.0" promptText="result" />
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

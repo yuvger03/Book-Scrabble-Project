@@ -8,5 +8,7 @@ module com.example.clientside {
     exports com.example.clientside;
     exports com.example.clientside.viewmodel;
     exports com.example.clientside.view;
+    exports com.example.clientside.Models;
+    opens com.example.clientside.Models to javafx.fxml;
 
 }

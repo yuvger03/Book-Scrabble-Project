@@ -2,7 +2,9 @@ package com.example.clientside.Models;
 
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.MyServer;
+import java.util.Observable;
 
+import java.util.Observer;
 import java.util.*;
 
 public class HostModeModel extends PlayerModel {
