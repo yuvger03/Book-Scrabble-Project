@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 //        MenuViewModel menuVM = new MenuViewModel(mm);
 //        mm.addObserver(menuVM);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/BoardView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();
 //        menuViewController mvc = fxmlLoader.getController();

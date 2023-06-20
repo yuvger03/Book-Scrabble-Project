@@ -21,6 +21,10 @@ public class BoardView extends Canvas {
         gc.setFill(paint); // Set the fill color to green
         gc.fillRect(j*w,i*h,w,h);
     }
+    public void fillText(GraphicsContext gc, double w, double h, int i, int j,String text){
+        gc.setFill(Color.BLACK);
+        gc.fillText(text, j * w + (w / 2), i * h + (h / 2));
+    }
     private void reDraw() {
         if(board == null) {
             System.out.println("null");
@@ -41,24 +45,23 @@ public class BoardView extends Canvas {
                 for (int j =0; j< board[i].length; j++){
                     switch (board[i][j]) {
                         case "0":
-                            fillGC(gc, w, h, i, j, Color.WHITE);
+                            fillGC(gc, w, h, i, j, Color.GREEN);
                             break;
                         case "1":
-                            fillGC(gc, w, h, i, j, Color.LIGHTBLUE);
+                            fillGC(gc, w, h, i, j, Color.RED);
                             break;
                         case "2":
                             fillGC(gc, w, h, i, j, Color.DARKBLUE);
                             break;
                         case "3":
-                            fillGC(gc, w, h, i, j, Color.GREEN);
+                            fillGC(gc, w, h, i, j, Color.LIGHTBLUE);
                             break;
                         case "4":
-                            fillGC(gc, w, h, i, j, Color.LIGHTPINK);
+                            fillGC(gc, w, h, i, j, Color.YELLOW);
                             break;
-                        default:
-                            fillGC(gc, w, h, i, j, Color.PURPLE);
-                            gc.setFill(Color.BLACK);
-                            gc.fillText(board[i][j], j * w + (w / 2), i * h + (h / 2));
+                        default: //Add number of rows and columns
+                            fillGC(gc, w, h, i, j, Color.WHITE);
+                            fillText(gc, w, h, i, j, board[i][j]);
                         }
                     }
 

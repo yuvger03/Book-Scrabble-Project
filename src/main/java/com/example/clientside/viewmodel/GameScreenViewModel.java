@@ -46,6 +46,7 @@ public class GameScreenViewModel extends Observable implements Observer {
         Word wd = s.stringToWord(w);
         player.tryToPlace(wd);
     }
-    }
+//    public void
+}
 
 

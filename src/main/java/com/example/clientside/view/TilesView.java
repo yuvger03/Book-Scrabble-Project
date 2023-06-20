@@ -40,7 +40,8 @@ public class TilesView extends Canvas {
 
                 gc.setFill(Color.BLACK);
                 gc.setFont(new Font(14));
-                gc.fillText(tiles[i], rectX + 5, rectY + cellSize - 5);
+                if (tiles[i] != null)
+                    gc.fillText(tiles[i], rectX + 5, rectY + cellSize - 5);
             }
         }
     }
