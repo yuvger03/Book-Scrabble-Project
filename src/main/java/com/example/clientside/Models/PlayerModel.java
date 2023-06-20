@@ -11,19 +11,20 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
-
+import java.util.concurrent.CountDownLatch;
 
 
 public class PlayerModel extends Observable {
     String name ;
     int totalScore ;
-    String score;
+    public String score;
     private Board board_game ;
-     ArrayList<Tile>p_tiles ;
+    public ArrayList<Tile>p_tiles ;
     //int serverPort;
     Scanner inFromServer;
     PrintWriter outToServer;
     Service service;
+    private CountDownLatch connectionLatch; // added field
 
     //TODO: understand how gameServer connection works
     //Server gameServer; each player has a instance of its gameServer.
@@ -33,6 +34,7 @@ public PlayerModel(){
     board_game = new Board();
     p_tiles =new ArrayList<>();
     service=new Service();
+    connectionLatch = new CountDownLatch(1); // initialize the latch
     //this.serverPort=serverPort;
 }
     public String getName() {
@@ -66,11 +68,12 @@ public PlayerModel(){
                             this.outToServer=new PrintWriter(server.getOutputStream());
                             this.inFromServer=new Scanner(server.getInputStream());
                             //StartGame();
+                            connectionLatch.countDown(); // signal that the connection is established
                         }catch (Exception e){}
                     }).start();
         }
 
-    public void tryToPlace(String tryToPlace ,Word word){
+    public void tryToPlace(Word word){
         //String s=word.toString();
         String s=service.WordToString(word);
         boolean valid = service.validateWord(s, p_tiles);
@@ -85,6 +88,7 @@ public PlayerModel(){
         else{
             score=s1;
         }
+        System.out.println(score);
         setChanged();
         notifyObservers();
     }

@@ -34,11 +34,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     @Override
     public void update(java.util.Observable o, Object arg) {
         if (o==player) {
-            if(player.getScore()==-1)
-            scoreResult.set("not valid word");
-            else
-                scoreResult.set(String.valueOf(player.getScore()));
-            //scoreResult.set(player.);
+            scoreResult.set(player.score);
         }
     }
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
@@ -48,7 +44,7 @@ public class GameScreenViewModel extends Observable implements Observer {
         } else
             w = word.get() + "," + row.get() + "," + col.get() + ",F";
         Word wd = s.stringToWord(w);
-        player.tryToPlace("tryToPlace",wd);
+        player.tryToPlace(wd);
     }
     }
 
