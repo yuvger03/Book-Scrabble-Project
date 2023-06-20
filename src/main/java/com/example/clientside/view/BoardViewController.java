@@ -54,64 +54,13 @@ public class BoardViewController implements Observer, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         boardView.setBoard(boardData);
-        boardView.addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> boardView.requestFocus());
-
-        boardView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            double x, y;
-
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                double cellWidth = boardView.getWidth() / boardData[0].length;
-                double cellHeight = boardView.getHeight() / boardData.length;
-
-                int row = (int) (mouseEvent.getY() / cellHeight);
-                int column = (int) (mouseEvent.getX() / cellWidth);
-
-                System.out.println("Clicked on row: " + row + ", column: " + column);
-                if( letterclicked != ""){
-                    boardData[row][column] = letterclicked;
-                    letterclicked = "";
 
 
-                }
-                boardView.setBoard(boardData);
-
-            }
-
-        });
 
         tilesView.setTiles(tilesArray);
-        tilesView.addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> tilesView.requestFocus());
 
-        tilesView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            double x, y;
 
-            @Override
-            public void handle(MouseEvent mouseEvent) {
 
-                // Calculate the actual cell width based on the available width and number of letters
-                double cellWidth = tilesView.cellSize;
-
-                double mouseX = mouseEvent.getX();
-
-                // Calculate the index based on the mouse position and cell width
-                int index = (int) (mouseX / cellWidth);
-
-                System.out.println("Clicked on letter at index: " + index);
-                letterclicked = tilesArray[index];
-            }
-        });
-//        doneButton.addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> doneButton.requestFocus());
-
-//        doneButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            double x, y;
-//
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                checkBoard();
-//            }
-//
-//        });
     }
 
     @Override
