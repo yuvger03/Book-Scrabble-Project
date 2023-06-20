@@ -4,17 +4,20 @@ import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Game.Word;
 import com.example.Service;
+import javafx.beans.InvalidationListener;
 
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 
 
 
-public class PlayerModel {
+public class PlayerModel extends Observable {
     String name ;
-    int score ;
+    int totalScore ;
+    String score;
     private Board board_game ;
      ArrayList<Tile>p_tiles ;
     //int serverPort;
@@ -26,7 +29,7 @@ public class PlayerModel {
     //Server gameServer; each player has a instance of its gameServer.
 public PlayerModel(){
     name=null;
-    score=0;
+    totalScore=0;
     board_game = new Board();
     p_tiles =new ArrayList<>();
     service=new Service();
@@ -36,9 +39,8 @@ public PlayerModel(){
         return name;
     }
 
-    public int getScore() {
-        return score;
-    }
+    //public int getScore() {return score;
+    //}
 
     public ArrayList<Tile> getP_tiles() {
         return p_tiles;
@@ -48,9 +50,9 @@ public PlayerModel(){
         this.name = name;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+  //  public void setScore(int score) {
+     //   this.score = score;
+    //}
 
     public void setP_tiles(ArrayList<Tile> p_tiles) {
         this.p_tiles = p_tiles;
@@ -68,14 +70,23 @@ public PlayerModel(){
                     }).start();
         }
 
-    public int tryToPlace(String tryToPlace ,Word word){
+    public void tryToPlace(String tryToPlace ,Word word){
+        //String s=word.toString();
         String s=service.WordToString(word);
         boolean valid = service.validateWord(s, p_tiles);
         if(!valid)
-            return -1;
+            score="not valid word";
         outToServer.println("tryToPlace"+","+s);
         outToServer.flush();
-        return Integer.parseInt(inFromServer.next());
+        String s1= inFromServer.next();
+        if(s1.equals("0")){
+            score="not valid";
+        }
+        else{
+            score=s1;
+        }
+        setChanged();
+        notifyObservers();
     }
 
     public Tile getTileFromBag(){

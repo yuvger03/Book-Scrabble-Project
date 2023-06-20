@@ -29,7 +29,7 @@ public class GuestHandler implements IClientHandler {
               out.println("you joind to game"); //TODO
            }
             if (key.equals("tryToPlace")){
-                Word word = service.stringToWord(lineAsList[0]);
+                Word word = service.stringToWord(lineAsList[1]);
                 int score = HM.tryPlaceWord(word);
                 out.println(String.valueOf(score));
            }
