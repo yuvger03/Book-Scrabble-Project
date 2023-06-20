@@ -22,7 +22,7 @@ public class GuestHandler implements IClientHandler {
            in = new BufferedReader(new InputStreamReader(inFromclient)); // remove the letter
            out = new PrintWriter(outToClient, true);
            String line = in.readLine();
-           String[] lineAsList = line.split(",");
+           String[] lineAsList = line.split("-");
            String key = lineAsList[0];
            if(key.equals("joinToGame")){
               HM.addPlayerToGame(lineAsList[2]);
@@ -32,7 +32,7 @@ public class GuestHandler implements IClientHandler {
                 Word word = service.stringToWord(lineAsList[1]);
                 int score = HM.tryPlaceWord(word);
                 out.println(String.valueOf(score));
-           }
+            }
             if (key.equals("getTileFromBag")) {
                 Tile t  = HM.getRand();
                 String s = service.TileToString(t);

@@ -6,8 +6,8 @@ import com.example.serverSide.HostManager;
 
 public class runClient {
     public static void main(String[] args) {
-        //HostManager h=new HostManager(8080);
-        //h.dictionaryLegal("Q,shira,");
+        HostManager h=new HostManager(8080);
+        h.dictionaryLegal("Q,shira,");
         //boolean b=h.dictionaryLegal("Q,s1.txt,s2.txt,");
        // PlayerModel p=new PlayerModel();
         Tile.Bag b=new Tile.Bag();

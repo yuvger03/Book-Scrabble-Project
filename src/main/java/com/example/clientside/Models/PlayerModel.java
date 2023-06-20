@@ -20,7 +20,7 @@ public class PlayerModel extends Observable {
     public String score;
     private Board board_game ;
     public ArrayList<Tile>p_tiles ;
-    //int serverPort;
+    int serverPort;
     Scanner inFromServer;
     PrintWriter outToServer;
     Service service;
@@ -35,7 +35,7 @@ public PlayerModel(){
     p_tiles =new ArrayList<>();
     service=new Service();
     connectionLatch = new CountDownLatch(1); // initialize the latch
-    //this.serverPort=serverPort;
+        //this.serverPort=serverPort;
 }
     public String getName() {
         return name;
@@ -60,11 +60,11 @@ public PlayerModel(){
         this.p_tiles = p_tiles;
     }
 
-    public void connectServer(int serverPort){
+    public void connectServer(){
             new Thread(
                     ()->{
                         try{
-                            Socket server=new Socket("localhost", serverPort);
+                            Socket server=new Socket("localhost", this.serverPort);
                             this.outToServer=new PrintWriter(server.getOutputStream());
                             this.inFromServer=new Scanner(server.getInputStream());
                             //StartGame();
@@ -78,28 +78,28 @@ public PlayerModel(){
         String s=service.WordToString(word);
         boolean valid = service.validateWord(s, p_tiles);
         if(!valid)
-            score="not valid word";
+            score="not_valid";
         try {
             connectionLatch.await(); // wait for the connection to be established
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        outToServer.println("tryToPlace"+","+s);
+        outToServer.println("tryToPlace"+"-"+s);
         outToServer.flush();
         String s1= inFromServer.next();
+//        System.out.println("scor"+s1);
         if(s1.equals("0")){
             score="not valid";
         }
         else{
             score=s1;
         }
-        System.out.println(score);
         setChanged();
         notifyObservers();
     }
 
     public Tile getTileFromBag(){
-        outToServer.println("getTileFromBag,");
+        outToServer.println("getTileFromBag-");
         outToServer.flush();
         String s = inFromServer.next();
         return service.stringToTile(s);

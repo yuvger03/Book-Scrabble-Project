@@ -18,7 +18,7 @@ public class HostModeModel extends PlayerModel {
         this.serverPort=8081;
         hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
         hostServer.start();
-        connectServer(serverPort);
+        connectServer();
         //System.out.println("server started");
         Scanner s = new Scanner(System.in);
         String input;

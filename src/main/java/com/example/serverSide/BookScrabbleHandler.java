@@ -31,7 +31,6 @@ public class BookScrabbleHandler implements IClientHandler {
 				// System.out.print(arg + " ");
 				// System.out.println(" ");
 				out.println(DM.query(args));
-				System.out.println("AQ");
 			} else if (key == 'C') {
 				// System.out.println("C");
 				out.println(DM.challenge(args));

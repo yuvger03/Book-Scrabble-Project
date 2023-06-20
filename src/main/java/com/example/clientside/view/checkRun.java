@@ -11,8 +11,8 @@ public class checkRun {
         Tile tile1 =b.getRand();
         Tile[] tiles= new Tile[]{tile,tile1};
         Word w=new Word(tiles,5,4,true);
-        GuestModeModel g=new GuestModeModel();
-        g.connectServer(8081);
+        GuestModeModel g=new GuestModeModel(8081);
+        //g.connectServer();
         g.tryToPlace(w);
     }
 
