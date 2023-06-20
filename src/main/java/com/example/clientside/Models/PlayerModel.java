@@ -79,6 +79,11 @@ public PlayerModel(){
         boolean valid = service.validateWord(s, p_tiles);
         if(!valid)
             score="not valid word";
+        try {
+            connectionLatch.await(); // wait for the connection to be established
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         outToServer.println("tryToPlace"+","+s);
         outToServer.flush();
         String s1= inFromServer.next();

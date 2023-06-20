@@ -16,9 +16,9 @@ public class HostModeModel extends PlayerModel {
         Random r = new Random();
         //this.serverPort = 6000 + r.nextInt(1000);
         this.serverPort=8081;
-        connectServer(serverPort);
         hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
         hostServer.start();
+        connectServer(serverPort);
         //System.out.println("server started");
         Scanner s = new Scanner(System.in);
         String input;
