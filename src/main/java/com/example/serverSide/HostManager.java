@@ -3,6 +3,7 @@ package com.example.serverSide;
 import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Game.Word;
+import com.example.Service;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -16,19 +17,21 @@ public class HostManager {
     Board gameboard;
     int serverPort ; //of GameServer
     ArrayList<String> playersList;
-    public int i; //for check the current turn;
+    public int index; //for check the current turn;
     Scanner inFromServer;
     PrintWriter outToServer;
     Socket serverSocket;
+    Service s;
     private CountDownLatch connectionLatch; // added field
 
     public HostManager(int serverPort){
         this.gameboard= new Board();
         this.b=new Tile.Bag();
         playersList=new ArrayList<>();
-        this.i=0;
+        this.index =0;
         this.serverPort=serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
+        this.s=new Service();
         connectToGameServer();
     }
 
@@ -103,20 +106,46 @@ public class HostManager {
         return sum;
     }
 
-    public Tile[][] getTiles(){ //return the updateBoard; //TODO :implemintion this func .
-    return null;
+    public String getBoardGame(){
+    return (s.matrixToString(gameboard.tiles));
 }
 
     public Tile getRand(){
         return b.getRand();
     }
 
-    public String sendPlayerTurn(){ // TODO: implementation this func
+    public String getPlayerTurn(){ // TODO: implementation this func
 
-        return playersList.get(i);
+        return playersList.get(index);
     }
 
-public void addPlayerToGame(String name){
-        playersList.add(name);
+public boolean addPlayerToGame(String name){
+        if(playersList.size()<4) {
+            playersList.add(name);
+            return true;
+        }
+        else
+            return false;
+        }
+    public void nextPlayer(){
+        if(index>playersList.size()){
+            index=0;
+        }
+        else
+            index++;
+    }
+    public ArrayList<Tile> initTileArray(){
+        ArrayList<Tile> array=new ArrayList<>();
+        for(int i=0;i<7;i++){
+            array.add(getRand());
+        }
+        return array;
+    }
+
+    public Board getGameboard() {
+        return gameboard;
+    }
+
+    public void startGame() {
     }
 }

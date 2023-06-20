@@ -14,6 +14,7 @@ public class checkRun {
         GuestModeModel g=new GuestModeModel(8081);
         //g.connectServer();
         g.tryToPlace(w);
+        System.out.println("play");
     }
 
 }

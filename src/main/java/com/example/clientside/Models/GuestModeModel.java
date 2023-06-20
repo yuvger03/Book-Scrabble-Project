@@ -7,7 +7,5 @@ public class GuestModeModel extends PlayerModel{
         connectServer();
 
     }
-    public void joinToGame(){
-        outToServer.println("joinToGame"+"-"+name);
-    }
+
 }

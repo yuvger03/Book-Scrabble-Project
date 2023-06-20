@@ -21,6 +21,7 @@ public class HostModeModel extends PlayerModel {
         hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
         hostServer.start();
         connectServer();
+        joinToGame();
         //System.out.println("server started");
         Scanner s = new Scanner(System.in);
         String input;
@@ -31,12 +32,15 @@ public class HostModeModel extends PlayerModel {
         hostServer.close();
         System.out.println("server stopped");
     }
-
+public void startGame(){
+    outToServer.println("startGame"+"-");
+}
     public void close() {
         inFromServer.close();
         outToServer.close();
         hostServer.close();
     }
+
 
 }
 

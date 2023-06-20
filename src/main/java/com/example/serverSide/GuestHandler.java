@@ -5,7 +5,7 @@ import com.example.Game.Word;
 import com.example.Service;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class GuestHandler implements IClientHandler {
     BufferedReader in;
@@ -23,20 +23,42 @@ public class GuestHandler implements IClientHandler {
            out = new PrintWriter(outToClient, true);
            String line = in.readLine();
            String[] lineAsList = line.split("-");
-           String key = lineAsList[0];
+           String namePlayer=lineAsList[0];
+           String key = lineAsList[1];
            if(key.equals("joinToGame")){
-              HM.addPlayerToGame(lineAsList[2]);
+             if(HM.addPlayerToGame(lineAsList[0]))
               out.println("you joind to game"); //TODO
+               else{
+                 out.println("you not joind to game");
+             }
            }
             if (key.equals("tryToPlace")){
-                Word word = service.stringToWord(lineAsList[1]);
-                int score = HM.tryPlaceWord(word);
-                out.println(String.valueOf(score));
+                if(HM.getPlayerTurn().equals(lineAsList[0])) {
+                    Word word = service.stringToWord(lineAsList[2]);
+                    int score = HM.tryPlaceWord(word);
+                    out.println(lineAsList[0]+"-"+String.valueOf(score));
+                    out.flush();
+                    if(score>0)
+                        out.println("board-"+ HM.getBoardGame());
+                }
+                else
+                    out.println("not your turn");
             }
             if (key.equals("getTileFromBag")) {
                 Tile t  = HM.getRand();
                 String s = service.TileToString(t);
-                out.println(s);
+                out.println(lineAsList[0]+"-"+s);
+           }
+            if(key.equals("initTiles")){
+                ArrayList<Tile>tiels=HM.initTileArray();
+                String tielsString="";
+                for(int i=0;i<tiels.size();i++){
+                    tielsString+=service.TileToString(tiels.get(i))+"-";
+                }
+                out.println(tielsString);
+            }
+           if (key.equals("startGame")) {
+               out.println("start");
            }
        } catch (Exception e) {
            throw new RuntimeException(e);
