@@ -68,9 +68,11 @@ public PlayerModel(){
                     }).start();
         }
 
-    public  int tryToPlace(String tryToPlace ,Word word){
-        //String s=word.toString();
+    public int tryToPlace(String tryToPlace ,Word word){
         String s=service.WordToString(word);
+        boolean valid = service.validateWord(s, p_tiles);
+        if(!valid)
+            return -1;
         outToServer.println("tryToPlace"+","+s);
         outToServer.flush();
         return Integer.parseInt(inFromServer.next());
@@ -79,11 +81,9 @@ public PlayerModel(){
     public Tile getTileFromBag(){
         outToServer.println("getTileFromBag,");
         outToServer.flush();
-        //TODO- how send tile from server?
-        return null;
+        String s = inFromServer.next();
+        return service.stringToTile(s);
     }
-
-    //TODO: think of good location
 
     public void close() {
         inFromServer.close();

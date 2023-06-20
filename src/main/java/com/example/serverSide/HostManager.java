@@ -11,15 +11,17 @@ import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
 public class HostManager {
+
     Tile.Bag b;
     Board gameboard;
     int serverPort ; //of GameServer
     ArrayList<String> playersList;
-   public int i; //for check the current turn;
+    public int i; //for check the current turn;
     Scanner inFromServer;
     PrintWriter outToServer;
     Socket serverSocket;
     private CountDownLatch connectionLatch; // added field
+
     public HostManager(int serverPort){
         this.gameboard= new Board();
         this.b=new Tile.Bag();
@@ -27,7 +29,7 @@ public class HostManager {
         this.i=0;
         this.serverPort=serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
-       connectToGameServer();
+        connectToGameServer();
     }
 
     private void connectToGameServer() {
@@ -42,6 +44,7 @@ public class HostManager {
                     }
                 }).start();
     }
+
     public boolean dictionaryLegal(String word){//TODO : how implement this func
         try {
             connectionLatch.await(); // wait for the connection to be established
@@ -109,6 +112,7 @@ public class HostManager {
     }
 
     public String sendPlayerTurn(){ // TODO: implementation this func
+
         return playersList.get(i);
     }
 

@@ -3,7 +3,12 @@ package com.example;
 import com.example.Game.Tile;
 import com.example.Game.Word;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Service {
+
     public String WordToString(Word word) { //make obj WORD to string- "word,row,col,vertical"
         int row=word.getRow();
         int col= word.getCol();
@@ -113,5 +118,33 @@ public class Service {
         }
     }
 
+    public static boolean validateWord(String word, List<Tile> tiles) {
+        // Create a frequency map for tiles characters
+        Map<Character, Integer> tileFrequencyMap = new HashMap<>();
+        for (Tile tile : tiles) {
+            char character = tile.letter;
+            tileFrequencyMap.put(character, tileFrequencyMap.getOrDefault(character, 0) + 1);
+        }
 
+        // Check if all letters in the word are present in tiles
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
+            if (!tileFrequencyMap.containsKey(letter) || tileFrequencyMap.get(letter) == 0) {
+                return false;
+            }
+            tileFrequencyMap.put(letter, tileFrequencyMap.get(letter) - 1);
+        }
+
+        return true;
+    }
+
+    public String TileToString(Tile tile) { //make obj WORD to string- "word,row,col,vertical"
+        return String.valueOf(tile.letter);
+    }
+
+    public Tile stringToTile(String s) {
+        char c = s.charAt(0);
+        Tile t = new Tile(c, calculateScore(c));
+        return t;
+    }
 }
