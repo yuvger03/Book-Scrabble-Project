@@ -13,8 +13,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GameScreenViewModel extends Observable implements Observer {
-    public StringProperty scoreResult;
     PlayerModel player;
+    public StringProperty scoreResult;
     public StringProperty word;
     public StringProperty row;
     public StringProperty col;

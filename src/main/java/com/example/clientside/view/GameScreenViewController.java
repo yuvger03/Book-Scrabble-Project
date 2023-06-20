@@ -23,7 +23,7 @@ public class GameScreenViewController implements Observer {
     Button sendWord;
     @FXML
     Label scoreResult;
-
+    BoardViewController board;
     GameScreenViewModel GVM;
 
     public void setGameVM(GameScreenViewModel gvm){
