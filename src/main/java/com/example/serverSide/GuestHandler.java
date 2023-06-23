@@ -23,42 +23,48 @@ public class GuestHandler implements IClientHandler {
            out = new PrintWriter(outToClient, true);
            String line = in.readLine();
            String[] lineAsList = line.split("-");
-           String namePlayer=lineAsList[0];
+           String playerName=lineAsList[0];
            String key = lineAsList[1];
            if(key.equals("joinToGame")){
              if(HM.addPlayerToGame(lineAsList[0]))
-              out.println("you joind to game"); //TODO
+               out.println(playerName+"-"+"message-you joind to game"); //TODO
                else{
-                 out.println("you not joind to game");
+                 out.println(playerName+"-"+"message-you not joind to game");
              }
            }
-            if (key.equals("tryToPlace")){
-                if(HM.getPlayerTurn().equals(lineAsList[0])) {
-                    Word word = service.stringToWord(lineAsList[2]);
+           if (key.equals("tryToPlace")){
+                    String wordString=lineAsList[2];
+                    Word word = service.stringToWord(wordString);
                     int score = HM.tryPlaceWord(word);
-                    out.println(lineAsList[0]+"-"+String.valueOf(score));
+                    String fillTiles="";
+                    if(score>0){
+                        int count=wordString.length();
+                        fillTiles=HM.fillTilesArray(count);
+                        fillTiles+="/"+wordString;
+                    }
+                    out.println(playerName+"-tryToPlace-"+String.valueOf(score)+"-"+fillTiles);
                     out.flush();
+
                     if(score>0)
                         out.println("board-"+ HM.getBoardGame());
-                }
-                else
-                    out.println("not your turn");
+
             }
-            if (key.equals("getTileFromBag")) {
+           if (key.equals("getTileFromBag")) {
                 Tile t  = HM.getRand();
                 String s = service.TileToString(t);
-                out.println(lineAsList[0]+"-"+s);
+                out.println(playerName+"-getTileFromBag-"+s);
            }
-            if(key.equals("initTiles")){
-                ArrayList<Tile>tiels=HM.initTileArray();
-                String tielsString="";
-                for(int i=0;i<tiels.size();i++){
-                    tielsString+=service.TileToString(tiels.get(i))+"-";
-                }
-                out.println(lineAsList[0]+"-"+tielsString);
-            }
            if (key.equals("startGame")) {
-               out.println("start");
+               for(int i=0;i<HM.playersList.size();i++){
+                   ArrayList<Tile>tiels=HM.initTileArray();
+                   String tielsString="";
+                   for(int j=0;j<tiels.size();j++){
+                       tielsString+=service.TileToString(tiels.get(j))+"/";
+                   }
+                   out.println(HM.playersList.get(i)+"-initTiles-" + tielsString);
+                   out.flush();
+               }
+               out.println("board-"+ HM.getBoardGame());
            }
        } catch (Exception e) {
            throw new RuntimeException(e);

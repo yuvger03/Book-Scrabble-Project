@@ -15,6 +15,7 @@ import java.util.concurrent.CountDownLatch;
 
 
 public class PlayerModel extends Observable {
+    static final int  countTiles = 7;
     String name;
     int totalScore;
     public String score; //TODO : bind to RESULT IN GAMEsCREEM
@@ -23,6 +24,7 @@ public class PlayerModel extends Observable {
     int serverPort;
     int turn;
     String currentTurn;
+    String message;
     Scanner inFromServer;
     PrintWriter outToServer;
     Service service;
@@ -66,7 +68,6 @@ public class PlayerModel extends Observable {
                         new Thread(() -> {
                             while (inFromServer.hasNextLine()) {
                                 String message = inFromServer.nextLine();
-                                // Process the received message
                                 processMessage(message);
                             }
                         }).start();
@@ -80,25 +81,56 @@ public class PlayerModel extends Observable {
         String[] lineAsList = message.split("-");
         if (lineAsList[0].equals("board")) {
             this.board_game.tiles = service.stringToMatrix(lineAsList[1]);
-        } else if (lineAsList[0].equals("start")) {
-            initTiles();
-        } else if (lineAsList[0].equals(name)) {
-            itsTurn = true;
+        } else if(lineAsList[0].equals("message")) {
+            this.message=lineAsList[1];
         }
-            else
-              itsTurn=false;
+    else if (lineAsList[0].equals(name)) {
+            getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);//TODO: check if it possible in try to place
         }
 
+        }
+    private void getFunc(String... args) {
+        String func=args[0];
+        String inputString=args[1];
+        if (func.equals("tryToPlace")) {
+            if (inputString.equals("0")) {
+                score = "not valid";
+            } else {
+                score = inputString;
+                String[] Tiles=args[2].split("/");
+                Tile[]missingTilesArray=service.StringToTilesArray(Tiles[0]);
+                Tile[] word=service.StringToTilesArray(Tiles[1]);;
 
-    public void initTiles() {
-        String tiels;
-        outToServer.println(this.name+"initTiles-");
-        tiels = inFromServer.next();
+                //service.stringToWord();
+                for(int i=0;i< word.length;i++){
+                    int j=0;
+                  while(!p_tiles.get(j).equals(word[i])) {
+                     j++;
+                  }
+                  p_tiles.remove(j);
+                  p_tiles.add(missingTilesArray[i]);
+                }
 
-        String[] TileAsList = tiels.split("-");
-        for (int i = 0; i < TileAsList.length; i++)
-            p_tiles.add(service.stringToTile(TileAsList[i]));
+            }
+            setChanged();
+            notifyObservers();
+        }
+        if (func.equals("initTiles")) {
+            initTiles(inputString);
+        }
+        if(func.equals("getTileFromBag")){
+            p_tiles.add(service.stringToTile(inputString));
+        }
+        if(func.equals("message")){
+          this.message=inputString;
+        }
+
     }
+    public void initTiles(String tilesString) {
+            String[] TileAsList = tilesString.split("/");
+            for (int i = 0; i < TileAsList.length; i++)
+                p_tiles.add(service.stringToTile(TileAsList[i]));
+        }
 
     public void joinToGame() {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
@@ -118,33 +150,13 @@ public class PlayerModel extends Observable {
         }
         outToServer.println("tryToPlace" + "-" + s);
         outToServer.flush();
-        String s1 = inFromServer.next();
-        String[] lineAsList = s1.split("-");
-        String namePlayer=lineAsList[0];
-        if(namePlayer.equals(this.name)) {
-            if (lineAsList[1].equals("0")) {
-                score = "not valid";
-            } else {
-                score = lineAsList[1];
-            }
-        }
-        else{
-            score =null;
-            }
-            setChanged();
-            notifyObservers();
-        }
+    }
 
-    public Tile getTileFromBag() {
-        outToServer.println(this.name + "-"+"getTileFromBag-");
-        outToServer.flush();
-        String s = inFromServer.next();
-        String[] lineAsList = s.split("-");
-        String namePlayer=lineAsList[0];
-        if(namePlayer.equals(this.name))
-            return service.stringToTile(lineAsList[1]);
-        else
-            return null;
+    public void getTileFromBag() {
+        if(p_tiles.size()<countTiles) {
+            outToServer.println(this.name + "-" + "getTileFromBag-");
+            outToServer.flush();
+        }
     }
         public void close(){
             inFromServer.close();

@@ -147,4 +147,8 @@ public class Service {
         Tile t = new Tile(c, calculateScore(c));
         return t;
     }
+
+    public Tile[] StringToTilesArray(String missingTiles) {
+        return stringToWord(missingTiles).getTiles();
+    }
 }

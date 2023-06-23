@@ -15,7 +15,7 @@ public class HostManager {
 
     Tile.Bag b;
     Board gameboard;
-    int serverPort ; //of GameServer
+    int serverPort; //of GameServer
     ArrayList<String> playersList;
     public int index; //for check the current turn;
     Scanner inFromServer;
@@ -24,14 +24,14 @@ public class HostManager {
     Service s;
     private CountDownLatch connectionLatch; // added field
 
-    public HostManager(int serverPort){
-        this.gameboard= new Board();
-        this.b=new Tile.Bag();
-        playersList=new ArrayList<>();
-        this.index =0;
-        this.serverPort=serverPort;
+    public HostManager(int serverPort) {
+        this.gameboard = new Board();
+        this.b = new Tile.Bag();
+        playersList = new ArrayList<>();
+        this.index = 0;
+        this.serverPort = serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
-        this.s=new Service();
+        this.s = new Service();
         connectToGameServer();
     }
 
@@ -39,7 +39,7 @@ public class HostManager {
         new Thread(
                 () -> {
                     try {
-                       this.serverSocket = new Socket("localhost", serverPort);
+                        this.serverSocket = new Socket("localhost", serverPort);
                         this.outToServer = new PrintWriter(serverSocket.getOutputStream());
                         this.inFromServer = new Scanner(serverSocket.getInputStream());
                         connectionLatch.countDown(); // signal that the connection is established
@@ -48,7 +48,7 @@ public class HostManager {
                 }).start();
     }
 
-    public boolean dictionaryLegal(String word){//TODO : how implement this func
+    public boolean dictionaryLegal(String word) {//TODO : how implement this func
         try {
             connectionLatch.await(); // wait for the connection to be established
         } catch (InterruptedException e) {
@@ -56,12 +56,13 @@ public class HostManager {
         }
         outToServer.println(word);
         outToServer.flush();
-        String result=inFromServer.next();
-        if(result.equals("true"))
-            return  true;
+        String result = inFromServer.next();
+        if (result.equals("true"))
+            return true;
         else
             return false;
     }
+
     public int tryPlaceWord(Word w) {
         Tile[] ts = w.getTiles();
         int row = w.getRow();
@@ -106,37 +107,37 @@ public class HostManager {
         return sum;
     }
 
-    public String getBoardGame(){
-    return (s.matrixToString(gameboard.tiles));
-}
+    public String getBoardGame() {
+        return (s.matrixToString(gameboard.tiles));
+    }
 
-    public Tile getRand(){
+    public Tile getRand() {
         return b.getRand();
     }
 
-    public String getPlayerTurn(){ // TODO: implementation this func
+    public String getPlayerTurn() { // TODO: implementation this func
 
         return playersList.get(index);
     }
 
-public boolean addPlayerToGame(String name){
-        if(playersList.size()<4) {
+    public boolean addPlayerToGame(String name) {
+        if (playersList.size() < 4) {
             playersList.add(name);
             return true;
-        }
-        else
+        } else
             return false;
-        }
-    public void nextPlayer(){
-        if(index>playersList.size()){
-            index=0;
-        }
-        else
+    }
+
+    public void nextPlayer() {
+        if (index > playersList.size()) {
+            index = 0;
+        } else
             index++;
     }
-    public ArrayList<Tile> initTileArray(){
-        ArrayList<Tile> array=new ArrayList<>();
-        for(int i=0;i<7;i++){
+
+    public ArrayList<Tile> initTileArray() {
+        ArrayList<Tile> array = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
             array.add(getRand());
         }
         return array;
@@ -147,5 +148,14 @@ public boolean addPlayerToGame(String name){
     }
 
     public void startGame() {
+    }
+
+    public String fillTilesArray(int count) {
+        String s = "";
+        for (int i = 0; i < count; i++) {
+            String c = String.valueOf(getRand().letter);
+            s += c;
+        }
+        return s;
     }
 }
