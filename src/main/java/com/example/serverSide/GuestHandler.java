@@ -55,7 +55,7 @@ public class GuestHandler implements IClientHandler {
                 for(int i=0;i<tiels.size();i++){
                     tielsString+=service.TileToString(tiels.get(i))+"-";
                 }
-                out.println(tielsString);
+                out.println(lineAsList[0]+"-"+tielsString);
             }
            if (key.equals("startGame")) {
                out.println("start");

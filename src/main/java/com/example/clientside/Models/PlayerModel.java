@@ -85,20 +85,23 @@ public class PlayerModel extends Observable {
         } else if (lineAsList[0].equals(name)) {
             itsTurn = true;
         }
+            else
+              itsTurn=false;
+        }
 
-    }
 
     public void initTiles() {
         String tiels;
-        outToServer.println("initTiles-");
+        outToServer.println(this.name+"initTiles-");
         tiels = inFromServer.next();
+
         String[] TileAsList = tiels.split("-");
         for (int i = 0; i < TileAsList.length; i++)
             p_tiles.add(service.stringToTile(TileAsList[i]));
     }
 
     public void joinToGame() {
-        outToServer.println(name + "-" + "joinToGame" + "-");
+        outToServer.println(this.name + "-" + "joinToGame" + "-");
         String s = inFromServer.next();
     }
 
@@ -116,30 +119,33 @@ public class PlayerModel extends Observable {
         outToServer.println("tryToPlace" + "-" + s);
         outToServer.flush();
         String s1 = inFromServer.next();
-//        System.out.println("scor"+s1);
-        if (s1.equals("0")) {
-            score = "not valid";
-        } else {
-            score = s1;
+        String[] lineAsList = s1.split("-");
+        String namePlayer=lineAsList[0];
+        if(namePlayer.equals(this.name)) {
+            if (lineAsList[1].equals("0")) {
+                score = "not valid";
+            } else {
+                score = lineAsList[1];
+            }
         }
-        setChanged();
-        notifyObservers();
-    }
+        else{
+            score =null;
+            }
+            setChanged();
+            notifyObservers();
+        }
 
     public Tile getTileFromBag() {
-        outToServer.println("getTileFromBag-");
+        outToServer.println(this.name + "-"+"getTileFromBag-");
         outToServer.flush();
         String s = inFromServer.next();
-        return service.stringToTile(s);
+        String[] lineAsList = s.split("-");
+        String namePlayer=lineAsList[0];
+        if(namePlayer.equals(this.name))
+            return service.stringToTile(lineAsList[1]);
+        else
+            return null;
     }
-
-    public void game() {
-        while (true) {
-            String serverOutput = inFromServer.next();
-            if (serverOutput.equals(name)) ;
-        }
-    }
-
         public void close(){
             inFromServer.close();
             outToServer.close();
