@@ -13,7 +13,9 @@ public class checkRun {
         Word w=new Word(tiles,5,4,true);
         GuestModeModel g=new GuestModeModel();
         //g.connectServer();
-        g.joinToGame();
+        g.enterToGame();
+
+
         System.out.println("play");
     }
 

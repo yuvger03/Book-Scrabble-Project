@@ -32,8 +32,8 @@ public class HostModeModel extends PlayerModel {
             System.out.println("server stopped");
         });
         serverThread.start();
-      //  connectServer(); //TODO return back
-       // joinToGame();    //TODO return back
+        //connectServer(); //TODO return back
+        //joinToGame();    //TODO return back
     }
 public void startGame(){
     outToServer.println("startGame"+"-");

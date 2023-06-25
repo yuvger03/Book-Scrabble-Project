@@ -23,7 +23,7 @@ public class GuestModeViewModel extends Observable implements Observer {
     public void joinToGame() {
         guestModel.serverPort= Integer.parseInt(port.get());
         guestModel.ipServer=Integer.parseInt(ip.get());
-        guestModel.joinToGame(  );
+        guestModel.enterToGame(  );
 
     }
 

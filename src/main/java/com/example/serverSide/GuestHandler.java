@@ -26,13 +26,15 @@ public class GuestHandler implements IClientHandler {
            String playerName=lineAsList[0];
            String key = lineAsList[1];
            if(key.equals("joinToGame")){
-             if(HM.addPlayerToGame(lineAsList[0]))
+             if(HM.addPlayerToGame(lineAsList[0])){
                out.println(playerName+"-"+"message-you joind to game"); //TODO
+               System.out.println(playerName+"-"+"message-you joind to game");}
                else{
                  out.println(playerName+"-"+"message-you not joind to game");
              }
            }
            if (key.equals("startGame")) {
+               System.out.println("gameStarted\n"); //TODO shira
                HM.current_player=HM.playersList.get(HM.index);
                for(int i=0;i<HM.playersList.size();i++){
                    ArrayList<Tile>tiels=HM.initTileArray();

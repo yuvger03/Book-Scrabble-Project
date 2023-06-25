@@ -67,17 +67,21 @@ public class PlayerModel extends Observable {
                         this.outToServer = new PrintWriter(server.getOutputStream());
                         this.inFromServer = new Scanner(server.getInputStream());
                         new Thread(() -> {
-                            while (inFromServer.hasNextLine()) {
+                            while (inFromServer.hasNext()) {
                                 String message = inFromServer.nextLine();
                                 processMessage(message);
                             }
                         }).start();
                         connectionLatch.countDown(); // signal that the connection is established
+                        joinToGame(); //TODO SHIRA
                     } catch (Exception e) {
                     }
                 }).start();
     }
-
+    public void joinToGame() {
+        outToServer.println(this.name + "-" + "joinToGame" + "-");
+        String s = inFromServer.next(); //TODO shira
+    }
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
         if (lineAsList[0].equals("board")) {

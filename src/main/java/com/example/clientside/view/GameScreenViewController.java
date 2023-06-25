@@ -28,9 +28,9 @@ public class GameScreenViewController extends BoardViewController {
     public void setGameVM(GameScreenViewModel gvm){
         this.GVM = gvm;
         this.GVM.addObserver(this);
-        GVM.word.bind(word.textProperty());
         GVM.row.bind(row.textProperty());
         GVM.col.bind(col.textProperty());
+        GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
     }

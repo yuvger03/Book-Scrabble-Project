@@ -16,6 +16,8 @@ public class runClient {
         Tile[] tiles= new Tile[]{tile,tile1};
         Word w=new Word(tiles,5,4,true);
         HostModeModel hm=new HostModeModel(8080);
+        hm.setName("shira");
+
         //Test flow:
         // check connctivity to main server
         // check how much time(how to check start bottom) listen to other players- what happend if 5 players trying to connect

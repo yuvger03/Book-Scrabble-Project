@@ -1,15 +1,15 @@
 package com.example.clientside.Models;
 
-public class GuestModeModel extends PlayerModel{
-    public GuestModeModel(){
+public class GuestModeModel extends PlayerModel {
+    public GuestModeModel() {
         super();
 
     }
-    public void joinToGame(){
+
+    public void enterToGame() {
+        this.serverPort=8081;//for test
         connectServer();
-        outToServer.println(this.name + "-" + "joinToGame" + "-");
-        String s = inFromServer.next();
-        }
     }
+}
 
 
