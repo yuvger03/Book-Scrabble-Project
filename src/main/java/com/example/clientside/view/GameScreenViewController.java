@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.util.Observer;
 
-public class GameScreenViewController implements Observer {
+public class GameScreenViewController extends BoardViewController {
     @FXML
     TextField word;
     @FXML
@@ -23,7 +23,6 @@ public class GameScreenViewController implements Observer {
     Button sendWord;
     @FXML
     Label scoreResult;
-    BoardViewController board;
     GameScreenViewModel GVM;
 
     public void setGameVM(GameScreenViewModel gvm){
