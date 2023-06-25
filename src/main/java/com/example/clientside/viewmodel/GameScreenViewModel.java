@@ -20,9 +20,9 @@ public class GameScreenViewModel extends Observable implements Observer {
     public StringProperty col;
     public BooleanProperty vertical;
     Service s;
-    public GameScreenViewModel(PlayerModel player){
-        this.player = player;
-        //this.mm.addObserver(this);
+    public GameScreenViewModel(PlayerModel pm){
+        this.player =pm;
+        this.player.addObserver(this);
         word = new SimpleStringProperty();
         row=new SimpleStringProperty();
         col=new SimpleStringProperty();
@@ -37,6 +37,7 @@ public class GameScreenViewModel extends Observable implements Observer {
             scoreResult.set(player.score);
         }
     }
+
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
         String w;
         if (vertical.equals(true)) {

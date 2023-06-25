@@ -28,11 +28,12 @@ public class GameScreenViewController implements Observer {
 
     public void setGameVM(GameScreenViewModel gvm){
         this.GVM = gvm;
+        this.GVM.addObserver(this);
         GVM.word.bind(word.textProperty());
         GVM.row.bind(row.textProperty());
         GVM.col.bind(col.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
-        scoreResult.textProperty().bind(gvm.scoreResult);
+        scoreResult.textProperty().bind(GVM.scoreResult);
     }
 //    public void gotWord(){
 //        GVM.gotWord();
@@ -43,6 +44,9 @@ public class GameScreenViewController implements Observer {
 //    public void checkboxPressed(){GVM.checkboxPressed();}
 //    public void pressedSend(){GVM.pressedSend();}
 
+public void sendWord(){
+        GVM.SendWord();
+}
     @Override
     public void update(java.util.Observable o, Object arg) {
 

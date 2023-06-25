@@ -1,5 +1,7 @@
 package com.example.clientside.viewmodel;
 
+import com.example.clientside.Models.GuestModeModel;
+import com.example.clientside.Models.HostModeModel;
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.Models.PlayerModel;
 import javafx.beans.InvalidationListener;
@@ -41,14 +43,22 @@ public class MenuViewModel extends Observable implements Observer {
     }
 
 
-
-    public void pressedHost() {
-        mm.setName(name.get());
-        System.out.println(name.get());
-//        mm.startHostMode();
+    public HostModeViewModel pressedHost() {
+        HostModeModel hm = mm.startHostMode();
+        HostModeViewModel hvm = new HostModeViewModel(hm);
+        hm.addObserver(hvm);
+        return hvm;
     }
-    public void pressedGuest(){
-        System.out.println(name.get() + "a");
+
+        //System.out.println(name.get());
+//        mm.startHostMode();
+
+    public GuestModeViewModel pressedGuest(){
+        GuestModeModel gm=mm.startGuestMode();
+        //System.out.println(name.get() + "a");
+        GuestModeViewModel guestvm=new GuestModeViewModel(gm);
+        gm.addObserver(guestvm);
+        return guestvm;
 //        mm.startGuestMode();
     }
 

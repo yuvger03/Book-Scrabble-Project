@@ -36,8 +36,8 @@ public class MyServer {
             while (!stop) {
                 try {
                     Socket clientSocket = serverSocket.accept();
-                    try {
-                        clientHandler.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
+                     try {
+                            clientHandler.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

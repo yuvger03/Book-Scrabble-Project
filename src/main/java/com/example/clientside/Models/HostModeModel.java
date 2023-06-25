@@ -10,7 +10,7 @@ import java.util.*;
 public class HostModeModel extends PlayerModel {
     MyServer hostServer;
     int gameServer;
-    int serverPort;
+    //int serverPort;
 
     public HostModeModel(int gameServer) {
         super();
@@ -18,23 +18,30 @@ public class HostModeModel extends PlayerModel {
         Random r = new Random();
         //this.serverPort = 6000 + r.nextInt(1000);
         this.serverPort=8081;
-        hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
-        hostServer.start();
-        connectServer();
-        joinToGame();
-        //System.out.println("server started");
-        Scanner s = new Scanner(System.in);
-        String input;
-        do {
-            input = s.next();
-        } while (!input.equals("stop"));
-        s.close();
-        hostServer.close();
-        System.out.println("server stopped");
+        Thread serverThread = new Thread(() -> {
+            MyServer hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
+            hostServer.start();
+            // System.out.println("server started");
+            Scanner s = new Scanner(System.in);
+            String input;
+            do {
+                input = s.next();
+            } while (!input.equals("stop"));
+            s.close();
+            hostServer.close();
+            System.out.println("server stopped");
+        });
+        serverThread.start();
+      //  connectServer(); //TODO return back
+       // joinToGame();    //TODO return back
     }
 public void startGame(){
     outToServer.println("startGame"+"-");
 }
+    public void joinToGame() {
+        outToServer.println(this.name + "-" + "joinToGame" + "-");
+        String s = inFromServer.next();
+    }
     public void close() {
         inFromServer.close();
         outToServer.close();

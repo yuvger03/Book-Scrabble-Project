@@ -16,12 +16,13 @@ import java.util.concurrent.CountDownLatch;
 
 public class PlayerModel extends Observable {
     static final int  countTiles = 7;
+    public int ipServer;
     String name;
     int totalScore;
     public String score; //TODO : bind to RESULT IN GAMEsCREEM
     private Board board_game;
     public ArrayList<Tile> p_tiles;
-    int serverPort;
+    public int serverPort;
     int turn;
     String currentTurn;
     String message;
@@ -132,10 +133,7 @@ public class PlayerModel extends Observable {
                 p_tiles.add(service.stringToTile(TileAsList[i]));
         }
 
-    public void joinToGame() {
-        outToServer.println(this.name + "-" + "joinToGame" + "-");
-        String s = inFromServer.next();
-    }
+
 
     public void tryToPlace(Word word) {
         //String s=word.toString();
