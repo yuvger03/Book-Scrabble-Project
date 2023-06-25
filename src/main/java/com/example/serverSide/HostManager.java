@@ -17,6 +17,7 @@ public class HostManager {
     Board gameboard;
     int serverPort; //of GameServer
     ArrayList<String> playersList;
+    public String current_player;
     public int index; //for check the current turn;
     Scanner inFromServer;
     PrintWriter outToServer;
@@ -131,8 +132,10 @@ public class HostManager {
     public void nextPlayer() {
         if (index > playersList.size()) {
             index = 0;
+
         } else
             index++;
+        current_player=playersList.get(index);
     }
 
     public ArrayList<Tile> initTileArray() {
