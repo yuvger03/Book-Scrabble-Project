@@ -21,7 +21,7 @@
         <TextField fx:id="row" prefHeight="25.0" prefWidth="38.0" promptText="row" />
         <TextField fx:id="col" prefHeight="25.0" prefWidth="59.0" promptText="column" />
         <CheckBox fx:id="vertical" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="vertical" />
-        <Button mnemonicParsing="false" text="send" />
+        <Button mnemonicParsing="false" text="send" onAction="#sendWord"/>
         <Label fx:id="scoreResult" prefHeight="25.0" prefWidth="69.0" text="     result" textAlignment="CENTER" />
         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="add tiles" />
       </children>

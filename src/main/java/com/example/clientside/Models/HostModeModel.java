@@ -37,11 +37,13 @@ public class HostModeModel extends PlayerModel {
     }
 public void startGame(){
     outToServer.println("startGame"+"-");
+    outToServer.flush();
 }
-    public void joinToGame() {
-        outToServer.println(this.name + "-" + "joinToGame" + "-");
-        String s = inFromServer.next();
-    }
+    //public void joinToGame() {
+        //outToServer.println(this.name + "-" + "joinToGame" + "-");
+
+        //String s = inFromServer.next();
+   // }
     public void close() {
         inFromServer.close();
         outToServer.close();

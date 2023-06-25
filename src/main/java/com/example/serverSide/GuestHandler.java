@@ -22,15 +22,18 @@ public class GuestHandler implements IClientHandler {
            in = new BufferedReader(new InputStreamReader(inFromclient)); // remove the letter
            out = new PrintWriter(outToClient, true);
            String line = in.readLine();
+           System.out.println(line+"\n");//TODO PRINTFORTEST
            String[] lineAsList = line.split("-");
            String playerName=lineAsList[0];
            String key = lineAsList[1];
            if(key.equals("joinToGame")){
              if(HM.addPlayerToGame(lineAsList[0])){
-               out.println(playerName+"-"+"message-you joind to game"); //TODO
+               out.println(playerName+"-"+"message-you joind to game");
+               out.flush();
                System.out.println(playerName+"-"+"message-you joind to game");}
                else{
                  out.println(playerName+"-"+"message-you not joind to game");
+                 out.flush();
              }
            }
            if (key.equals("startGame")) {
@@ -46,9 +49,11 @@ public class GuestHandler implements IClientHandler {
                    out.flush();
                }
                out.println("board-"+ HM.getBoardGame());
+               out.flush();
            }
            if(playerName.equals(HM.current_player)){
                if (key.equals("tryToPlace")) {
+                   System.out.println("send word func server \n");//TODO PRINTFORTEST
                    String wordString = lineAsList[2];
                    Word word = service.stringToWord(wordString);
                    int score = HM.tryPlaceWord(word);
@@ -67,16 +72,19 @@ public class GuestHandler implements IClientHandler {
                    }
                    HM.nextPlayer();
                    out.println("message-"+"The current turn is of "+HM.current_player);
+                   out.flush();
 
                }
                if (key.equals("getTileFromBag")) {
                    Tile t  = HM.getRand();
                    String s = service.TileToString(t);
                    out.println(playerName+"-getTileFromBag-"+s+"- ");
+                   out.flush();
                }
            }
-         else
+         else if(!key.equals("startGame")&&!key.equals("joinToGame"))
              out.println(playerName+"-"+"message-not your turn,please wait to your turn- ");
+             out.flush();
 
        } catch (Exception e) {
            throw new RuntimeException(e);

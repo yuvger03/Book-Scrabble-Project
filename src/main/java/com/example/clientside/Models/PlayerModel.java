@@ -5,6 +5,9 @@ import com.example.Game.Tile;
 import com.example.Game.Word;
 import com.example.Service;
 import javafx.beans.InvalidationListener;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -60,26 +63,34 @@ public class PlayerModel extends Observable {
     }
 
     public void connectServer() {
-        new Thread(
-                () -> {
-                    try {
-                        Socket server = new Socket("localhost", this.serverPort);
-                        this.outToServer = new PrintWriter(server.getOutputStream());
-                        this.inFromServer = new Scanner(server.getInputStream());
-                        new Thread(() -> {
-                            while (inFromServer.hasNext()) {
-                                String message = inFromServer.nextLine();
-                                processMessage(message);
-                            }
-                        }).start();
-                        connectionLatch.countDown(); // signal that the connection is established
-                        joinToGame(); //TODO SHIRA
-                    } catch (Exception e) {
+        new Thread(() -> {
+            try {
+                Socket server = new Socket("localhost", this.serverPort);
+                this.outToServer = new PrintWriter(server.getOutputStream());
+                this.inFromServer = new Scanner(server.getInputStream());
+                connectionLatch.countDown(); // signal that the connection is established
+                joinToGame(); // Invoke joinToGame() after the connection is established
+
+                // Create a ScheduledExecutorService to periodically check for new input
+                ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+                executorService.scheduleAtFixedRate(() -> {
+                    if (inFromServer.hasNextLine()) {
+                        String message = inFromServer.nextLine();
+                        processMessage(message);
                     }
-                }).start();
+                }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
+
+                // Wait for the executor service to terminate (e.g., when the client disconnects)
+                executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
     public void joinToGame() {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
+        outToServer.flush();
+        System.out.println("outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
         String s = inFromServer.next(); //TODO shira
     }
     private void processMessage(String message) {
@@ -141,17 +152,24 @@ public class PlayerModel extends Observable {
 
     public void tryToPlace(Word word) {
         //String s=word.toString();
+        System.out.println("send word func model \n");//TODO PRINTFORTEST
         String s = service.WordToString(word);
-        boolean valid = service.validateWord(s, p_tiles);
-        if (!valid)
-            score = "not_valid";
+
+        //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
+        //if (!valid) {TODO RETURN
+        //    score = "not_valid";TODO RETURN
+        //    return;TODO RETURN
+       // }TODO RETURN
         try {
             connectionLatch.await(); // wait for the connection to be established
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
         outToServer.println("tryToPlace" + "-" + s);
+        System.out.println("outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
         outToServer.flush();
+        System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
 
     public void getTileFromBag() {

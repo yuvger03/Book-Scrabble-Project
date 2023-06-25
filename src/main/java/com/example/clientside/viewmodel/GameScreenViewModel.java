@@ -7,7 +7,6 @@ import com.example.clientside.Models.MenuModel;
 import com.example.clientside.Models.PlayerModel;
 import javafx.beans.property.*;
 
-
 import java.util.Observable;
 
 import java.util.Observer;
@@ -39,6 +38,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     }
 
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
+        System.out.println("send word func vm \n");//TODO PRINTFORTEST
         String w;
         if (vertical.equals(true)) {
             w = word.get() + "," + row.get() + "," + col.get() + ",T";
@@ -47,7 +47,9 @@ public class GameScreenViewModel extends Observable implements Observer {
         Word wd = s.stringToWord(w);
         player.tryToPlace(wd);
     }
-//    public void
+    public void addTiles(){
+        player.getTileFromBag();
+    }
 }
 
 
