@@ -33,13 +33,16 @@ public class menuViewController implements Observer {
 
     public void setMenuVM(MenuViewModel menuVM){
         this.menuVM = menuVM;
+        System.out.println(menuVM.name + "A");
+        System.out.println(name.textProperty());
         menuVM.name.bind(name.textProperty());
+
     }
     public void pressedHost() throws IOException {
         HostModeViewModel hvm=menuVM.pressedHost();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/HostModeView.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();
         HostModeViewController hvc=fxmlLoader.getController();
@@ -50,7 +53,7 @@ public class menuViewController implements Observer {
         GuestModeViewModel guestvm = menuVM.pressedGuest();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GuestModeView.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();
         GuestModeViewController gvc = fxmlLoader.getController();

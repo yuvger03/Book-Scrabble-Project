@@ -15,12 +15,12 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField prefHeight="100.0" prefWidth="336.0" promptText="Enter host IP">
+            <TextField fx:id="ipServer" prefHeight="100.0" prefWidth="336.0" promptText="Enter host IP">
                <font>
                   <Font size="42.0" />
                </font>
             </TextField>
-            <TextField prefHeight="108.0" prefWidth="319.0" promptText="Enter port">
+            <TextField fx:id="serverPort" prefHeight="108.0" prefWidth="319.0" promptText="Enter port">
                <font>
                   <Font size="42.0" />
                </font>

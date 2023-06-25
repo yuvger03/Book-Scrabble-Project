@@ -45,6 +45,7 @@ public class MenuViewModel extends Observable implements Observer {
 
     public HostModeViewModel pressedHost() {
         HostModeModel hm = mm.startHostMode();
+        hm.setName(name.get());
         HostModeViewModel hvm = new HostModeViewModel(hm);
         hm.addObserver(hvm);
         return hvm;
@@ -55,6 +56,7 @@ public class MenuViewModel extends Observable implements Observer {
 
     public GuestModeViewModel pressedGuest(){
         GuestModeModel gm=mm.startGuestMode();
+        gm.setName(name.get());
         //System.out.println(name.get() + "a");
         GuestModeViewModel guestvm=new GuestModeViewModel(gm);
         gm.addObserver(guestvm);

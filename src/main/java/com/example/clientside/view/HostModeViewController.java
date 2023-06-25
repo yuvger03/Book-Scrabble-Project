@@ -22,7 +22,7 @@ public void setHostViewModel(HostModeViewModel hvm){
         GameScreenViewModel gvm=new GameScreenViewModel(HVM.getHostModel());
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 800, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();
         GameScreenViewController gvc=fxmlLoader.getController();
