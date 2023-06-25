@@ -64,7 +64,7 @@ public class GuestHandler implements IClientHandler {
                        out.flush();
                    }
                    HM.nextPlayer();
-                   //out next player turn
+                   out.println("message-"+"The current turn is of "+HM.current_player);
 
                }
                if (key.equals("getTileFromBag")) {
