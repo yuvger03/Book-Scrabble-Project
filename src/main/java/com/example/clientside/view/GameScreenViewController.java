@@ -44,11 +44,11 @@ public class GameScreenViewController implements Observer {
 //    public void checkboxPressed(){GVM.checkboxPressed();}
 //    public void pressedSend(){GVM.pressedSend();}
 
-public void sendWord(){
-        GVM.SendWord();
-}
-    @Override
-    public void update(java.util.Observable o, Object arg) {
-
+    public void sendWord(){
+            GVM.SendWord();
     }
+        @Override
+        public void update(java.util.Observable o, Object arg) {
+
+        }
 }

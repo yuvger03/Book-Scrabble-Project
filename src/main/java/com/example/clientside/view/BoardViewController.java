@@ -24,7 +24,6 @@ public class BoardViewController implements Observer, Initializable {
 
     private String[][] boardData;
     private String[] tilesArray;
-    private String letterclicked;
 
     public BoardViewController() {
         boardData = new String[][]{
@@ -47,7 +46,6 @@ public class BoardViewController implements Observer, Initializable {
         };
 
         tilesArray = new String[7];
-        letterclicked = "";
     }
 
     @Override

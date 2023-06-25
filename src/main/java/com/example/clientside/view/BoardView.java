@@ -5,6 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class BoardView extends Canvas {
     String [][] board;
@@ -23,24 +26,18 @@ public class BoardView extends Canvas {
     }
     public void fillText(GraphicsContext gc, double w, double h, int i, int j,String text){
         gc.setFill(Color.BLACK);
-        gc.fillText(text, j * w + (w / 2), i * h + (h / 2));
+        gc.fillText(text, j * w + (w /4), i * h + (2*h / 3));
     }
+
     private void reDraw() {
-        if(board == null) {
-            System.out.println("null");
+        if(board == null)
             return;
-        }
         else{
             double W = getWidth();
             double H = getHeight();
-            System.out.println("not null");
-            System.out.println("W: " + W);
-            System.out.println("H: " + H);
             double w = W/board[0].length;
             double h = H/board.length;
-
             GraphicsContext gc = getGraphicsContext2D();
-            System.out.println("board.length: " + board.length);
             for (int i =0; i<board.length; i++)
                 for (int j =0; j< board[i].length; j++){
                     switch (board[i][j]) {
@@ -62,9 +59,9 @@ public class BoardView extends Canvas {
                         default: //Add number of rows and columns
                             fillGC(gc, w, h, i, j, Color.WHITE);
                             fillText(gc, w, h, i, j, board[i][j]);
-                        }
                     }
+                }
 
-            }
         }
     }
+}
