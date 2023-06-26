@@ -19,6 +19,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     public StringProperty col;
     public BooleanProperty vertical;
     Service s;
+    public StringProperty gameBoard;
     public GameScreenViewModel(PlayerModel pm){
         this.player =pm;
         this.player.addObserver(this);
@@ -28,12 +29,14 @@ public class GameScreenViewModel extends Observable implements Observer {
         vertical=new SimpleBooleanProperty();
         scoreResult= new SimpleStringProperty();
         s=new Service();
+        gameBoard=new SimpleStringProperty();
     }
 
     @Override
     public void update(java.util.Observable o, Object arg) {
         if (o==player) {
             scoreResult.set(player.score);
+            gameBoard.set(player.gameBoard);
         }
     }
 

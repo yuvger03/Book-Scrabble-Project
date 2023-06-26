@@ -36,6 +36,7 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
+        //boardView bind to GVM.gameBoard
     }
     public void addTileToBoard(String Tile,boolean vertical){
         boardView.newTile(BVC.boardView.w,BVC.boardView.h,row,col,Tile,vertical);

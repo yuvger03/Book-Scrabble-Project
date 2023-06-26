@@ -24,8 +24,10 @@ public class PlayerModel extends Observable {
     String name;
     int totalScore;
     public String score; //TODO : bind to RESULT IN GAMEsCREEM
-    private Board board_game;
+    public String gameBoard;
+    private Board board_game; //YUVAL
     public ArrayList<Tile> p_tiles;
+    //public String tilesStringArray;
     public int serverPort;
     int turn;
     String currentTurn;
@@ -83,6 +85,7 @@ public class PlayerModel extends Observable {
                 executorService.scheduleAtFixedRate(() -> {
                     if (inFromServer.hasNextLine()) {
                         String message = inFromServer.nextLine();
+                        System.out.println(message);//TODO FORTEST
                         processMessage(message);
                     }
                 }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
@@ -103,7 +106,10 @@ public class PlayerModel extends Observable {
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
         if (lineAsList[0].equals("board")) {
-            this.board_game.tiles = service.stringToMatrix(lineAsList[1]);
+           gameBoard=lineAsList[1];
+           setChanged();
+           notifyObservers();
+            //this.board_game.tiles = service.stringToMatrix(lineAsList[1]);
         } else if(lineAsList[0].equals("message")) {
             this.message=lineAsList[1];
         }
@@ -123,7 +129,6 @@ public class PlayerModel extends Observable {
                 String[] Tiles=args[2].split("/");
                 Tile[]missingTilesArray=service.StringToTilesArray(Tiles[0]);
                 Tile[] word=service.StringToTilesArray(Tiles[1]);;
-
                 //service.stringToWord();
                 for(int i=0;i< word.length;i++){
                     int j=0;
@@ -150,6 +155,7 @@ public class PlayerModel extends Observable {
 
     }
     public void initTiles(String tilesString) {
+            //tilesStringArray=tilesString;
             String[] TileAsList = tilesString.split("/");
             for (int i = 0; i < TileAsList.length; i++)
                 p_tiles.add(service.stringToTile(TileAsList[i]));
@@ -173,7 +179,7 @@ public class PlayerModel extends Observable {
             e.printStackTrace();
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        outToServer.println("tryToPlace" + "-" + s);
+        outToServer.println(name+"-tryToPlace" + "-" + s);
         System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
         outToServer.flush();
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
