@@ -131,16 +131,6 @@ public class PlayerModel extends Observable {
             this.inFromServer = new Scanner(server.getInputStream());
             connectionLatch.countDown(); // signal that the connection is established
             joinToGame(); // Invoke joinToGame() after the connection is established
-
-<<<<<<< HEAD
-                // Create a ScheduledExecutorService to periodically check for new input
-                ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-                executorService.scheduleAtFixedRate(() -> {
-                    if (inFromServer.hasNextLine()) {
-                        String message = inFromServer.nextLine();
-                        System.out.println(message);//TODO FORTEST
-                        processMessage(message);
-=======
             Thread t= new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -150,7 +140,6 @@ public class PlayerModel extends Observable {
                             System.out.println("here"+message);
                             processMessage(message);
                         }
->>>>>>> 30c74d3 ([Noa]: changex to make background thread to listen)
                     }
                 }
             });
