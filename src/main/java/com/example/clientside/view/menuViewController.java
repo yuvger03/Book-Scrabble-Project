@@ -40,8 +40,10 @@ public class menuViewController implements Observer {
     }
     public void pressedHost() throws IOException {
         HostModeViewModel hvm=menuVM.pressedHost();
+        Stage stage = (Stage) name.getScene().getWindow();
+        stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/HostModeView.fxml"));
-        Stage stage = new Stage();
+        stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();
@@ -51,8 +53,10 @@ public class menuViewController implements Observer {
     }
     public void pressedGuest() throws IOException {
         GuestModeViewModel guestvm = menuVM.pressedGuest();
+        Stage stage = (Stage) name.getScene().getWindow();
+        stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GuestModeView.fxml"));
-        Stage stage = new Stage();
+        stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

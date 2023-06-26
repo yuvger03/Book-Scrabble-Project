@@ -24,6 +24,9 @@ public class GameScreenViewController extends BoardViewController {
     @FXML
     Label scoreResult;
     GameScreenViewModel GVM;
+    BoardViewController BVC;
+
+
 
     public void setGameVM(GameScreenViewModel gvm){
         this.GVM = gvm;
@@ -33,6 +36,9 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
+    }
+    public void addTileToBoard(String Tile,boolean vertical){
+        boardView.newTile(BVC.boardView.w,BVC.boardView.h,row,col,Tile,vertical);
     }
 //    public void gotWord(){
 //        GVM.gotWord();

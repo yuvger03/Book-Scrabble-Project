@@ -22,8 +22,8 @@ public class BoardViewController implements Observer, Initializable {
 //    @FXML
 //    Button doneButton;
 
-    private String[][] boardData;
-    private String[] tilesArray;
+    public String[][] boardData;
+    public String[] tilesArray;
 
     public BoardViewController() {
         boardData = new String[][]{
@@ -45,18 +45,14 @@ public class BoardViewController implements Observer, Initializable {
                 {"15","1", "0", "0", "3", "0", "0", "0", "1", "0", "0", "0", "3", "0", "0", "1"},
         };
 
-        tilesArray = new String[7];
+        tilesArray = new String[]{"a"};
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         boardView.setBoard(boardData);
-
-
-
         tilesView.setTiles(tilesArray);
-
 
 
     }

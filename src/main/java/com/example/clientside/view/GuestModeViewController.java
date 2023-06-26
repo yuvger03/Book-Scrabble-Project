@@ -26,8 +26,10 @@ public class GuestModeViewController implements Observer {
     }
 public void joinToGame() throws IOException {
     GameScreenViewModel gvm = new GameScreenViewModel(guestVm.getGuestModel());
+    Stage stage = (Stage) serverPort.getScene().getWindow();
+    stage.close();
     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
-    Stage stage = new Stage();
+    stage = new Stage();
     Scene scene = new Scene(fxmlLoader.load(), 700, 650);
     stage.setScene(scene);
     stage.show();

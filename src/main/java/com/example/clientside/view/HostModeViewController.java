@@ -3,8 +3,10 @@ package com.example.clientside.view;
 import com.example.clientside.HelloApplication;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,14 +16,17 @@ import java.util.Observer;
 public class HostModeViewController implements Observer {
 
     HostModeViewModel HVM;
-
+    @FXML
+    Button start;
 public void setHostViewModel(HostModeViewModel hvm){
     this.HVM=hvm;
 }
     public void startGame() throws IOException {
         GameScreenViewModel gvm=new GameScreenViewModel(HVM.getHostModel());
+        Stage stage = (Stage) start.getScene().getWindow();
+        stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
-        Stage stage = new Stage();
+        stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

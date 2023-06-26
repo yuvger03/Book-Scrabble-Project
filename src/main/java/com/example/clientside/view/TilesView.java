@@ -35,7 +35,7 @@ public class TilesView extends Canvas {
                 double rectX = col * cellSize;
                 double rectY = row * cellSize;
 
-                gc.setFill(Color.LIGHTGRAY);
+                gc.setFill(Color.WHITE);
                 gc.fillRect(rectX, rectY, cellSize, cellSize);
 
                 gc.setFill(Color.BLACK);
