@@ -3,6 +3,7 @@ package com.example;
 import com.example.Game.Tile;
 import com.example.Game.Word;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,13 @@ public class Service {
         sb.append(",").append(row).append(",").append(col);
         sb.append(",").append(direction);
         return sb.toString();
+    }
+
+    public String tilesArrToString(ArrayList<Tile> ptiles){
+        String s ="";
+        for(int i = 0; i< ptiles.size(); i++ )
+            s += TileToString(ptiles.get(i));
+        return s;
     }
 
     public Word stringToWord(String wordString) {

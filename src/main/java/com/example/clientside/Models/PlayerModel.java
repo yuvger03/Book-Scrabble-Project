@@ -11,11 +11,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.sleep;
 
 
 public class PlayerModel extends Observable {
@@ -36,7 +31,8 @@ public class PlayerModel extends Observable {
     PrintWriter outToServer;
     Service service;
     boolean itsTurn = false;
-    private CountDownLatch connectionLatch; // added field
+    CountDownLatch connectionLatch; // added field
+    boolean stop= false;
 
     //TODO: understand how gameServer connection works
     //Server gameServer; each player has a instance of its gameServer.
@@ -65,21 +61,78 @@ public class PlayerModel extends Observable {
         this.p_tiles = p_tiles;
     }
 
+//    public void connectServer(){
+//        try{
+//            Socket server = new Socket("localhost", this.serverPort);
+//            this.outToServer = new PrintWriter(server.getOutputStream());
+//            this.inFromServer = new Scanner(server.getInputStream());
+//            connectionLatch.countDown(); // signal that the connection is established
+//            joinToGame(); // Invoke joinToGame() after the connection is established
+//
+//            // Create a ScheduledExecutorService to periodically check for new input
+//            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+//            executorService.scheduleAtFixedRate(() -> {
+//                if (inFromServer.hasNextLine()) {
+//                    String message = inFromServer.nextLine();
+//                    System.out.println("here"+message);
+//                    processMessage(message);
+//                }
+//        }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
+//
+//        // Wait for the executor service to terminate (e.g., when the client disconnects)
+//        executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//
+//}
+
+//    public void connectServer() {
+//        try {
+//            System.out.println("connecting port " + serverPort);
+//            Socket server = new Socket("localhost", this.serverPort);
+//            this.outToServer = new PrintWriter(server.getOutputStream());
+//            this.inFromServer = new Scanner(server.getInputStream());
+//            connectionLatch.countDown(); // signal that the connection is established
+//            joinToGame(); // Invoke joinToGame() after the connection is established
+//
+//            // Create a ScheduledExecutorService to periodically check for new input
+//            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+//            executorService.scheduleAtFixedRate(() -> {
+//                while (!stop) {
+//                    if (inFromServer.hasNextLine()) {
+//                        String message = inFromServer.nextLine();
+//                        processMessage(message);
+//                    }
+//                }
+////                    String message = null;
+////                    try {
+////                        message = inFromServer.readLine();
+////                    } catch (IOException e) {
+////                            throw new RuntimeException(e);
+////                        }
+////                        if (message !=null) {
+////                            System.out.println("here"+message);
+////                            System.out.println(message);
+////                            processMessage(message);
+////                    }
+//            }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
+//
+//            // Wait for the executor service to terminate (e.g., when the client disconnects)
+//            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void connectServer() {
         try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        new Thread(() -> {
-            try {
-                System.out.println("connecting port " + serverPort);
-                Socket server = new Socket("localhost", this.serverPort);
-                this.outToServer = new PrintWriter(server.getOutputStream());
-                this.inFromServer = new Scanner(server.getInputStream());
-                connectionLatch.countDown(); // signal that the connection is established
-                joinToGame(); // Invoke joinToGame() after the connection is established
+            Socket server = new Socket("localhost", this.serverPort);
+            this.outToServer = new PrintWriter(server.getOutputStream(),false);
+            this.inFromServer = new Scanner(server.getInputStream());
+            connectionLatch.countDown(); // signal that the connection is established
+            joinToGame(); // Invoke joinToGame() after the connection is established
 
+<<<<<<< HEAD
                 // Create a ScheduledExecutorService to periodically check for new input
                 ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
                 executorService.scheduleAtFixedRate(() -> {
@@ -87,21 +140,30 @@ public class PlayerModel extends Observable {
                         String message = inFromServer.nextLine();
                         System.out.println(message);//TODO FORTEST
                         processMessage(message);
+=======
+            Thread t= new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!stop) {
+                        if (inFromServer.hasNextLine()) {
+                            String message = inFromServer.nextLine();
+                            System.out.println("here"+message);
+                            processMessage(message);
+                        }
+>>>>>>> 30c74d3 ([Noa]: changex to make background thread to listen)
                     }
-                }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
-
-                // Wait for the executor service to terminate (e.g., when the client disconnects)
-                executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+                }
+            });
+            t.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     public void joinToGame() {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
         outToServer.flush();
         System.out.println(this.name+ "outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
-        String s = inFromServer.next(); //TODO shira
     }
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
@@ -165,7 +227,7 @@ public class PlayerModel extends Observable {
 
     public void tryToPlace(Word word) {
         //String s=word.toString();
-        System.out.println("send word func model \n");//TODO PRINTFORTEST
+        System.out.println(this.name+"send word func model \n");//TODO PRINTFORTEST
         String s = service.WordToString(word);
 
         //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
@@ -179,7 +241,7 @@ public class PlayerModel extends Observable {
             e.printStackTrace();
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        outToServer.println(name+"-tryToPlace" + "-" + s);
+        outToServer.println(this.name+ "-tryToPlace" + "-" + s);
         System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
         outToServer.flush();
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST

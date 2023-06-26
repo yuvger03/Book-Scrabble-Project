@@ -18,39 +18,40 @@ public class GuestHandler implements IClientHandler {
     }
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
-        System.out.println("check handle client");
        try {
            in = new BufferedReader(new InputStreamReader(inFromclient)); // remove the letter
            out = new PrintWriter(outToClient, true);
            String line = in.readLine();
-           System.out.println(line+"\n");//TODO PRINTFORTEST
+           System.out.println(line+"\n");//TODO
            String[] lineAsList = line.split("-");
            String playerName=lineAsList[0];
            String key = lineAsList[1];
            if(key.equals("joinToGame")){
              if(HM.addPlayerToGame(lineAsList[0])){
-               out.println(playerName+"-"+"message-you joind to game");
-               out.flush();
-               System.out.println(playerName+"-"+"message-you joind to game");}
-               else{
-                 out.println(playerName+"-"+"message-you not joind to game");
-                 out.flush();
+               out.println(playerName+"-"+"message-you joind to game- "+"\n");
+//               out.flush();
+//               System.out.println(playerName+"-"+"message-you joind to game");
+             }
+             else{
+                 out.println(playerName+"-"+"message-you not joind to game- "+"\n");
+//                 out.flush();
+//                 System.out.println(playerName+"-"+"message-you not joind to game");
              }
            }
-           if (key.equals("startGame")) {
+           if(key.equals("startGame")) {
                System.out.println("gameStarted\n"); //TODO shira
                HM.current_player=HM.playersList.get(HM.index);
                for(int i=0;i<HM.playersList.size();i++){
-                   ArrayList<Tile>tiels=HM.initTileArray();
+                   ArrayList<Tile>tiles=HM.initTileArray();
                    String tielsString="";
-                   for(int j=0;j<tiels.size();j++){
-                       tielsString+=service.TileToString(tiels.get(j))+"/";
+                   for(int j=0;j<tiles.size();j++){
+                       tielsString+=service.TileToString(tiles.get(j))+"/";
                    }
-                   out.println(HM.playersList.get(i)+"-initTiles-" + tielsString+"- ");
-                   out.flush();
+                   out.println(HM.playersList.get(i)+"-initTiles-" + tielsString+"- "+"\n");
+//                   out.flush();
                }
-               out.println("board-"+ HM.getBoardGame());
-               out.flush();
+               out.println("board-"+ HM.getBoardGame()+"\n");
+//               out.flush();
            }
            if(playerName.equals(HM.current_player)){
                if (key.equals("tryToPlace")) {
@@ -64,28 +65,30 @@ public class GuestHandler implements IClientHandler {
                        fillTiles = HM.fillTilesArray(count);
                        fillTiles += "/" + wordString;
                    }
-                   out.println(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
-                   out.flush();
+                   System.out.println("send to" +playerName+"- try to place"+"\n");
+                   out.println(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles+ "\n");
+//                   out.flush();
 
-                   if (score > 0){
-                       out.println("board-" + HM.getBoardGame());
-                       out.flush();
-                   }
+//                   if (score > 0){//TODO: return it
+                   System.out.println("send to everyone the board");
+                   out.println("board-" + HM.getBoardGame()+"\n");
+//                   out.flush();
+                  // }
                    HM.nextPlayer();
-                   out.println("message-"+"The current turn is of "+HM.current_player);
-                   out.flush();
+                   out.println("message-"+"The current turn is of "+HM.current_player+"\n");
+//                   out.flush();
 
                }
                if (key.equals("getTileFromBag")) {
                    Tile t  = HM.getRand();
                    String s = service.TileToString(t);
-                   out.println(playerName+"-getTileFromBag-"+s+"- ");
-                   out.flush();
+                   out.println(playerName+"-getTileFromBag-"+s+"- "+"\n");
+//                   out.flush();
                }
            }
          else if(!key.equals("startGame")&&!key.equals("joinToGame"))
-             out.println(playerName+"-"+"message-not your turn,please wait to your turn- ");
-             out.flush();
+             out.println(playerName+"-"+"message-not your turn,please wait to your turn- "+"\n");
+//             out.flush();
 
        } catch (Exception e) {
            throw new RuntimeException(e);

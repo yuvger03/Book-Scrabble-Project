@@ -11,10 +11,11 @@ public class GuestModeModel extends PlayerModel {
         super();
         this.serverPort = port;
         this.name = name;
+        connectServer();
     }
 
     public void enterToGame() {
-//        this.serverPort=8081;//for test
+        this.serverPort=8081;//for test
         connectServer();
     }
 }

@@ -38,8 +38,9 @@ public class HostModeModel extends PlayerModel {
         super();
         this.name = name;
         this.gameServer=gameServer;
-        Random r = new Random();
-        this.serverPort = 6000 + r.nextInt(1000);
+//        Random r = new Random();
+//        this.serverPort = 6000 + r.nextInt(1000);
+        this.serverPort = 8081;
         Thread serverThread = new Thread(() -> {
             MyServer hostServer = new MyServer(serverPort, guestHandler, 4);
             hostServer.start();
@@ -54,19 +55,21 @@ public class HostModeModel extends PlayerModel {
             System.out.println("server stopped");
         });
         serverThread.start();
-        connectServer(); //TODO return back
+        connectServer();
     }
 
 
 public void startGame(){
-    outToServer.println("startGame"+"-");
+    try {
+        connectionLatch.await(); // wait for the connection to be established
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    outToServer.println(this.name+"-startGame"+"-"+"\n");
     outToServer.flush();
+    System.out.println("start game "+ outToServer);
 }
-    //public void joinToGame() {
-        //outToServer.println(this.name + "-" + "joinToGame" + "-");
 
-        //String s = inFromServer.next();
-   // }
     public void close() {
         inFromServer.close();
         outToServer.close();

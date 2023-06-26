@@ -34,90 +34,69 @@ package com.example.clientside.Models;
 
 //package com.example.serverSide;
 
+import com.example.Game.Tile;
+import com.example.Game.Word;
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.HostManager;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static java.lang.Thread.sleep;
 
 public class runClient {
-    public static PlayerModel host;
-    private static GuestModeModel player2;
+    public static HostModeModel host;
     public HostManager hostManager;
     public static GuestHandler guestHandler;
 
-//    @BeforeEach
+    //    @BeforeEach
     public static void main(String[] args) throws InterruptedException {
         int serverPort = 8080; // Change the server port if needed
         guestHandler = new GuestHandler(serverPort);
         host = new HostModeModel(8080, guestHandler, "host");
-        player2 = new GuestModeModel(host.serverPort, "noa");
-        player2.enterToGame();
 //    }
 //    @Test
 //    public void testConnectivityToServer() {
         // Simulate a new host being up
-        InputStream hostInputStream = new ByteArrayInputStream("joinToGame".getBytes());
-        OutputStream hostOutputStream = new ByteArrayOutputStream();
-//        guestHandler.handleClient(hostInputStream, hostOutputStream);
-
         sleep(100);
         // Check if the host is connected
-        if (!guestHandler.HM.playersList.contains("host"))
-            System.out.println("player list should contain host");
-        if (!guestHandler.HM.playersList.contains("noa"))
-            System.out.println("player list should contain noa");
-        if (guestHandler.HM.playersList.contains("shira"))
-            System.out.println("player list should not contain shira");
+        if (!guestHandler.HM.playersList.contains("host")) System.out.println("player list should contain host");
 
+//        GuestModeModel guest1 = new GuestModeModel(host.serverPort, "guest1");
+//        GuestModeModel guest2 = new GuestModeModel(host.serverPort, "guest2");
+//        GuestModeModel guest3 = new GuestModeModel(host.serverPort, "guest3");
+//        GuestModeModel guest4 = new GuestModeModel(host.serverPort, "guest4");
+        // Check if only 4 guests are connected
+//        if (!guestHandler.HM.playersList.contains("guest1")) System.out.println("player list not contain player 1");
+//        if (!guestHandler.HM.playersList.contains("guest2")) System.out.println("player list not contain player 2");
+//        if (!guestHandler.HM.playersList.contains("guest3")) System.out.println("player list not contain player 3");
+//        if (!guestHandler.HM.playersList.contains("guest4")) System.out.println("player list not contain player 4"); // 4'th player not in the game
 
-    }
+        sleep(100);
+        host.startGame();
 
-//        // Simulate up to 4 guests being up
-//        InputStream guest1InputStream = new ByteArrayInputStream("joinToGame".getBytes());
-//        OutputStream guest1OutputStream = new ByteArrayOutputStream();
-//        guestHandler.handleClient(guest1InputStream, guest1OutputStream);
-//
-//        InputStream guest2InputStream = new ByteArrayInputStream("joinToGame".getBytes());
-//        OutputStream guest2OutputStream = new ByteArrayOutputStream();
-//        guestHandler.handleClient(guest2InputStream, guest2OutputStream);
-//
-//        InputStream guest3InputStream = new ByteArrayInputStream("joinToGame".getBytes());
-//        OutputStream guest3OutputStream = new ByteArrayOutputStream();
-//        guestHandler.handleClient(guest3InputStream, guest3OutputStream);
-//
-//        // Try to add a fifth guest
-//        InputStream guest4InputStream = new ByteArrayInputStream("joinToGame".getBytes());
-//        OutputStream guest4OutputStream = new ByteArrayOutputStream();
-//        guestHandler.handleClient(guest4InputStream, guest4OutputStream);
-//
-//        // Check if only 4 guests are connected
-//        if(!guestHandler.HM.playersList.contains("guest1")) System.out.println("player list not contain player 1");
-//        if(!guestHandler.HM.playersList.contains("guest2")) System.out.println("player list not contain player 2");
-//        if(!guestHandler.HM.playersList.contains("guest3")) System.out.println("player list not contain player 3");
-//        if(guestHandler.HM.playersList.contains("guest4")) System.out.println("player list contain player 4");
-//        if(!("guest4-message-you not joind to game" == guest4OutputStream.toString().trim())) System.out.println(" guest 4 should get error");
-//    }
-//
+        System.out.println(host.service.tilesArrToString(host.p_tiles));
+//        System.out.println(guest1.service.tilesArrToString(guest1.p_tiles));
+//        System.out.println(guest2.service.tilesArrToString(guest2.p_tiles));
+//        System.out.println(guest3.service.tilesArrToString(guest3.p_tiles));
 //    @Test
 //    public void testTryToPlaceWord() {
-//        // Simulate a player trying to place a word
-//        Word word = new Word(new Tile[] {new Tile('T', 1), new Tile('H',4), new Tile('E',1)}, 0, 0, true);
+        // Simulate a player trying to place a word
+        Word word = new Word(new Tile[]{new Tile('T', 1), new Tile('H', 4), new Tile('E', 1)}, 0, 0, true);
+        //till here
+
+
+
+
+
 //        guestHandler.HM.addPlayerToGame("player1");
 //        guestHandler.HM.addPlayerToGame("player2");
-//
-//        InputStream inputStream = new ByteArrayInputStream("player1-tryToPlace-THE".getBytes());
+//        guest1.tryToPlace(word);
+//        InputStream inputStream = new ByteArrayInputStream("guest1-tryToPlace-THE".getBytes());
 //        OutputStream outputStream = new ByteArrayOutputStream();
 //        guestHandler.handleClient(inputStream, outputStream);
 //
 //        // Check the response
 //        String expectedOutput = "player1-tryToPlace-4-/THE\nboard-";
 //        if(!outputStream.toString().startsWith(expectedOutput)) System.out.println(" expected output not equal");;
-//    }
+//}
 
 //    @Test
 ////    public void testGetTileFromBag() {
@@ -245,4 +224,5 @@ public class runClient {
 //    }
 
 
+    }
 }
