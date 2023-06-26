@@ -33,6 +33,7 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
+        //boardView bind to GVM.gameBoard
     }
 //    public void gotWord(){
 //        GVM.gotWord();
