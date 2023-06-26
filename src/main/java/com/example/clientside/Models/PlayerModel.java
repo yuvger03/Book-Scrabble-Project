@@ -4,10 +4,6 @@ import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Game.Word;
 import com.example.Service;
-import javafx.beans.InvalidationListener;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -15,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 
 public class PlayerModel extends Observable {
@@ -63,8 +64,14 @@ public class PlayerModel extends Observable {
     }
 
     public void connectServer() {
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         new Thread(() -> {
             try {
+                System.out.println("connecting port " + serverPort);
                 Socket server = new Socket("localhost", this.serverPort);
                 this.outToServer = new PrintWriter(server.getOutputStream());
                 this.inFromServer = new Scanner(server.getInputStream());
@@ -90,7 +97,7 @@ public class PlayerModel extends Observable {
     public void joinToGame() {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
         outToServer.flush();
-        System.out.println("outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
+        System.out.println(this.name+ "outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
         String s = inFromServer.next(); //TODO shira
     }
     private void processMessage(String message) {
@@ -167,7 +174,7 @@ public class PlayerModel extends Observable {
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
         outToServer.println("tryToPlace" + "-" + s);
-        System.out.println("outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
+        System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
         outToServer.flush();
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }

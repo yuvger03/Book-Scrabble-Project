@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class GuestHandler implements IClientHandler {
     BufferedReader in;
     PrintWriter out;
-    HostManager HM;
+    public HostManager HM;
     Service service=new Service();
 
     public GuestHandler(int serverPort) {
@@ -18,6 +18,7 @@ public class GuestHandler implements IClientHandler {
     }
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
+        System.out.println("check handle client");
        try {
            in = new BufferedReader(new InputStreamReader(inFromclient)); // remove the letter
            out = new PrintWriter(outToClient, true);

@@ -13,10 +13,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class HostManager {
 
-    Tile.Bag b;
-    Board gameboard;
+    public Tile.Bag b;
+    public Board gameboard;
     int serverPort; //of GameServer
-    ArrayList<String> playersList;
+    public ArrayList<String> playersList;
     public String current_player;
     public int index; //for check the current turn;
     Scanner inFromServer;

@@ -2,10 +2,9 @@ package com.example.clientside.Models;
 
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.MyServer;
-import java.util.Observable;
 
-import java.util.Observer;
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
 public class HostModeModel extends PlayerModel {
     MyServer hostServer;
@@ -32,9 +31,33 @@ public class HostModeModel extends PlayerModel {
             System.out.println("server stopped");
         });
         serverThread.start();
-        //connectServer(); //TODO return back
-        //joinToGame();    //TODO return back
+        connectServer(); //TODO return back
     }
+
+    public HostModeModel(int gameServer, GuestHandler guestHandler, String name) {
+        super();
+        this.name = name;
+        this.gameServer=gameServer;
+        Random r = new Random();
+        this.serverPort = 6000 + r.nextInt(1000);
+        Thread serverThread = new Thread(() -> {
+            MyServer hostServer = new MyServer(serverPort, guestHandler, 4);
+            hostServer.start();
+            // System.out.println("server started");
+            Scanner s = new Scanner(System.in);
+            String input;
+            do {
+                input = s.next();
+            } while (!input.equals("stop"));
+            s.close();
+            hostServer.close();
+            System.out.println("server stopped");
+        });
+        serverThread.start();
+        connectServer(); //TODO return back
+    }
+
+
 public void startGame(){
     outToServer.println("startGame"+"-");
     outToServer.flush();
