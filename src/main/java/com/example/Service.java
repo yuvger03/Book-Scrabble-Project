@@ -111,6 +111,25 @@ public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
         }
         return matrix;
     }
+    public String[][] stringToMatrixS(String input) {
+        if (input.length() != 225) {
+            throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
+        }
+
+        String[][] matrix = new String[15][15];
+        int index = 0;
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                if(input.charAt(index)!='n') {
+                    matrix[row][col] = ""+input.charAt(index++);
+                }
+                else {
+                    matrix[row][col]=null;
+                }
+            }
+        }
+        return matrix;
+    }
 
 
     private int calculateScore(char c) {
