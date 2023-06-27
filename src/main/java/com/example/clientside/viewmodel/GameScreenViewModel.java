@@ -5,6 +5,7 @@ import com.example.Service;
 import com.example.clientside.Models.HostModeModel;
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.Models.PlayerModel;
+import com.example.clientside.view.BoardView;
 import javafx.beans.property.*;
 
 import java.util.Observable;
@@ -18,6 +19,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     public StringProperty row;
     public StringProperty col;
     public BooleanProperty vertical;
+    public StringProperty boardView;
     Service s;
     public StringProperty gameBoard;
     public GameScreenViewModel(PlayerModel pm){
@@ -29,7 +31,6 @@ public class GameScreenViewModel extends Observable implements Observer {
         vertical=new SimpleBooleanProperty();
         scoreResult= new SimpleStringProperty();
         s=new Service();
-        gameBoard=new SimpleStringProperty();
     }
 
     @Override
@@ -37,6 +38,8 @@ public class GameScreenViewModel extends Observable implements Observer {
         if (o==player) {
             scoreResult.set(player.score);
             gameBoard.set(player.gameBoard);
+
+
         }
     }
 

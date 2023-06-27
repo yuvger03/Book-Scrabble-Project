@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class BoardView extends Canvas {
     String [][] board;
-    double W = getWidth();
-    double H = getHeight();
-    double w = W/board[0].length;
-    double h = H/board.length;
+    double W;
+    double H ;
+    double w ;
+    double h ;
     GraphicsContext gc = getGraphicsContext2D();
     public BoardView(){
 
@@ -23,22 +23,22 @@ public class BoardView extends Canvas {
     public void setBoard(String [][] board){
         this.board = board;
         this.gc = gc;
-        this.W = W;
-        this.H = H;
-        this.w = w;
-        this.h = h;
+        this.W = getWidth();
+        this.H = getHeight();
+        this.w = W/board[0].length;
+        this.h = H/board.length;;
         reDraw();
 
     }
-    public void newTile(double boardWidth, double h, int i, int j,String text,boolean vertical){
+    public void newTile(double boardWidth,double h,int i,int j,boolean vertical,String text){
         if (vertical)
             for(char c: text.toCharArray()){
-                fillText(this.gc,boardWidth,h,i,j,text);
+                fillText(this.gc,boardWidth,h,i,j,""+c);
                 i++;
         }
         else
             for(char c: text.toCharArray()){
-                fillText(this.gc,boardWidth,h,i,j,text);
+                fillText(this.gc,boardWidth,h,i,j,""+c);
                 j++;
             }
     }

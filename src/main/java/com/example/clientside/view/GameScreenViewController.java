@@ -36,10 +36,10 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
-        //boardView bind to GVM.gameBoard
+//        boardViewProperty.bind(GVM.gameBoard);
     }
     public void addTileToBoard(String Tile,boolean vertical){
-        boardView.newTile(BVC.boardView.w,BVC.boardView.h,row,col,Tile,vertical);
+        boardView.newTile(boardView.w,boardView.h,Integer.parseInt(row.getText()),Integer.parseInt(col.getText()),vertical,Tile);
     }
 //    public void gotWord(){
 //        GVM.gotWord();
@@ -52,6 +52,7 @@ public class GameScreenViewController extends BoardViewController {
 
     public void sendWord(){
             GVM.SendWord();
+            addTileToBoard(word.getText(),vertical.isSelected());
     }
         @Override
         public void update(java.util.Observable o, Object arg) {
