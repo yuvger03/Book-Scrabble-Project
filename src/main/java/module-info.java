@@ -1,8 +1,9 @@
 module com.example.clientside {
     requires javafx.controls;
     requires javafx.fxml;
-            
-                            
+    requires java.sql;
+
+
     opens com.example.clientside to javafx.fxml;
     opens com.example.clientside.view to javafx.fxml;
     exports com.example.clientside;

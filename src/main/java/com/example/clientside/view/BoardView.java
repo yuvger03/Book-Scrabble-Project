@@ -14,6 +14,8 @@ public class BoardView extends Canvas {
     double W;
     double H ;
     double w ;
+    String[][] boardsTiles;
+
     double h ;
     GraphicsContext gc = getGraphicsContext2D();
     public BoardView(){
@@ -50,7 +52,18 @@ public class BoardView extends Canvas {
         gc.setFill(Color.BLACK);
         gc.fillText(text, j * boardWidth + (boardWidth /4), i * h + (2*h / 3));
     }
-
+    public void reDrawTilesBoard(String[][]board) {
+        if (this.boardsTiles.equals(board))
+            return;
+        else {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 1; j <board[i].length; j++) {
+                    if (!board[i][j].equals("n"))
+                        fillText(this.gc, w, h, i+1, j+1, board[i][j]);
+                }
+            }
+        }
+    }
     private void reDraw() {
         if(board == null)
             return;

@@ -1,5 +1,6 @@
 package com.example.clientside.view;
 
+import com.example.Service;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.util.Observable;
 import java.util.Observer;
 
 public class GameScreenViewController extends BoardViewController {
@@ -25,6 +27,7 @@ public class GameScreenViewController extends BoardViewController {
     Label scoreResult;
     GameScreenViewModel GVM;
     BoardViewController BVC;
+    Service s = new Service();
 
 
 
@@ -54,8 +57,13 @@ public class GameScreenViewController extends BoardViewController {
             GVM.SendWord();
             addTileToBoard(word.getText(),vertical.isSelected());
     }
-        @Override
-        public void update(java.util.Observable o, Object arg) {
 
-        }
+    @Override
+    public void update(Observable o, Object arg) {
+        String[] lineAsList = ((String)arg).split(",");
+        String[][] board= s.StringTOString2DAraay(lineAsList[0],15,15);//TODO hardcoded
+        String[] tiles1 =lineAsList[1].split("");
+        boardView.reDrawTilesBoard(board);
+        tilesView.reDraw(tiles1);
+    }
 }

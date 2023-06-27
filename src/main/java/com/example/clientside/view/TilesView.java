@@ -9,16 +9,19 @@ import javafx.scene.text.Font;
 public class TilesView extends Canvas {
     private String[] tiles;
     public final int cellSize = 30;
-
+    private String[] tilesArray= new String[]{""};
     public TilesView() {
     }
 
     public void setTiles(String[] tiles) {
-        this.tiles = tiles;
-        reDraw();
+        this.tilesArray = tiles;
+        reDraw(this.tilesArray);
     }
 
-    private void reDraw() {
+    public void reDraw(String[] tiles) {
+        if(tilesArray.equals(tiles)){
+            return;
+        }
         if (tiles != null) {
             double width = getWidth();
             double height = getHeight();
@@ -46,3 +49,4 @@ public class TilesView extends Canvas {
         }
     }
 }
+

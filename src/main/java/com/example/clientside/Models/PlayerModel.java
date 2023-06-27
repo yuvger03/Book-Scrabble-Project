@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
@@ -219,21 +220,36 @@ public class PlayerModel extends Observable {
         System.out.println(this.name+"send word func model \n");//TODO PRINTFORTEST
         String s = service.WordToString(word);
 
+
+
+
+        Tile.Bag b=new Tile.Bag();
+        Tile tile =b.getRand();
+        Tile tile1 =b.getRand();
+        int random = new Random().nextInt(0,15);
+        board_game.tiles[random][random] = tile1;
+        gameBoard = service.matrixToString(board_game.tiles);
+        System.out.println(gameBoard);
+        setChanged();
+        notifyObservers();
+
+
+
         //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
         //if (!valid) {TODO RETURN
         //    score = "not_valid";TODO RETURN
         //    return;TODO RETURN
        // }TODO RETURN
-        try {
-            connectionLatch.await(); // wait for the connection to be established
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        outToServer.println(this.name+ "-tryToPlace" + "-" + s);
-        System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
-        outToServer.flush();
-        System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
+//        try {
+//            connectionLatch.await(); // wait for the connection to be established
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
+//        outToServer.println(this.name+ "-tryToPlace" + "-" + s);
+//        System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
+//        outToServer.flush();
+//        System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
 
     public void getTileFromBag() {

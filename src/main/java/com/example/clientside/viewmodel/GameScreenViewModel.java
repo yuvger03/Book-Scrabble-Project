@@ -16,12 +16,16 @@ public class GameScreenViewModel extends Observable implements Observer {
     PlayerModel player;
     public StringProperty scoreResult;
     public StringProperty word;
+//    public StringProperty gameBoard;
+    public String gameBoard;
+    public StringProperty tilesArray;
     public StringProperty row;
     public StringProperty col;
     public BooleanProperty vertical;
-    public StringProperty boardView;
+//    public StringProperty boardView;
+//    public String boardview;
     Service s;
-    public StringProperty gameBoard;
+
     public GameScreenViewModel(PlayerModel pm){
         this.player =pm;
         this.player.addObserver(this);
@@ -30,17 +34,24 @@ public class GameScreenViewModel extends Observable implements Observer {
         col=new SimpleStringProperty();
         vertical=new SimpleBooleanProperty();
         scoreResult= new SimpleStringProperty();
+//        gameBoard=new SimpleStringProperty();
+        tilesArray=new SimpleStringProperty();
         s=new Service();
     }
 
     @Override
     public void update(java.util.Observable o, Object arg) {
-        if (o==player) {
+//        if (o==player) {
             scoreResult.set(player.score);
-            gameBoard.set(player.gameBoard);
+            gameBoard =(player.gameBoard);
+            tilesArray.set(s.TilessArrayToSTring(player.p_tiles));
+//            String sendNotify=gameBoard.toString()+","+tilesArray.toString();
+            String sendNotify=gameBoard +","+"ABCGKCD";
 
 
-        }
+            setChanged();
+            notifyObservers(sendNotify);
+//        }
     }
 
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
