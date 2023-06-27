@@ -20,6 +20,8 @@ public class GameScreenViewModel extends Observable implements Observer {
     public BooleanProperty vertical;
     Service s;
     public StringProperty gameBoard;
+    public StringProperty tilesArray;
+
     public GameScreenViewModel(PlayerModel pm){
         this.player =pm;
         this.player.addObserver(this);
@@ -37,6 +39,10 @@ public class GameScreenViewModel extends Observable implements Observer {
         if (o==player) {
             scoreResult.set(player.score);
             gameBoard.set(player.gameBoard);
+            //tilesArray.set(s.TilessArrayToSTring(player.p_tiles));
+            String sendNotify=gameBoard.toString()+",";
+            setChanged();
+            notifyObservers(gameBoard);
         }
     }
 

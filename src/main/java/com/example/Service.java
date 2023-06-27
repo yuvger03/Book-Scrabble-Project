@@ -42,7 +42,16 @@ public class Service {
             s += TileToString(ptiles.get(i));
         return s;
     }
-
+public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
+    String[][] array = new String[row][col];
+    int index = 0;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++)
+            array[i][j] = String.valueOf(s1.charAt(index));
+        index++;
+    }
+    return array;
+}
     public Word stringToWord(String wordString) {
         int length = wordString.length();
         String[] array = wordString.split(",");
@@ -159,4 +168,15 @@ public class Service {
     public Tile[] StringToTilesArray(String missingTiles) {
         return stringToWord(missingTiles).getTiles();
     }
+
+
+    public String TilessArrayToSTring(ArrayList<Tile> pTiles) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i=0;i<pTiles.size();i++) {
+            stringBuilder.append(pTiles.get(i).letter);
+        }
+        return stringBuilder.toString();
+    }
+
 }

@@ -137,7 +137,7 @@ public class PlayerModel extends Observable {
                     while (!stop) {
                         if (inFromServer.hasNextLine()) {
                             String message = inFromServer.nextLine();
-                            System.out.println("here"+message);
+                            System.out.println("here "+message+" "+"\n");
                             processMessage(message);
                         }
                     }
