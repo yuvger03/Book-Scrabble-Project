@@ -48,7 +48,6 @@ public class PlayerModel extends Observable {
     public String getName() {
         return name;
     }
-
     public ArrayList<Tile> getP_tiles() {
         return p_tiles;
     }
@@ -60,70 +59,6 @@ public class PlayerModel extends Observable {
     public void setP_tiles(ArrayList<Tile> p_tiles) {
         this.p_tiles = p_tiles;
     }
-
-//    public void connectServer(){
-//        try{
-//            Socket server = new Socket("localhost", this.serverPort);
-//            this.outToServer = new PrintWriter(server.getOutputStream());
-//            this.inFromServer = new Scanner(server.getInputStream());
-//            connectionLatch.countDown(); // signal that the connection is established
-//            joinToGame(); // Invoke joinToGame() after the connection is established
-//
-//            // Create a ScheduledExecutorService to periodically check for new input
-//            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-//            executorService.scheduleAtFixedRate(() -> {
-//                if (inFromServer.hasNextLine()) {
-//                    String message = inFromServer.nextLine();
-//                    System.out.println("here"+message);
-//                    processMessage(message);
-//                }
-//        }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
-//
-//        // Wait for the executor service to terminate (e.g., when the client disconnects)
-//        executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//
-//}
-
-//    public void connectServer() {
-//        try {
-//            System.out.println("connecting port " + serverPort);
-//            Socket server = new Socket("localhost", this.serverPort);
-//            this.outToServer = new PrintWriter(server.getOutputStream());
-//            this.inFromServer = new Scanner(server.getInputStream());
-//            connectionLatch.countDown(); // signal that the connection is established
-//            joinToGame(); // Invoke joinToGame() after the connection is established
-//
-//            // Create a ScheduledExecutorService to periodically check for new input
-//            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-//            executorService.scheduleAtFixedRate(() -> {
-//                while (!stop) {
-//                    if (inFromServer.hasNextLine()) {
-//                        String message = inFromServer.nextLine();
-//                        processMessage(message);
-//                    }
-//                }
-////                    String message = null;
-////                    try {
-////                        message = inFromServer.readLine();
-////                    } catch (IOException e) {
-////                            throw new RuntimeException(e);
-////                        }
-////                        if (message !=null) {
-////                            System.out.println("here"+message);
-////                            System.out.println(message);
-////                            processMessage(message);
-////                    }
-//            }, 0, 100, TimeUnit.MILLISECONDS); // Adjust the delay as needed
-//
-//            // Wait for the executor service to terminate (e.g., when the client disconnects)
-//            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void connectServer() {
         try {
             Socket server = new Socket("localhost", this.serverPort);
@@ -137,8 +72,8 @@ public class PlayerModel extends Observable {
                     while (!stop) {
                         if (inFromServer.hasNextLine()) {
                             String message = inFromServer.nextLine();
-                            System.out.println(message);
-                            if(message!="")
+                            //System.out.println(message);
+                            if(!message.equals(""))
                                 processMessage(message);
                         }
                     }
@@ -170,6 +105,7 @@ public class PlayerModel extends Observable {
             this.message=lineAsList[1];
         }
     else if (lineAsList[0].equals(name)) {
+            System.out.println(message);
             getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);//TODO: check if it possible in try to place
         }
 
@@ -177,6 +113,8 @@ public class PlayerModel extends Observable {
     private void getFunc(String... args) {
         String func=args[0];
         String inputString=args[1];
+        System.out.println("inputString "+inputString);
+
         if (func.equals("tryToPlace")) {
             if (inputString.equals("0")) {
                 score = "not valid";
@@ -216,7 +154,6 @@ public class PlayerModel extends Observable {
             for (int i = 0; i < TileAsList.length; i++)
                 p_tiles.add(service.stringToTile(TileAsList[i]));
         }
-
 
 
     public void tryToPlace(Word word) {

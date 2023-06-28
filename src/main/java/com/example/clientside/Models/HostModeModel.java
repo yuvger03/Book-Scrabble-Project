@@ -1,14 +1,14 @@
 package com.example.clientside.Models;
 
 import com.example.serverSide.GuestHandler;
-import com.example.serverSide.IClientHandler;
+import com.example.serverSide.MyHostServer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,7 +21,8 @@ public class HostModeModel extends PlayerModel {
 
     public HostModeModel(int gameServer) {
         super();
-        this.gameServer = gameServer;}
+        this.gameServer = gameServer;
+    }
 //    public HostModeModel(int gameServer) {
 //        super();
 //        this.gameServer = gameServer;
@@ -57,7 +58,7 @@ public class HostModeModel extends PlayerModel {
         this.serverPort = 8081;
         this.guestHandler = guestHandler1;
         this.guestHandler.HM.playersList.add("host");
-        this.guestHandler.host = this;
+        //this.guestHandler.host = this;
         System.out.println("im here");
     }
 
@@ -69,101 +70,29 @@ public class HostModeModel extends PlayerModel {
     }
 
     public void startGame() {
-        notifyAll(this.name + "-startGame" + "-");
+        hostServer.notifyAll(this.name + "-startGame" + "-");
         System.out.println("start game " + outToServer);
     }
 
-    public void notifyAll(String update){
-        for (Socket s : sockets) {
-            try {
-                outToServer = new PrintWriter(s.getOutputStream());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            outToServer.println(update);
-            outToServer.flush();
-        }
-    }
+//    public void notifyAll(String update) {
+//        for (Socket s : sockets) {
+//            try {
+//                outToServer = new PrintWriter(s.getOutputStream());
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//            outToServer.println(update);
+//            //outToServer.flush();
+//        }
+//    }
 
     public void close() {
         inFromServer.close();
         outToServer.close();
         hostServer.close();
     }
-
-
-    public class MyHostServer {
-        public int port;
-        IClientHandler clientHandler;
-        private int maxThreads;
-        protected ServerSocket serverSocket;
-        private ExecutorService executorService;
-        protected volatile boolean stop;
-
-        public MyHostServer(int port, IClientHandler clientHandler, int maxThreads) {
-            this.port = port;
-            this.clientHandler = clientHandler;
-            this.maxThreads = maxThreads;
-            this.executorService = Executors.newFixedThreadPool(maxThreads);
-        }
-
-        public void start() {
-            stop = false;
-            executorService.execute(() -> startServer());
-        }
-
-        protected void startServer() {
-            try {
-                serverSocket = new ServerSocket(port);
-                System.out.println("Server started on port " + port);
-                serverSocket.setSoTimeout(1000);
-                while (!stop) {
-                    try {
-                        Socket clientSocket = serverSocket.accept();
-                        if(clientSocket!=null)
-                            sockets.add(clientSocket);
-                        try {
-                            clientHandler.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                clientSocket.close();
-                                clientHandler.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } catch (SocketTimeoutException e) {
-                    }
-                }
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void close() {
-            stop = true;
-            try {
-                executorService.shutdown();
-                if (serverSocket.isClosed())
-                    serverSocket.close();
-                for (Socket s : sockets) {
-                    if (!s.isClosed()) {
-                        try {
-                            s.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
+
 
 
 

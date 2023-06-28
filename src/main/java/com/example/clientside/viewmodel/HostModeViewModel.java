@@ -10,7 +10,7 @@ public class HostModeViewModel extends Observable implements Observer {
       this.hostModel=hm;
    }
    public void startGame(){
-    hostModel.startGame();
+       hostModel.startGame();
 
    }
    public HostModeModel getHostModel(){return hostModel;}

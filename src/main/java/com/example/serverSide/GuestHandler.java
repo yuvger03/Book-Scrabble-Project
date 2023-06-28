@@ -11,11 +11,11 @@ import java.util.Scanner;
 
 public class GuestHandler implements IClientHandler {
     Scanner in;
-    //PrintWriter out;
+    PrintWriter out;
     public HostManager HM;
     Service service=new Service();
     Boolean stop=false;
-    public HostModeModel host;
+    public MyHostServer host;
 
     public GuestHandler(int serverPort) {
         this.HM=new HostManager(serverPort);
@@ -23,9 +23,8 @@ public class GuestHandler implements IClientHandler {
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
         in = new Scanner(inFromclient); // remove the letter
-        PrintWriter out = new PrintWriter(outToClient, true);
-        //while(in.hasNextLine()) {
-         while(!stop){
+        out = new PrintWriter(outToClient, true);
+         while(in.hasNextLine()){
             try {
                 String line = in.nextLine();
                 System.out.println(line);//TODO
@@ -40,7 +39,7 @@ public class GuestHandler implements IClientHandler {
 //                          out.flush();
                     } else {
                         host.notifyAll(playerName + "-" + "message-you not joind to game- ");
-//                      out.flush();
+
                     }
                 }
                 if (key.equals("startGame")) {
@@ -53,12 +52,8 @@ public class GuestHandler implements IClientHandler {
                             tielsString += service.TileToString(tiles.get(j)) + "/";
                         }
                         host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "- ");
-//                   out.flush();
                     }
                     host.notifyAll("board-" + HM.getBoardGame());
-//                    System.out.println("board-" + HM.getBoardGame() );
-
-//               out.flush();
                 }
                 if (playerName.equals(HM.current_player)) {
                     if (key.equals("tryToPlace")) {
@@ -88,7 +83,6 @@ public class GuestHandler implements IClientHandler {
                     }
                 } else if (!key.equals("startGame") && !key.equals("joinToGame"))
                     host.notifyAll(playerName + "-" + "message-not your turn,please wait to your turn- ");
-//             out.flush();
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -99,7 +93,7 @@ public class GuestHandler implements IClientHandler {
     @Override
   public void close()  {
         in.close();
-        //out.close();
+        out.close();
     }
 }
 
