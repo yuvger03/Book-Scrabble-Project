@@ -200,6 +200,9 @@ public class PlayerModel extends Observable {
         }
         if(func.equals("getTileFromBag")){
             p_tiles.add(service.stringToTile(inputString));
+            setChanged();
+            notifyObservers();
+
         }
         if(func.equals("message")){
           this.message=inputString;
@@ -217,23 +220,27 @@ public class PlayerModel extends Observable {
 
     public void tryToPlace(Word word) {
         //String s=word.toString();
-        System.out.println(this.name+"send word func model \n");//TODO PRINTFORTEST
+        System.out.println(this.name + "send word func model \n");//TODO PRINTFORTEST
         String s = service.WordToString(word);
 
 
-
-
-        Tile.Bag b=new Tile.Bag();
-        Tile tile =b.getRand();
-        Tile tile1 =b.getRand();
-        int random = new Random().nextInt(0,15);
+        Tile.Bag b = new Tile.Bag();
+        Tile tile = b.getRand();
+        Tile tile1 = b.getRand();
+        int random = new Random().nextInt(0, 15);
         board_game.tiles[random][random] = tile1;
         gameBoard = service.matrixToString(board_game.tiles);
         System.out.println(gameBoard);
         setChanged();
         notifyObservers();
-
-
+    }
+public void checkView(){
+    Tile.Bag b = new Tile.Bag();
+    Tile tile = b.getRand();
+    p_tiles.add(tile);
+    setChanged();
+    notifyObservers();
+}
 
         //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
         //if (!valid) {TODO RETURN
@@ -250,7 +257,7 @@ public class PlayerModel extends Observable {
 //        System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
 //        outToServer.flush();
 //        System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
-    }
+
 
     public void getTileFromBag() {
         if(p_tiles.size()<countTiles) {

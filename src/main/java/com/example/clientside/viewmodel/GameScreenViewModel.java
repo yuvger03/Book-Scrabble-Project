@@ -18,7 +18,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     public StringProperty word;
 //    public StringProperty gameBoard;
     public String gameBoard;
-    public StringProperty tilesArray;
+    public String tilesArray;
     public StringProperty row;
     public StringProperty col;
     public BooleanProperty vertical;
@@ -35,7 +35,7 @@ public class GameScreenViewModel extends Observable implements Observer {
         vertical=new SimpleBooleanProperty();
         scoreResult= new SimpleStringProperty();
 //        gameBoard=new SimpleStringProperty();
-        tilesArray=new SimpleStringProperty();
+        //tilesArray=new SimpleStringProperty();
         s=new Service();
     }
 
@@ -44,10 +44,10 @@ public class GameScreenViewModel extends Observable implements Observer {
 //        if (o==player) {
             scoreResult.set(player.score);
             gameBoard =(player.gameBoard);
-            tilesArray.set(s.TilessArrayToSTring(player.p_tiles));
-//            String sendNotify=gameBoard.toString()+","+tilesArray.toString();
-            String sendNotify=gameBoard +","+"ABCGKCD";
-
+            System.out.println("board vm  "+gameBoard);
+            tilesArray=s.TilessArrayToSTring(player.p_tiles);
+            String sendNotify=gameBoard+","+tilesArray;
+            //String sendNotify=gameBoard +","+"ABCGKCD";
 
             setChanged();
             notifyObservers(sendNotify);
@@ -66,6 +66,10 @@ public class GameScreenViewModel extends Observable implements Observer {
     }
     public void addTiles(){
         player.getTileFromBag();
+    }
+
+    public void addTile() {
+        player.checkView();
     }
 }
 

@@ -3,6 +3,7 @@ package com.example.clientside.view;
 import com.example.Service;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -55,15 +56,22 @@ public class GameScreenViewController extends BoardViewController {
 
     public void sendWord(){
             GVM.SendWord();
-            addTileToBoard(word.getText(),vertical.isSelected());
+            //addTileToBoard(word.getText(),vertical.isSelected());
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        String[] lineAsList = ((String)arg).split(",");
-        String[][] board= s.StringTOString2DAraay(lineAsList[0],15,15);//TODO hardcoded
-        String[] tiles1 =lineAsList[1].split("");
-        boardView.reDrawTilesBoard(board);
-        tilesView.reDraw(tiles1);
+        if ((o == GVM) && (arg instanceof String)) {
+            String[] lineAsList = ((String) arg).split(",");
+            System.out.println("theboard is "+lineAsList[0]+" the tiles is- "+lineAsList[1] );
+            String[][] board = s.stringToMatrixS(lineAsList[0]);
+            String[] tiles1 = lineAsList[1].split("");
+            boardView.reDrawTilesBoard(board);
+            tilesView.reDraw(tiles1);
+        }
+    }
+
+    public void addTile() {
+        GVM.addTile();
     }
 }

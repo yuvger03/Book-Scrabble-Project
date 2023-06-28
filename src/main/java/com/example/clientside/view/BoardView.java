@@ -14,7 +14,7 @@ public class BoardView extends Canvas {
     double W;
     double H ;
     double w ;
-    String[][] boardsTiles;
+    String[][] boardTiles;
 
     double h ;
     GraphicsContext gc = getGraphicsContext2D();
@@ -22,7 +22,8 @@ public class BoardView extends Canvas {
 
     }
 
-    public void setBoard(String [][] board){
+    public void setBoard(String [][] board,String[][] boardTiles){
+        this.boardTiles=boardTiles;
         this.board = board;
         this.gc = gc;
         this.W = getWidth();
@@ -52,14 +53,20 @@ public class BoardView extends Canvas {
         gc.setFill(Color.BLACK);
         gc.fillText(text, j * boardWidth + (boardWidth /4), i * h + (2*h / 3));
     }
-    public void reDrawTilesBoard(String[][]board) {
-        if (this.boardsTiles.equals(board))
+    public void reDrawTilesBoard(String[][]board1) {
+        if (this.boardTiles.equals(board1)) {
+            System.out.println("this.boardTiles.equals(board)");
             return;
+        }
         else {
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 1; j <board[i].length; j++) {
-                    if (!board[i][j].equals("n"))
-                        fillText(this.gc, w, h, i+1, j+1, board[i][j]);
+            System.out.println("else this.boardTiles.equals(board)");
+            for (int i = 0; i < board1.length; i++) {
+                for (int j = 1; j <board1[i].length; j++) {
+                    if (!board1[i][j].equals("n")&&(boardTiles[i][j].equals("n"))) {
+                        boardTiles[i][j]=board1[i][j];
+                        System.out.println("the board cell is -" + board1[i][j]);
+                        fillText(this.gc, w, h, i + 1, j + 1, board1[i][j]);
+                    }
                 }
             }
         }
