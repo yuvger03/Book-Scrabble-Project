@@ -11,9 +11,10 @@ import java.util.Scanner;
 
 public class GuestHandler implements IClientHandler {
     Scanner in;
-    PrintWriter out;
+    //PrintWriter out;
     public HostManager HM;
     Service service=new Service();
+    Boolean stop=false;
     public HostModeModel host;
 
     public GuestHandler(int serverPort) {
@@ -22,8 +23,9 @@ public class GuestHandler implements IClientHandler {
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
         in = new Scanner(inFromclient); // remove the letter
-        out = new PrintWriter(outToClient, true);
-        while(in.hasNextLine()) {
+        PrintWriter out = new PrintWriter(outToClient, true);
+        //while(in.hasNextLine()) {
+         while(!stop){
             try {
                 String line = in.nextLine();
                 System.out.println(line);//TODO
@@ -95,9 +97,9 @@ public class GuestHandler implements IClientHandler {
     }
 
     @Override
-    public void close()  {
+  public void close()  {
         in.close();
-        out.close();
+        //out.close();
     }
 }
 
