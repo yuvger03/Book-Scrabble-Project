@@ -34,12 +34,8 @@ package com.example.clientside.Models;
 
 //package com.example.serverSide;
 
-import com.example.Game.Tile;
-import com.example.Game.Word;
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.HostManager;
-
-import static java.lang.Thread.sleep;
 
 public class runClient {
     public static HostModeModel host;
@@ -48,41 +44,41 @@ public class runClient {
 
     //    @BeforeEach
     public static void main(String[] args) throws InterruptedException {
-        int serverPort = 8080; // Change the server port if needed
-        guestHandler = new GuestHandler(serverPort);
+        // Change the server port if needed
+        guestHandler = new GuestHandler(8080);
         host = new HostModeModel(8080, guestHandler, "host");
-//    }
-//    @Test
-//    public void testConnectivityToServer() {
-        // Simulate a new host being up
-        sleep(100);
-        // Check if the host is connected
-        if (!guestHandler.HM.playersList.contains("host")) System.out.println("player list should contain host");
+        host.startServer();
+//        while(guestHandler.HM.playersList.size() < 2) {}
+//        sleep(1000);
+//        host.startGame();
 
 //        GuestModeModel guest1 = new GuestModeModel(host.serverPort, "guest1");
 //        GuestModeModel guest2 = new GuestModeModel(host.serverPort, "guest2");
 //        GuestModeModel guest3 = new GuestModeModel(host.serverPort, "guest3");
 //        GuestModeModel guest4 = new GuestModeModel(host.serverPort, "guest4");
+
+//    @Test
+//    public void testConnectivityToServer() {
+        // Simulate a new host being up
+        // Check if the host is connected
+//        if (!guestHandler.HM.playersList.contains("host")) System.out.println("player list should contain host");
         // Check if only 4 guests are connected
 //        if (!guestHandler.HM.playersList.contains("guest1")) System.out.println("player list not contain player 1");
 //        if (!guestHandler.HM.playersList.contains("guest2")) System.out.println("player list not contain player 2");
 //        if (!guestHandler.HM.playersList.contains("guest3")) System.out.println("player list not contain player 3");
 //        if (!guestHandler.HM.playersList.contains("guest4")) System.out.println("player list not contain player 4"); // 4'th player not in the game
-
-        sleep(100);
-        host.startGame();
-
-        System.out.println(host.service.tilesArrToString(host.p_tiles));
+//        while(guestHandler.HM.playersList.size() < 2) {}
+//        host.startGame();
+        //print
+//        System.out.println(host.service.tilesArrToString(host.p_tiles));
 //        System.out.println(guest1.service.tilesArrToString(guest1.p_tiles));
 //        System.out.println(guest2.service.tilesArrToString(guest2.p_tiles));
 //        System.out.println(guest3.service.tilesArrToString(guest3.p_tiles));
 //    @Test
 //    public void testTryToPlaceWord() {
         // Simulate a player trying to place a word
-        Word word = new Word(new Tile[]{new Tile('T', 1), new Tile('H', 4), new Tile('E', 1)}, 0, 0, true);
+//        Word word = new Word(new Tile[]{new Tile('T', 1), new Tile('H', 4), new Tile('E', 1)}, 0, 0, true);
         //till here
-
-
 
 
 

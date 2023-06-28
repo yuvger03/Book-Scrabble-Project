@@ -137,8 +137,9 @@ public class PlayerModel extends Observable {
                     while (!stop) {
                         if (inFromServer.hasNextLine()) {
                             String message = inFromServer.nextLine();
-                            System.out.println("here "+message+" "+"\n");
-                            processMessage(message);
+                            System.out.println(message);
+                            if(message!="")
+                                processMessage(message);
                         }
                     }
                 }
@@ -152,10 +153,14 @@ public class PlayerModel extends Observable {
     public void joinToGame() {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
         outToServer.flush();
-        System.out.println(this.name+ "outToServer join game-"+outToServer+"\n");//TODO PRINTFORTEST
     }
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
+        if(lineAsList[1].equals("startGame")) {
+            outToServer.println(this.name + "-" + "startGame" + "-");
+            outToServer.flush();
+            System.out.println(this.name+ "outToServer startGame-"+outToServer);//TODO PRINTFORTEST
+        }
         if (lineAsList[0].equals("board")) {
            gameBoard=lineAsList[1];
            setChanged();
@@ -231,7 +236,7 @@ public class PlayerModel extends Observable {
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
         outToServer.println(this.name+ "-tryToPlace" + "-" + s);
-        System.out.println("outToServer try to place-"+outToServer+"\n");//TODO PRINTFORTEST
+        System.out.println("outToServer try to place-"+outToServer);//TODO PRINTFORTEST
         outToServer.flush();
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
