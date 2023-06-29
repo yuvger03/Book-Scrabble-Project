@@ -49,30 +49,42 @@ public class GuestHandler implements IClientHandler {
                         ArrayList<Tile> tiles = HM.initTileArray();
                         String tielsString = "";
                         for (int j = 0; j < tiles.size(); j++) {
-                            tielsString += service.TileToString(tiles.get(j)) + "/";
+                            //tielsString += service.TileToString(tiles.get(j)) + "/";
+                            tielsString += service.TileToString(tiles.get(j));
                         }
-                        host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "- ");
+                        host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
                     }
                     host.notifyAll("board-" + HM.getBoardGame());
                 }
                 if (playerName.equals(HM.current_player)) {
                     if (key.equals("tryToPlace")) {
+                        /////////////TODO for test view////////////////////////////
                         System.out.println("send word func server \n");//TODO PRINTFORTEST
                         String wordString = lineAsList[2];
                         Word word = service.stringToWord(wordString);
-                        int score = HM.tryPlaceWord(word);
+                        int score = 100;
                         String fillTiles = "";
                         if (score > 0) {
                             int count = wordString.length();
                             fillTiles = HM.fillTilesArray(count);
                             fillTiles += "/" + wordString;
                         }
+                       ////////////////////////////////////////////////////////////
+                        //System.out.println("send word func server \n");//TODO PRINTFORTEST
+                        //String wordString = lineAsList[2];
+                        //Word word = service.stringToWord(wordString);
+                        //int score = HM.tryPlaceWord(word);
+                        //String fillTiles = "";
+                        //if (score > 0) {
+                            //int count = wordString.length();
+                            //fillTiles = HM.fillTilesArray(count);
+                            //fillTiles += "/" + wordString;
+                        //}
                         System.out.println("send to" + playerName + "- try to place" + "\n");
                         host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
-                        if (score > 0) {//TODO: return it
+                        //if (score > 0) {//TODO: return it
                            System.out.println("send to everyone the board");
                            host.notifyAll("board-" + HM.getBoardGame());
-                       }
                            HM.nextPlayer();
                            host.notifyAll("message-" + "The current turn is of " + HM.current_player);
                         }

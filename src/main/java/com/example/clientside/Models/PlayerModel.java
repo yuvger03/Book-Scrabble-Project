@@ -43,6 +43,11 @@ public class PlayerModel extends Observable {
         p_tiles = new ArrayList<>();
         service = new Service();
         connectionLatch = new CountDownLatch(1); // initialize the latch
+        gameBoard="";
+        for(int i=0;i<225;i++){
+            gameBoard+="n";
+        }
+        System.out.println(gameBoard);
     }
 
     public String getName() {
@@ -91,11 +96,11 @@ public class PlayerModel extends Observable {
     }
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
-        if(lineAsList[1].equals("startGame")) {
-            outToServer.println(this.name + "-" + "startGame" + "-");
-            outToServer.flush();
-            System.out.println(this.name+ "outToServer startGame-"+outToServer);//TODO PRINTFORTEST
-        }
+//        if(lineAsList[1].equals("startGame")) {
+//            outToServer.println(this.name + "-" + "startGame" + "-");
+//            outToServer.flush();
+//            System.out.println(this.name+ "outToServer startGame-"+outToServer);//TODO PRINTFORTEST
+//        }
         if (lineAsList[0].equals("board")) {
            gameBoard=lineAsList[1];
            setChanged();
@@ -113,7 +118,8 @@ public class PlayerModel extends Observable {
     private void getFunc(String... args) {
         String func=args[0];
         String inputString=args[1];
-        System.out.println("inputString "+inputString);
+        System.out.println("inputString of player "+name+" "+inputString);
+        System.out.println("func of player "+name+" "+func);
 
         if (func.equals("tryToPlace")) {
             if (inputString.equals("0")) {
@@ -150,16 +156,18 @@ public class PlayerModel extends Observable {
     }
     public void initTiles(String tilesString) {
             //tilesStringArray=tilesString;
-            String[] TileAsList = tilesString.split("/");
+            String[] TileAsList = tilesString.split("");
             for (int i = 0; i < TileAsList.length; i++)
                 p_tiles.add(service.stringToTile(TileAsList[i]));
+            setChanged();
+            notifyObservers();
         }
 
 
-    public void tryToPlace(Word word) {
+    public void tryToPlace(String word) {
         //String s=word.toString();
         System.out.println(this.name+"send word func model \n");//TODO PRINTFORTEST
-        String s = service.WordToString(word);
+       // String s = service.WordToString(word);
 
         //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
         //if (!valid) {TODO RETURN
@@ -172,9 +180,11 @@ public class PlayerModel extends Observable {
             e.printStackTrace();
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        outToServer.println(this.name+ "-tryToPlace" + "-" + s);
-        System.out.println("outToServer try to place-"+outToServer);//TODO PRINTFORTEST
+        System.out.println(word);
+        System.out.println(this.name+ "-tryToPlace" + "-" + word);
+        outToServer.println(this.name+ "-tryToPlace" + "-" + word);
         outToServer.flush();
+        System.out.println("outToServer try to place-"+outToServer);//TODO PRINTFORTEST
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
 

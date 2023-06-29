@@ -1,4 +1,4 @@
-package com.example.clientside.Models;
+package com.example.Tests;
 //
 //import com.example.Game.Tile;
 //import com.example.Game.Word;
@@ -34,6 +34,10 @@ package com.example.clientside.Models;
 
 //package com.example.serverSide;
 
+import com.example.Game.Tile;
+import com.example.Game.Word;
+import com.example.Service;
+import com.example.clientside.Models.HostModeModel;
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.HostManager;
 
@@ -41,13 +45,23 @@ public class runClient {
     public static HostModeModel host;
     public HostManager hostManager;
     public static GuestHandler guestHandler;
+    static Service service=new Service();
 
     //    @BeforeEach
     public static void main(String[] args) throws InterruptedException {
         // Change the server port if needed
         guestHandler = new GuestHandler(8080);
-        host = new HostModeModel(8080, guestHandler, "host");
-        host.startServer();
+        host = new HostModeModel(8080, guestHandler,"host");
+        //while(guestHandler.HM.playersList.size()<2);
+        //host.startGame();
+        Tile.Bag b=new Tile.Bag();
+        Tile tile =b.getRand();
+        Tile tile1 =b.getRand();
+        Tile[] tiles= new Tile[]{tile,tile1};
+        Word w=new Word(tiles,5,4,true);
+        String wd=service.WordToString(w);
+        host.tryToPlace(wd);
+        //host.startServer();
 //        while(guestHandler.HM.playersList.size() < 2) {}
 //        sleep(1000);
 //        host.startGame();

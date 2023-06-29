@@ -1,5 +1,8 @@
 package com.example.serverSide;
 
+import com.example.Game.Tile;
+import com.example.Service;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -85,7 +88,24 @@ public class MyHostServer {
                 e.printStackTrace();
             }
         }
+
+    public void startGame() {
+        Service s=new Service();
+        System.out.println("gameStarted\n"); //TODO shira
+        guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
+        for (int i = 0; i <  guestHandler1.HM.playersList.size(); i++) {
+            ArrayList<Tile> tiles =  guestHandler1.HM.initTileArray();
+            String tielsString = "";
+            for (int j = 0; j < tiles.size(); j++) {
+                //tielsString += service.TileToString(tiles.get(j)) + "/";
+                tielsString += s.TileToString(tiles.get(j));
+            }
+            notifyAll(guestHandler1.HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
+        }
+        notifyAll("board-" +  guestHandler1.HM.getBoardGame());
     }
+    }
+
 
 
 

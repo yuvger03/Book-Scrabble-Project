@@ -1,4 +1,7 @@
-package com.example.serverSide;
+package com.example.Tests;
+
+import com.example.serverSide.BookScrabbleHandler;
+import com.example.serverSide.MyServer;
 
 public class RunServer {
 

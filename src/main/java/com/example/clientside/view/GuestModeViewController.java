@@ -24,20 +24,18 @@ public class GuestModeViewController implements Observer {
         guestVm.port.bind(serverPort.textProperty());
         guestVm.ip.bind(ipServer.textProperty());
     }
-public void joinToGame() throws IOException {
-    GameScreenViewModel gvm = new GameScreenViewModel(guestVm.getGuestModel());
-    Stage stage = (Stage) serverPort.getScene().getWindow();
-    stage.close();
-    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
-    stage = new Stage();
-    Scene scene = new Scene(fxmlLoader.load(), 700, 650);
-    stage.setScene(scene);
-    stage.show();
-    GameScreenViewController gvc = fxmlLoader.getController();
-    gvc.setGameVM(gvm);
-    gvm.addObserver(gvc);
-    guestVm.joinToGame();
-}
+    public void joinToGame() throws IOException {
+        GameScreenViewModel gvm = new GameScreenViewModel(guestVm.getGuestModel());
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
+        stage.setScene(scene);
+        stage.show();
+        GameScreenViewController gvc = fxmlLoader.getController();
+        gvc.setGameVM(gvm);
+        gvm.addObserver(gvc);
+        guestVm.joinToGame();
+    }
 
     @Override
     public void update(Observable o, Object arg) {

@@ -24,6 +24,7 @@ public class BoardViewController implements Observer, Initializable {
 
     public String[][] boardData;
     public String[] tilesArray;
+    public String[][] boardTiles;
 
     public BoardViewController() {
         boardData = new String[][]{
@@ -44,17 +45,30 @@ public class BoardViewController implements Observer, Initializable {
                 {"14","0", "4", "0", "0", "0", "2", "0", "0", "0", "2", "0", "0", "0", "4", "0"},
                 {"15","1", "0", "0", "3", "0", "0", "0", "1", "0", "0", "0", "3", "0", "0", "1"},
         };
-
+        boardTiles=new String[][]{
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+                {"n","n","n","n","n","n","n","n","n","n","n","n","n","n","n","n"},
+        };
         tilesArray = new String[]{"a"};
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        boardView.setBoard(boardData);
+        boardView.setBoard(boardData,boardTiles);
         tilesView.setTiles(tilesArray);
-
-
     }
 
     @Override
@@ -67,4 +81,3 @@ public class BoardViewController implements Observer, Initializable {
         // check that all the words on the board are legal
     }
 }
-

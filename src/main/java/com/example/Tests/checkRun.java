@@ -1,4 +1,4 @@
-package com.example.clientside.view;
+package com.example.Tests;
 
 import com.example.clientside.Models.GuestModeModel;
 
@@ -13,6 +13,7 @@ public class checkRun {
         //GuestModeModel guest2 = new GuestModeModel(8081, "guest2");
 //        GuestModeModel guest3 = new GuestModeModel(8081, "guest3");
        // System.out.println("play");
+
     }
 
 }

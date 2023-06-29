@@ -42,16 +42,7 @@ public class Service {
             s += TileToString(ptiles.get(i));
         return s;
     }
-public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
-    String[][] array = new String[row][col];
-    int index = 0;
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++)
-            array[i][j] = String.valueOf(s1.charAt(index));
-        index++;
-    }
-    return array;
-}
+
     public Word stringToWord(String wordString) {
         int length = wordString.length();
         String[] array = wordString.split(",");
@@ -121,11 +112,13 @@ public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if(input.charAt(index)!='n') {
-                    matrix[row][col] = ""+input.charAt(index++);
+                    matrix[row][col] = ""+input.charAt(index);
                 }
                 else {
-                    matrix[row][col]=null;
+                    matrix[row][col]="n";
                 }
+                System.out.println( matrix[row][col]);
+                index++;
             }
         }
         return matrix;
@@ -174,7 +167,7 @@ public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
         return true;
     }
 
-    public String TileToString(Tile tile) { //make obj WORD to string- "word,row,col,vertical"
+    public String TileToString(Tile tile) {
         return String.valueOf(tile.letter);
     }
 
@@ -184,11 +177,14 @@ public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
         return t;
     }
 
-    public Tile[] StringToTilesArray(String missingTiles) {
-        return stringToWord(missingTiles).getTiles();
+    public Tile[] StringToTilesArray(String tiles) {
+        String[] array=tiles.split("");
+        Tile[] tilesArray = new Tile[array.length];
+        for(int i=0;i<array.length;i++){
+            tilesArray[i]=stringToTile(array[i]);
+        }
+        return tilesArray;
     }
-
-
     public String TilessArrayToSTring(ArrayList<Tile> pTiles) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -197,5 +193,18 @@ public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
         }
         return stringBuilder.toString();
     }
+    public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
+        System.out.println("the servcie string- "+s1);//
+        String[][] array = new String[row][col];
+        int index = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                array[i][j] = String.valueOf(s1.charAt(index));
+                System.out.println(array[i][j]);//
+            }
+            index++;
 
+        }
+        return array;
+    }
 }

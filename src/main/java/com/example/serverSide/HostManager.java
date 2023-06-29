@@ -29,7 +29,7 @@ public class HostManager {
         this.gameboard = new Board();
         this.b = new Tile.Bag();
         playersList = new ArrayList<>();
-        this.index = 0;
+        this.index = 1;
         this.serverPort = serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
         this.s = new Service();

@@ -1,13 +1,16 @@
 package com.example.clientside.view;
 
+import com.example.Service;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.util.Observable;
 import java.util.Observer;
 
 public class GameScreenViewController extends BoardViewController {
@@ -25,6 +28,7 @@ public class GameScreenViewController extends BoardViewController {
     Label scoreResult;
     GameScreenViewModel GVM;
     BoardViewController BVC;
+    Service s = new Service();
 
 
 
@@ -36,11 +40,11 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
-        //boardView bind to GVM.gameBoard
+//        boardViewProperty.bind(GVM.gameBoard);
     }
-  //  public void addTileToBoard(String Tile,boolean vertical){
-     //   boardView.newTile(BVC.boardView.w,BVC.boardView.h,row,col,Tile,vertical);
-    //}
+    public void addTileToBoard(String Tile,boolean vertical){
+        boardView.newTile(boardView.w,boardView.h,Integer.parseInt(row.getText()),Integer.parseInt(col.getText()),vertical,Tile);
+    }
 //    public void gotWord(){
 //        GVM.gotWord();
 //    }
@@ -51,10 +55,23 @@ public class GameScreenViewController extends BoardViewController {
 //    public void pressedSend(){GVM.pressedSend();}
 
     public void sendWord(){
-            GVM.SendWord();
+        GVM.SendWord();
+        //addTileToBoard(word.getText(),vertical.isSelected());
     }
-        @Override
-        public void update(java.util.Observable o, Object arg) {
 
+    @Override
+    public void update(Observable o, Object arg) {
+        if ((o == GVM) && (arg instanceof String)) {
+            String[] lineAsList = ((String) arg).split(",");
+            System.out.println("theboard is "+lineAsList[0]+" the tiles is- "+lineAsList[1] );
+            String[][] board = s.stringToMatrixS(lineAsList[0]);
+            String[] tiles1 = lineAsList[1].split("");
+            boardView.reDrawTilesBoard(board);
+            tilesView.reDraw(tiles1);
         }
+    }
+
+    public void addTile() {
+        GVM.addTile();
+    }
 }

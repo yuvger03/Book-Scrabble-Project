@@ -1,5 +1,6 @@
 package com.example.clientside.Models;
 
+import com.example.serverSide.GuestHandler;
 import javafx.beans.InvalidationListener;
 //import javafx.beans.Observable;
 import java.util.Observer;
@@ -11,8 +12,9 @@ public class MenuModel extends Observable {
     public MenuModel(){
 
     }
-    public HostModeModel startHostMode(){
-        this.player = new HostModeModel(8080); //enter game port
+    public HostModeModel startHostMode(String name){
+        GuestHandler guestHandler = new GuestHandler(8080);
+        this.player = new HostModeModel(8080, guestHandler,name); //enter game port
         return (HostModeModel)player;
         //((HostModeModel) player).initNewGame();
        // notifyObservers();

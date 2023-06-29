@@ -17,12 +17,11 @@ public class HostModeModel extends PlayerModel {
     int gameServer;
     ArrayList<Socket> sockets;
     GuestHandler guestHandler;
-    PrintWriter outToServer;
 
-    public HostModeModel(int gameServer) {
-        super();
-        this.gameServer = gameServer;
-    }
+  //  public HostModeModel(int gameServer) {
+    //    super();
+   ///     this.gameServer = gameServer;
+  //  }
 //    public HostModeModel(int gameServer) {
 //        super();
 //        this.gameServer = gameServer;
@@ -48,7 +47,7 @@ public class HostModeModel extends PlayerModel {
 //        connectServer(); //TODO return back
 //    }
 
-    public HostModeModel(int gameServer, GuestHandler guestHandler1, String name) {
+    public HostModeModel(int gameServer, GuestHandler guestHandler1,String name) {
         super();
         this.name = name;
         this.gameServer = gameServer;
@@ -57,21 +56,25 @@ public class HostModeModel extends PlayerModel {
 //        this.serverPort = 6000 + r.nextInt(1000);
         this.serverPort = 8081;
         this.guestHandler = guestHandler1;
-        this.guestHandler.HM.playersList.add("host");
+        //this.guestHandler.HM.playersList.add("host");
         //this.guestHandler.host = this;
         System.out.println("im here");
+        startServer();
+        connectServer();
     }
 
     public void startServer() {
         //    HostModeModel h =new HostModeModel(gameServer,guestHandler1,name);
-        MyHostServer hostServer = new MyHostServer(this.serverPort, this.guestHandler, 4);
-        hostServer.start();
+        this.hostServer = new MyHostServer(this.serverPort, this.guestHandler, 4);
+        this.hostServer.start();
         System.out.println("server started");
     }
 
     public void startGame() {
-        hostServer.notifyAll(this.name + "-startGame" + "-");
-        System.out.println("start game " + outToServer);
+        this.hostServer.startGame();
+        //outToServer.println(this.name+ "-startGame-");
+        //hostServer.notifyAll(this.name + "-startGame" + "-");
+        //System.out.println("start game " + outToServer);
     }
 
 //    public void notifyAll(String update) {
