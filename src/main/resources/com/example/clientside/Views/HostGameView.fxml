@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import com.example.clientside.view.BoardView?>
+<?import com.example.clientside.view.TilesView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="639.0" styleClass="bodybg" stylesheets="@backgrounds/gameview.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.GameScreenViewController">
+    <children>
+        <HBox layoutX="166.0" layoutY="500.0" prefHeight="41.0" prefWidth="200.0">
+            <children>
+                <TilesView id="tilesView" fx:id="tilesView" height="45.0" layoutY="740.0" width="300.0" />
+            </children>
+        </HBox>
+        <BoardView fx:id="boardView" height="450.0" layoutX="150.0" layoutY="10.0" width="450.0" />
+        <HBox layoutY="550.0" prefHeight="50.0" prefWidth="600.0">
+            <children>
+                <TextField fx:id="word" prefHeight="25.0" prefWidth="86.0" promptText="enter word" />
+                <TextField fx:id="row" prefHeight="25.0" prefWidth="38.0" promptText="row" />
+                <TextField fx:id="col" prefHeight="25.0" prefWidth="59.0" promptText="column" />
+                <CheckBox fx:id="vertical" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="vertical" />
+                <Button mnemonicParsing="false" text="send" onAction="#sendWord"/>
+                <Label fx:id="scoreResult" prefHeight="25.0" prefWidth="69.0" text="     result" textAlignment="CENTER" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="add tiles" onAction="#addTile" />
+                <Button fx:id="endGame" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="end and save" onAction="#endGame" />
+
+            </children>
+        </HBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <Text fill="BLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="triple letter">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text fill="#d4c10f" strokeType="OUTSIDE" strokeWidth="0.0" text="double word" wrappingWidth="116.80340576171875">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text fill="#499635" strokeType="OUTSIDE" strokeWidth="0.0" text="standart" wrappingWidth="78.80337524414062">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text fill="#ff2200" strokeType="OUTSIDE" strokeWidth="0.0" text="triple word" wrappingWidth="111.47006225585938">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+                <Text fill="#00f2ff" strokeType="OUTSIDE" strokeWidth="0.0" text="double letter">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Text>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -17,6 +17,11 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button fx:id="resume" layoutX="368.0" layoutY="306.0" mnemonicParsing="false" onAction="#resumeGame" text="resume game">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
 
       <Text layoutX="255.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="host">
          <font>

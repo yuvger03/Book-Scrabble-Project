@@ -77,7 +77,7 @@ public class HostModeModel extends PlayerModel {
         //System.out.println("start game " + outToServer);
     }
     public void resumeGame() { //TODO
-//        this.hostServer.resumeGame();
+        this.hostServer.resumeGame();
         //outToServer.println(this.name+ "-startGame-");
         //hostServer.notifyAll(this.name + "-startGame" + "-");
         //System.out.println("start game " + outToServer);

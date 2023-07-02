@@ -1,14 +1,16 @@
 package com.example.serverSide;
 
+import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Service;
-
+import org.bson.Document;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -105,7 +107,28 @@ public class MyHostServer {
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
     }
-    //TODO: implement resumeGame that reads from DB all the fields of the game
+    public void resumeGame(){
+//        Service s=new Service();
+        DBcom dBcom = new DBcom();
+        System.out.println("game resumed\n");
+        guestHandler1.HM.current_player =  dBcom.readFromDB(guestHandler1.HM.serverPort).getString("current_player");
+        //TODO: check that the same players connected to the DB
+        guestHandler1.HM.pTilesMap = dBcom.readFromDB(guestHandler1.HM.serverPort).get("pTilesMap", guestHandler1.HM.pTilesMap);
+        guestHandler1.HM.scoreMap = dBcom.readFromDB(guestHandler1.HM.serverPort).get("scoreMap", guestHandler1.HM.scoreMap);
+        guestHandler1.HM.gameboard = dBcom.readFromDB(guestHandler1.HM.serverPort).get("gameboard",guestHandler1.HM.gameboard);
+        guestHandler1.HM.b = dBcom.readFromDB(guestHandler1.HM.serverPort).get("bag",guestHandler1.HM.b);
+        for (String player :  guestHandler1.HM.playersList) {
+            String tielsString = guestHandler1.HM.pTilesMap.get(player);
+            notifyAll(player + "-initTiles-" + tielsString + "-null");
+            notifyAll(player + "-initScore-" + guestHandler1.HM.scoreMap.get(player) + "-null");
+        }
+        notifyAll("board-" +  guestHandler1.HM.getBoardGame());
+    }
+    public void saveGame(HostManager hm){
+        DBcom dBcom = new DBcom();
+        dBcom.saveToDB(hm);
+            //TODO: save HM to DB
+    }
 }
 
 
