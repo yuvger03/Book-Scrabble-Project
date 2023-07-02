@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!--TODO: SOLVE THE VERSION PROBLEM (THE  DOCTYPE ISNT THE SAME AS THE VERSION IN THE DEPENDENCY)-->
 <hibernate-configuration>
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/GAMES</property>
