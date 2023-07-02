@@ -117,7 +117,7 @@ public class Service {
                 else {
                     matrix[row][col]="n";
                 }
-                System.out.println( matrix[row][col]);
+                //System.out.println( matrix[row][col]);
                 index++;
             }
         }
@@ -206,5 +206,10 @@ public class Service {
 
         }
         return array;
+    }
+
+    public String getWordString(String word) { //get the word string from string in struct word- "word,row,col,vertical"
+        String[]s1=word.split(",");
+        return s1[0];
     }
 }

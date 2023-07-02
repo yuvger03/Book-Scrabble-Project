@@ -16,10 +16,10 @@ public class checkRun2 {
         String wd=service.WordToString(w);
         GuestModeModel guest2 = new GuestModeModel(8081, "guest2");
         guest2.tryToPlace("TC,8,9,F");
-        GuestModeModel guest4 = new GuestModeModel(8081, "guest4");
-        guest2.tryToPlace(wd);
+        //GuestModeModel guest4 = new GuestModeModel(8081, "guest4");
+        //guest4.tryToPlace(wd);
         GuestModeModel guest5 = new GuestModeModel(8081, "guest5");
-        guest2.tryToPlace(wd);
+        guest5.tryToPlace(wd);
 //        GuestModeModel guest3 = new GuestModeModel(8081, "guest3");
         System.out.println("play");
     }

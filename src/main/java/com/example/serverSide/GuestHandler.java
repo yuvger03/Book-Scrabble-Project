@@ -24,84 +24,93 @@ public class GuestHandler implements IClientHandler {
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
         in = new Scanner(inFromclient); // remove the letter
         out = new PrintWriter(outToClient, true);
-         while(in.hasNextLine()){
-            try {
-                String line = in.nextLine();
-                System.out.println(line);//TODO
-                String[] lineAsList = line.split("-");
-                String playerName = lineAsList[0];
-                String key = lineAsList[1];
-                if (key.equals("joinToGame")) {
-                    if (HM.addPlayerToGame(playerName)) {
-                        HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
-                        HM.setPlayerpTiles(lineAsList[4],playerName);
-                        //TODO:save to DB
-                        host.notifyAll(playerName + "-" + "message- joined to game- ");
-                        System.out.println("server"+playerName + "-" + "joined to game");
+         while(in.hasNext()){
+             System.out.println("line 28\n");
+             if (in.hasNextLine()) {
+                 System.out.println("line 29\n");
+                 try {
+                     System.out.println("line-server\n");//TODO
+                     String line = in.nextLine();
+                     System.out.println("server " + line);
+                     //System.out.println(line);//TODO
+                     String[] lineAsList = line.split("-");
+                     String playerName = lineAsList[0];
+                     String key = lineAsList[1];
+                     if (key.equals("joinToGame")) {
+                         if (HM.addPlayerToGame(lineAsList[0])) {
+                             HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
+                             HM.setPlayerpTiles(lineAsList[4],playerName);
+                             //TODO:save to DB
+                             host.notifyAll(playerName + "-" + "message- joined to game- ");
+                             System.out.println("server " + playerName + "-" + "joined to game");
 //                        out.println(playerName + "-" + "message-you joined to game- " + "\n");
 //                          out.flush();
-                    } else {
-                        host.notifyAll(playerName + "-" + "message-you not joind to game- ");
+                         } else {
+                             host.notifyAll(playerName + "-" + "message-you not joind to game- ");
 
-                    }
-                }
-                if (key.equals("startGame")) {//TODO: implement resume game
-                    System.out.println("gameStarted\n"); //TODO shira
-                    HM.current_player = HM.playersList.get(HM.index);//TODO: save to DB
-                    for (int i = 0; i < HM.playersList.size(); i++) {
-                        ArrayList<Tile> tiles = HM.initTileArray();//TODO: save to DB
-                        String tielsString = "";
-                        for (int j = 0; j < tiles.size(); j++) {
-                            //tielsString += service.TileToString(tiles.get(j)) + "/";
-                            tielsString += service.TileToString(tiles.get(j));
-                        }
-                        host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
-                    }
-                    host.notifyAll("board-" + HM.getBoardGame());
-                }
-                if (playerName.equals(HM.current_player)) {
-                    if (key.equals("tryToPlace")) {
-                        /////////////TODO for test view////////////////////////////
-                        System.out.println("send word func server \n");//TODO PRINTFORTEST
-                        String wordString = lineAsList[2];
-                        Word word = service.stringToWord(wordString);
-                        int score = 100;
-                        String fillTiles = "";
-                        if (score > 0) {
-                            int count = wordString.length();
-                            fillTiles = HM.fillTilesArray(count);
-                            fillTiles += "/" + wordString;
-                        }
-                       ////////////////////////////////////////////////////////////
-                        //System.out.println("send word func server \n");//TODO PRINTFORTEST
-                        //String wordString = lineAsList[2];
-                        //Word word = service.stringToWord(wordString);
-                        //int score = HM.tryPlaceWord(word);
-                        //String fillTiles = "";
-                        //if (score > 0) {
-                            //int count = wordString.length();
-                            //fillTiles = HM.fillTilesArray(count);
-                            //fillTiles += "/" + wordString;
-                        //}
-                        System.out.println("send to" + playerName + "- try to place" + "\n");
-                        host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
-                        //if (score > 0) {//TODO: return it
-                           System.out.println("send to everyone the board");
-                           host.notifyAll("board-" + HM.getBoardGame());
-                           HM.nextPlayer();
-                           host.notifyAll("message-" + "The current turn is of " + HM.current_player);
-                        }
-                    if (key.equals("getTileFromBag")) {
-                        Tile t = HM.getRand();
-                        String s = service.TileToString(t);
-                        host.notifyAll(playerName + "-getTileFromBag-" + s + "- ");
-                    }
-                } else if (!key.equals("startGame") && !key.equals("joinToGame"))
-                    host.notifyAll(playerName + "-" + "message-not your turn,please wait to your turn- ");
 
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+                         }
+                     }
+                     if (key.equals("startGame")) {
+                         System.out.println("gameStarted\n"); //TODO shira
+                         HM.current_player = HM.playersList.get(HM.index);
+                         System.out.println("HM.current_player "+ HM.playersList.get(HM.index)); //TODO shira
+                         for (int i = 0; i < HM.playersList.size(); i++) {
+                             ArrayList<Tile> tiles = HM.initTileArray();
+                             String tielsString = "";
+                             for (int j = 0; j < tiles.size(); j++) {
+                                 //tielsString += service.TileToString(tiles.get(j)) + "/";
+                                 tielsString += service.TileToString(tiles.get(j));
+                             }
+                             host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
+                         }
+                         host.notifyAll("board-" + HM.getBoardGame());
+                     }
+                     if (playerName.equals(HM.current_player)) {
+                         if (key.equals("tryToPlace")) {
+                             /////////////TODO for test view////////////////////////////
+                             System.out.println("send word func server \n");//TODO PRINTFORTEST
+                             //String wordString = lineAsList[2];
+                             String wordString = service.getWordString(lineAsList[2]);
+                             int score = 100;
+                             String fillTiles = "";
+                             if (score > 0) {
+                                 int count = wordString.length();
+                                 fillTiles = HM.fillTilesArray(count);
+                                 fillTiles += "/" + wordString;
+                             }
+                             ////////////////////////////////////////////////////////////
+                             //System.out.println("send word func server \n");//TODO PRINTFORTEST
+                             //String wordString = lineAsList[2];
+                             //Word word = service.stringToWord(wordString);
+                             //int score = HM.tryPlaceWord(word);
+                             //String fillTiles = "";
+                             //if (score > 0) {
+                             //int count = wordString.length();
+                             //fillTiles = HM.fillTilesArray(count);
+                             //fillTiles += "/" + wordString;
+                             //}
+                             System.out.println("send to" + playerName + "- try to place" + "\n");
+                             host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
+                             //if (score > 0) {//TODO: return it
+                             System.out.println("send to everyone the board");
+                             host.notifyAll("board-" + HM.getBoardGame());
+
+                             HM.nextPlayer();
+                             host.notifyAll("message-" + "The current turn is of " + HM.current_player);
+                         }
+                         if (key.equals("getTileFromBag")) {
+                             Tile t = HM.getRand();
+                             String s = service.TileToString(t);
+                             host.notifyAll(playerName + "-getTileFromBag-" + s + "- ");
+                         }
+                     } else if (!key.equals("startGame") && !key.equals("joinToGame"))
+                         host.notifyAll(playerName + "-" + "message-not your turn,please wait to your turn- ");
+
+                 } catch (Exception e) {
+                     throw new RuntimeException(e);
+                 }
+             }
         }
     }
 

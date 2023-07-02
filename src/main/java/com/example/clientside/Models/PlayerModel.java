@@ -75,12 +75,12 @@ public class PlayerModel extends Observable {
                 @Override
                 public void run() {
                     while (!stop) {
-                        if (inFromServer.hasNextLine()) {
+                        //if (inFromServer.hasNextLine()) {
                             String message = inFromServer.nextLine();
                             //System.out.println(message);
                             if(!message.equals(""))
                                 processMessage(message);
-                        }
+                        //}
                     }
                 }
             });
@@ -111,6 +111,7 @@ public class PlayerModel extends Observable {
         }
     else if (lineAsList[0].equals(name)) {
             System.out.println(message);
+            //getFunc(lineAsList[1],lineAsList[2]);//TODO: check if it possible in try to place
             getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);//TODO: check if it possible in try to place
         }
 
@@ -126,13 +127,14 @@ public class PlayerModel extends Observable {
                 score = "not valid";
             } else {
                 score = inputString;
+                System.out.println(args[2]);
                 String[] Tiles=args[2].split("/");
                 Tile[]missingTilesArray=service.StringToTilesArray(Tiles[0]);
                 Tile[] word=service.StringToTilesArray(Tiles[1]);;
                 //service.stringToWord();
                 for(int i=0;i< word.length;i++){
                     int j=0;
-                  while(!p_tiles.get(j).equals(word[i])) {
+                  while(p_tiles.get(j).letter!=(word[i].letter)) {
                      j++;
                   }
                   p_tiles.remove(j);
@@ -180,8 +182,8 @@ public class PlayerModel extends Observable {
             e.printStackTrace();
         }
         System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        System.out.println(word);
-        System.out.println(this.name+ "-tryToPlace" + "-" + word);
+        //System.out.println(word);
+        //System.out.println(this.name+ "-tryToPlace" + "-" + word);
         outToServer.println(this.name+ "-tryToPlace" + "-" + word);
         outToServer.flush();
         System.out.println("outToServer try to place-"+outToServer);//TODO PRINTFORTEST
