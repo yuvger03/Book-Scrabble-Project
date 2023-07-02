@@ -4,7 +4,24 @@ import java.util.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
-public class GameLoader {
+public class GameManager {
+    private Session session = null;
+    public GameManager(Session session){
+        if (session == null)
+            throw new RuntimeException("invalid seesion object.");
+        this.session = session;
+    }
+    //TODO:declare our Game structure that wanted to be saved in the table
+//    public void saveGame(Game game){
+//        session.save(game);
+//    }
+//    public void updateGame(Game game){
+//        session.update(game);
+//    }
+//    public void deleteGame(Game game){
+//        session.delete(game);
+//    }
+
      public static void main(String[] args) {
          // Build the Hibernate session factory
          SessionFactory sessionFactory = new Configuration()

@@ -20,6 +20,12 @@
       <version>18.0.2</version>
     </dependency>
     <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.28</version>
+    </dependency>
+<!--    TODO: run ctrl+shift+o to save all the dependencies-->
+    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>18.0.2</version>
