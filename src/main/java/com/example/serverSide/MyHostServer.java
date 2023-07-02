@@ -90,6 +90,7 @@ public class MyHostServer {
         }
 
     public void startGame() {
+
         Service s=new Service();
         System.out.println("gameStarted\n"); //TODO shira
         guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
@@ -104,7 +105,8 @@ public class MyHostServer {
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
     }
-    }
+    //TODO: implement resumeGame that reads from DB all the fields of the game
+}
 
 
 

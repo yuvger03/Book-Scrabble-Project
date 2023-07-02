@@ -32,7 +32,10 @@ public class GuestHandler implements IClientHandler {
                 String playerName = lineAsList[0];
                 String key = lineAsList[1];
                 if (key.equals("joinToGame")) {
-                    if (HM.addPlayerToGame(lineAsList[0])) {
+                    if (HM.addPlayerToGame(playerName)) {
+                        HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
+                        HM.setPlayerpTiles(lineAsList[4],playerName);
+                        //TODO:save to DB
                         host.notifyAll(playerName + "-" + "message- joined to game- ");
                         System.out.println("server"+playerName + "-" + "joined to game");
 //                        out.println(playerName + "-" + "message-you joined to game- " + "\n");
@@ -42,11 +45,11 @@ public class GuestHandler implements IClientHandler {
 
                     }
                 }
-                if (key.equals("startGame")) {
+                if (key.equals("startGame")) {//TODO: implement resume game
                     System.out.println("gameStarted\n"); //TODO shira
-                    HM.current_player = HM.playersList.get(HM.index);
+                    HM.current_player = HM.playersList.get(HM.index);//TODO: save to DB
                     for (int i = 0; i < HM.playersList.size(); i++) {
-                        ArrayList<Tile> tiles = HM.initTileArray();
+                        ArrayList<Tile> tiles = HM.initTileArray();//TODO: save to DB
                         String tielsString = "";
                         for (int j = 0; j < tiles.size(); j++) {
                             //tielsString += service.TileToString(tiles.get(j)) + "/";

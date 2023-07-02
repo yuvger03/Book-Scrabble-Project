@@ -11,8 +11,10 @@ public class HostModeViewModel extends Observable implements Observer {
    }
    public void startGame(){
        hostModel.startGame();
-
    }
+    public void resumeGame(){
+        hostModel.resumeGame();
+    }
    public HostModeModel getHostModel(){return hostModel;}
     @Override
     public void update(java.util.Observable o, Object arg) {

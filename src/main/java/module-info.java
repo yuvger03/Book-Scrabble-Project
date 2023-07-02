@@ -5,6 +5,9 @@ module com.example.clientside {
     requires org.hibernate.orm.core;
     requires org.hibernate.commons.annotations;
     requires java.naming;
+    requires org.mongodb.driver.sync.client;
+    requires org.mongodb.driver.core;
+    requires org.mongodb.bson;
 
     opens com.example.clientside to javafx.fxml;
     opens com.example.clientside.view to javafx.fxml;

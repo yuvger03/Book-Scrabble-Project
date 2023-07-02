@@ -8,8 +8,10 @@ import com.example.Service;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.HashMap;
 
 public class HostManager {
 
@@ -19,6 +21,9 @@ public class HostManager {
     public ArrayList<String> playersList;
     public String current_player;
     public int index; //for check the current turn;
+    public Map<String,String> pTilesMap;
+    public Map<String,String> scoreMap;
+
     Scanner inFromServer;
     PrintWriter outToServer;
     Socket serverSocket;
@@ -29,6 +34,8 @@ public class HostManager {
         this.gameboard = new Board();
         this.b = new Tile.Bag();
         playersList = new ArrayList<>();
+        pTilesMap = new HashMap<>();
+        scoreMap = new HashMap<>();
         this.index = 1;
         this.serverPort = serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
@@ -160,5 +167,12 @@ public class HostManager {
             s += c;
         }
         return s;
+    }
+
+    public void setPlayerScore(String score,String name) {
+        this.scoreMap.put(name,score);
+    }
+    public void setPlayerpTiles(String tiles,String name) {
+        this.scoreMap.put(name,tiles);
     }
 }
