@@ -1,18 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.example</groupId>
   <artifactId>clientSide</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>clientSide</name>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.9.2</junit.version>      </properties>
-
+    <junit.version>5.9.2</junit.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -20,11 +15,26 @@
       <version>18.0.2</version>
     </dependency>
     <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.28</version>
+    </dependency>
+    <!--     TODO: run ctrl+shift+o to save all the dependencies -->
+    <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>18.0.2</version>
     </dependency>
-                                    
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.5.7.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.5.7.Final</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -36,11 +46,11 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>              </dependencies>
-
+    </dependency>
+  </dependencies>
   <build>
-        <plugins>
-            <plugin>
+    <plugins>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
@@ -48,14 +58,14 @@
           <source>18</source>
           <target>18</target>
         </configuration>
-            </plugin>
+      </plugin>
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
+            <!--  Default configuration for running with: mvn clean javafx:run  -->
             <id>default-cli</id>
             <configuration>
               <mainClass>com.example.clientside/com.example.clientside.HelloApplication</mainClass>
@@ -69,6 +79,6 @@
           </execution>
         </executions>
       </plugin>
-          </plugins>
+    </plugins>
   </build>
 </project>
