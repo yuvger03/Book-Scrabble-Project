@@ -42,9 +42,9 @@ public class GameScreenViewModel extends Observable implements Observer {
     @Override
     public void update(java.util.Observable o, Object arg) {
 //        if (o==player) {
-        scoreResult.set(player.score);
+        //scoreResult.set(player.score);
         gameBoard =(player.gameBoard);
-        System.out.println("board vm  "+gameBoard);
+        //System.out.println("board vm  "+gameBoard);
         tilesArray=s.TilessArrayToSTring(player.p_tiles);
         //System.out.println("gameBoard "+gameBoard.length());
         String sendNotify=gameBoard+","+tilesArray;

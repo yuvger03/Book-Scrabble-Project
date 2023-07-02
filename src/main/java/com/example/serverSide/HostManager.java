@@ -137,7 +137,7 @@ public class HostManager {
     }
 
     public void nextPlayer() {
-        if (index > playersList.size()) {
+        if (index >=playersList.size()-1){
             index = 0;
 
         } else

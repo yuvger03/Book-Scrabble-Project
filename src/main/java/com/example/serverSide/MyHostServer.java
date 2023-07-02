@@ -93,7 +93,9 @@ public class MyHostServer {
 
         Service s=new Service();
         System.out.println("gameStarted\n"); //TODO shira
+        System.out.println("HM.index "+guestHandler1.HM.index); //TODO shira
         guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
+        System.out.println("HM.current_player "+ guestHandler1.HM.playersList.get(guestHandler1.HM.index));
         for (int i = 0; i <  guestHandler1.HM.playersList.size(); i++) {
             ArrayList<Tile> tiles =  guestHandler1.HM.initTileArray();
             String tielsString = "";

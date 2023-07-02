@@ -59,7 +59,7 @@ public class BoardView extends Canvas {
             return;
         }
         else {
-            System.out.println("else this.boardTiles.equals(board)");
+            //System.out.println("else this.boardTiles.equals(board)");
             for (int i = 0; i < board1.length; i++) {
                 for (int j = 1; j <board1[i].length; j++) {
                     if (!board1[i][j].equals("n")&&(boardTiles[i][j].equals("n"))) {
