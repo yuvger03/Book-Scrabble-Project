@@ -62,7 +62,7 @@ public class HostManager {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        outToServer.println(word);
+        outToServer.println("Q,test.txt,Harry Potter.txt,"+word);
         outToServer.flush();
         String result = inFromServer.next();
         if (result.equals("true"))
@@ -88,15 +88,20 @@ public class HostManager {
 
         int sum = 0;
         if (gameboard.boardLegal(test)) {
+            System.out.println("boardLegal "+ts);
             ArrayList<Word> newWords = gameboard.getWords(test);
             for (Word nw : newWords) {
+
                 if (dictionaryLegal(nw.toString()))
                     sum += gameboard.getScore(nw);
                 else
                     return 0;
             }
         }
-
+        else {
+            System.out.println("else return 0");
+            return 0;
+        }
         // the placement
         row = w.getRow();
         col = w.getCol();
