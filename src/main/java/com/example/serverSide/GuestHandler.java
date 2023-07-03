@@ -3,15 +3,13 @@ package com.example.serverSide;
 import com.example.Game.Tile;
 import com.example.Game.Word;
 import com.example.Service;
-import com.example.clientside.Models.HostModeModel;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GuestHandler implements IClientHandler {
-    Scanner in;
-    PrintWriter out;
     public HostManager HM;
     Service service=new Service();
     Boolean stop=false;
@@ -37,8 +35,8 @@ public class GuestHandler implements IClientHandler {
                      String key = lineAsList[1];
                      if (key.equals("joinToGame")) {
                          if (HM.addPlayerToGame(lineAsList[0])) {
-                             HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
-                             HM.setPlayerpTiles(lineAsList[4],playerName);
+                             HM.setPlayerScore(0,playerName);//TODO:ask Shira
+                             HM.setPlayerpTiles("",playerName);
                              //TODO:save to DB
                              host.notifyAll(playerName + "-" + "message- joined to game- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
@@ -77,7 +75,7 @@ public class GuestHandler implements IClientHandler {
                                //  int count = wordString.length();
                                 // fillTiles = HM.fillTilesArray(count);
                                 // fillTiles += "/" + wordString;
-//                             HM.setPlayerpTiles(fillTiles,playerName); //TODO:return it
+//                              HM.setPlayerpTiles(fillTiles,playerName); //TODO:return it
 //                                 HM.setPlayerScore(score,playerName);
 
                              // }
