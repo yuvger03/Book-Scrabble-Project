@@ -15,7 +15,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MyHostServer {
-    PrintWriter outToServer;
     public int port;
         GuestHandler guestHandler1;
         private int maxThreads;
@@ -69,13 +68,15 @@ public class MyHostServer {
             }
         }
         public void notifyAll(String message) {
+            PrintWriter outToServer;
             for (Socket s : clientSockets) {
                 try {
-                    outToServer = new PrintWriter(s.getOutputStream());
+                     outToServer = new PrintWriter(s.getOutputStream());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 outToServer.println(message);
+                System.out.println("notify all "+message);
                 outToServer.flush();
             }
         }
@@ -98,6 +99,7 @@ public class MyHostServer {
         System.out.println("HM.index "+guestHandler1.HM.index); //TODO shira
         guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
         System.out.println("HM.current_player "+ guestHandler1.HM.playersList.get(guestHandler1.HM.index));
+        System.out.println("guestHandler1.HM.playersList.size()- "+guestHandler1.HM.playersList.size());
         for (int i = 0; i <  guestHandler1.HM.playersList.size(); i++) {
             ArrayList<Tile> tiles =  guestHandler1.HM.initTileArray();
             String tielsString = "";
