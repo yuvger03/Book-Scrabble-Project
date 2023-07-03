@@ -3,6 +3,7 @@ package com.example.serverSide;
 import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Service;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.bson.Document;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -105,20 +106,21 @@ public class MyHostServer {
                 //tielsString += service.TileToString(tiles.get(j)) + "/";
                 tielsString += s.TileToString(tiles.get(j));
             }
+//            guestHandler1.HM.setPlayerpTiles(tielsString,guestHandler1.HM.playersList.get(i));
             notifyAll(guestHandler1.HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
     }
-    public void resumeGame(){
+    public void resumeGame() throws JsonProcessingException {
 //        Service s=new Service();
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(guestHandler1.HM.serverPort).getString("current_player");
         //TODO: check that the same players connected to the DB
-        guestHandler1.HM.pTilesMap = dBcom.readFromDB(guestHandler1.HM.serverPort).get("pTilesMap", guestHandler1.HM.pTilesMap);
-        guestHandler1.HM.scoreMap = dBcom.readFromDB(guestHandler1.HM.serverPort).get("scoreMap", guestHandler1.HM.scoreMap);
-        guestHandler1.HM.gameboard = dBcom.readFromDB(guestHandler1.HM.serverPort).get("gameboard",guestHandler1.HM.gameboard);
-        guestHandler1.HM.b = dBcom.readFromDB(guestHandler1.HM.serverPort).get("bag",guestHandler1.HM.b);
+        guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"pTilesMap");
+        guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"scoreMap");
+        guestHandler1.HM.gameboard.tiles = dBcom.getBoardFromDocument(dBcom.readFromDB(guestHandler1.HM.serverPort));
+        guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(guestHandler1.HM.serverPort));
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);
             notifyAll(player + "-initTiles-" + tielsString + "-null");
@@ -126,9 +128,9 @@ public class MyHostServer {
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
     }
-    public void saveGame(HostManager hm){
+    public void saveGame(){
         DBcom dBcom = new DBcom();
-        dBcom.saveToDB(hm);
+        dBcom.saveToDB(guestHandler1.HM);
             //TODO: save HM to DB
     }
 }

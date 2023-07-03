@@ -169,10 +169,26 @@ public class HostManager {
         return s;
     }
 
-    public void setPlayerScore(String score,String name) {
-        this.scoreMap.put(name,score);
+    public void setPlayerScore(int score,String name) {
+        if (score == 0){
+            this.scoreMap.put(name, "0");
+        }
+        else {
+            int n_s = Integer.parseInt(scoreMap.get(name)) + score;
+            this.scoreMap.put(name, String.valueOf(n_s));
+        }
     }
+
     public void setPlayerpTiles(String tiles,String name) {
-        this.scoreMap.put(name,tiles);
+        String modifiedString ="";
+        if(tiles != "" && tiles.contains("/")){
+            String[] Tiles=tiles.split("/"); //abc/dad r - s ddaabbabc -> abbabc
+            String charactersToDrop = Tiles[1];
+            modifiedString = pTilesMap.get(name).replaceAll(charactersToDrop, "");
+            modifiedString += Tiles[0];
+        }
+        else if(!tiles.contains("/"))
+            modifiedString = tiles;
+        this.pTilesMap.put(name,modifiedString);
     }
 }

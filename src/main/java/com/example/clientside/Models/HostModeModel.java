@@ -2,6 +2,7 @@ package com.example.clientside.Models;
 
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.MyHostServer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,13 +77,17 @@ public class HostModeModel extends PlayerModel {
         //hostServer.notifyAll(this.name + "-startGame" + "-");
         //System.out.println("start game " + outToServer);
     }
-    public void resumeGame() { //TODO
+    public void resumeGame() throws JsonProcessingException { //TODO
         this.hostServer.resumeGame();
         //outToServer.println(this.name+ "-startGame-");
         //hostServer.notifyAll(this.name + "-startGame" + "-");
         //System.out.println("start game " + outToServer);
     }
-//    public void notifyAll(String update) {
+
+    public void saveGame() {
+        this.hostServer.saveGame();
+    }
+    //    public void notifyAll(String update) {
 //        for (Socket s : sockets) {
 //            try {
 //                outToServer = new PrintWriter(s.getOutputStream());

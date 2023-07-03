@@ -38,10 +38,9 @@ public class GuestHandler implements IClientHandler {
                      String key = lineAsList[1];
                      if (key.equals("joinToGame")) {
                          if (HM.addPlayerToGame(lineAsList[0])) {
-                             HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
-                             HM.setPlayerpTiles(lineAsList[4],playerName);
-                             //TODO:save to DB
                              host.notifyAll(playerName + "-" + "message- joined to game- ");
+                             HM.setPlayerScore(0,playerName);//TODO:ask Shira
+                             HM.setPlayerpTiles("",playerName);
                              System.out.println("server " + playerName + "-" + "joined to game");
 //                        out.println(playerName + "-" + "message-you joined to game- " + "\n");
 //                          out.flush();
@@ -78,6 +77,8 @@ public class GuestHandler implements IClientHandler {
                                  int count = wordString.length();
                                  fillTiles = HM.fillTilesArray(count);
                                  fillTiles += "/" + wordString;
+//                                 HM.setPlayerpTiles(fillTiles,playerName); //TODO:return it
+//                                 HM.setPlayerScore(score,playerName);
                              }
                              ////////////////////////////////////////////////////////////
                              //System.out.println("send word func server \n");//TODO PRINTFORTEST

@@ -1,40 +1,130 @@
 package com.example.serverSide;
 
 import com.example.Game.Board;
+import com.example.Game.Tile;
+import com.example.Service;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.client.*;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.*;
+
+import static java.lang.Thread.sleep;
 
 public class DBcom {
 
     // Create a MongoDB client
-    public MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+//    public static MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
 
     // Access the database
-    public MongoDatabase database = mongoClient.getDatabase("Games");
-    public String collectionName = "games";
-    public MongoCollection<Document> collection = database.getCollection(collectionName);
+//    public static MongoDatabase database = mongoClient.getDatabase("mydb");
+    public static String collectionName = "games";
+//    public static MongoCollection<Document> collection = database.getCollection(collectionName);
 
     public DBcom() {
     }
 
     public void saveToDB(HostManager hm) {
-        int server = hm.serverPort;
+        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+        MongoDatabase database = mongoClient.getDatabase("mydb");
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        int server = hm.serverPort; //TODO: take the server port of the guest not the host
         Document document = new Document("Game port" , server);
         document.append("current_player" ,hm.current_player);
-        document.append("pTilesMap" ,hm.pTilesMap);
-        document.append("playersList" ,hm.playersList);
-        document.append("scoreMap" ,hm.scoreMap);
-        document.append("gameboard" ,hm.gameboard);
-        document.append("bag" ,hm.b);
+        document.append("pTilesMap" ,MaptoDocument(hm.pTilesMap));
+        document.append("playersList" ,arrayListTodocument(hm.playersList));
+        document.append("scoreMap" ,MaptoDocument(hm.scoreMap));
+        document.append("gameBoard" ,boardToDocument(hm.gameboard));
+        document.append("bag" ,bagToDocument(hm.b));
+
         collection.insertOne(document);
 
+        mongoClient.close();
 
     }
+    public Document MaptoDocument(Map<String,String> map) {
+        Document embedded_document=new Document();
+        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            String key = entry.getKey();
+            embedded_document.append(key, map.get(key));
+        }
+        return embedded_document;
+    }
+    public Document arrayListTodocument(ArrayList<String>list) {
+        Document embedded_document=new Document();
+        int i =0;
+        for (String element : list){
+            i++;
+            embedded_document.append(""+i,element);
+        }
+        return embedded_document;
+    }
+    public Document boardToDocument(Board B){
+        Document embedded_document=new Document();
+        Service s = new Service();
+        String board = s.matrixToString(B.tiles);
+        embedded_document.append("Board", board);
+        return embedded_document;
+    }
+    public Document bagToDocument(Tile.Bag bag){
+        Document embedded_document=new Document();
+        String s = "";
+        for(int element:bag.quantities)
+            s = s + "," + element;
+        embedded_document.append("bag",s);
+        return embedded_document;
+    }
+    public Tile[][] getBoardFromDocument(Document document){
+        Service s=new Service();
+        return s.stringToMatrix((String) document.get("Board"));
+    }
+    public int[] getBagFromDocument(Document document){
+        Service s=new Service();
+        String[] quantitisString = ((String) document.get("Board")).split(",");
+        int[] quantitis = new int[quantitisString.length];
+        for (int i =0;i<quantitis.length;i++)
+            quantitis[i] = Integer.parseInt(quantitisString[i]);
+        return quantitis;
+    }
+    public static Map<String,String> getMapFromJSON(Document document, String mapName) throws JsonProcessingException {
+        Map<String, String> map = new HashMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(document);
+        JsonNode rootNode = objectMapper.readTree(json);
+        JsonNode scoreMapNode = rootNode.get(mapName);
+        Iterator<String> fieldNames = scoreMapNode.fieldNames();
 
-    public Document readFromDB(int serverPort) {
-        Document query = new Document("Game port:" , serverPort);
+        while (fieldNames.hasNext()) {
+            String key = fieldNames.next();
+            String value = scoreMapNode.get(key).asText();
+            map.put(key,value);
+        }
+        return map;
+    }
+    public static ArrayList<String> getArrayListFromJSON(Document document, String listName) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayList<String> arrayList = new ArrayList<>();
+        String json = objectMapper.writeValueAsString(document);
+        JsonNode rootNode = objectMapper.readTree(json);
+        JsonNode list = rootNode.get(listName);
+        Iterator<String> fieldNames = list.fieldNames();
+        while (fieldNames.hasNext()) {
+            String key = fieldNames.next();
+            String value = list.get(key).asText();
+            arrayList.add(value);
+        }
+        return arrayList;
+    }
+
+    public static Document readFromDB(int serverPort) {
+        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+        MongoDatabase database = mongoClient.getDatabase("mydb");
+        MongoCollection<Document> collection = database.getCollection(collectionName);
+        Document query = new Document("Game port" , serverPort);
         Document document = collection.find(query).first();
         return document;
 // Iterate over the result set
@@ -52,6 +142,18 @@ public class DBcom {
 //
 //        mongoClient.close();
     }
+
+//    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
+//
+//        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+//        MongoDatabase database = mongoClient.getDatabase("mydb");
+//        MongoCollection<Document> collection = database.getCollection(collectionName);
+//        Document document = readFromDB(8080);
+//        System.out.println(getMapFromJSON(document,"scoreMap"));
+//        getArrayListFromJSON(document,"playersList");
+//
+//
+//    }
 }
 //    Method to save the GameState document to MongoDB collection(table)
 //    public void saveToMongoDB(MongoCollection<Document> collection) {

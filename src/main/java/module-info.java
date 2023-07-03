@@ -8,6 +8,7 @@ module com.example.clientside {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.driver.core;
     requires org.mongodb.bson;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.clientside to javafx.fxml;
     opens com.example.clientside.view to javafx.fxml;

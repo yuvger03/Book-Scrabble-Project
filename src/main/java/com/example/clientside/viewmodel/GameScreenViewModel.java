@@ -72,7 +72,5 @@ public class GameScreenViewModel extends Observable implements Observer {
         player.getTileFromBag();
     }
 
-    public void endGame() {//TODO:
-    }
 }
 

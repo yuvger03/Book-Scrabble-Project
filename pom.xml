@@ -15,9 +15,9 @@
       <version>18.0.2</version>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.28</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.12.5</version>
     </dependency>
     <!--     TODO: run ctrl+shift+o to save all the dependencies -->
     <dependency>
