@@ -128,17 +128,20 @@ public class PlayerModel extends Observable {
             } else {
                 score = inputString;
                 System.out.println(args[2]);
-                String[] Tiles=args[2].split("/");
-                Tile[]missingTilesArray=service.StringToTilesArray(Tiles[0]);
-                Tile[] word=service.StringToTilesArray(Tiles[1]);;
-                //service.stringToWord();
-                for(int i=0;i< word.length;i++){
-                    int j=0;
-                  while(p_tiles.get(j).letter!=(word[i].letter)) {
-                     j++;
-                  }
-                  p_tiles.remove(j);
-                  p_tiles.add(missingTilesArray[i]);
+                if(!args[2].equals("null")) {
+                    String[] Tiles = args[2].split("/");
+                    Tile[] missingTilesArray = service.StringToTilesArray(Tiles[0]);
+                    Tile[] word = service.StringToTilesArray(Tiles[1]);
+                    ;
+                    //service.stringToWord();
+                    for (int i = 0; i < word.length; i++) {
+                        int j = 0;
+                        while (p_tiles.get(j).letter != (word[i].letter)) {
+                            j++;
+                        }
+                        p_tiles.remove(j);
+                        p_tiles.add(missingTilesArray[i]);
+                    }
                 }
 
             }

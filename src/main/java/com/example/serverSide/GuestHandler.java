@@ -22,8 +22,7 @@ public class GuestHandler implements IClientHandler {
     }
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
-        in = new Scanner(inFromclient); // remove the letter
-        out = new PrintWriter(outToClient, true);
+        Scanner in = new Scanner(inFromclient); // remove the letter
          while(in.hasNext()){
              System.out.println("line 28\n");
              if (in.hasNextLine()) {
@@ -38,9 +37,10 @@ public class GuestHandler implements IClientHandler {
                      String key = lineAsList[1];
                      if (key.equals("joinToGame")) {
                          if (HM.addPlayerToGame(lineAsList[0])) {
+                             HM.setPlayerScore(lineAsList[3],playerName);//TODO:ask Shira
+                             HM.setPlayerpTiles(lineAsList[4],playerName);
+                             //TODO:save to DB
                              host.notifyAll(playerName + "-" + "message- joined to game- ");
-                             HM.setPlayerScore(0,playerName);//TODO:ask Shira
-                             HM.setPlayerpTiles("",playerName);
                              System.out.println("server " + playerName + "-" + "joined to game");
 //                        out.println(playerName + "-" + "message-you joined to game- " + "\n");
 //                          out.flush();
@@ -69,31 +69,43 @@ public class GuestHandler implements IClientHandler {
                          if (key.equals("tryToPlace")) {
                              /////////////TODO for test view////////////////////////////
                              System.out.println("send word func server \n");//TODO PRINTFORTEST
-                             //String wordString = lineAsList[2];
-                             String wordString = service.getWordString(lineAsList[2]);
-                             int score = 100;
-                             String fillTiles = "";
-                             if (score > 0) {
-                                 int count = wordString.length();
-                                 fillTiles = HM.fillTilesArray(count);
-                                 fillTiles += "/" + wordString;
-//                                 HM.setPlayerpTiles(fillTiles,playerName); //TODO:return it
-//                                 HM.setPlayerScore(score,playerName);
-                             }
-                             ////////////////////////////////////////////////////////////
-                             //System.out.println("send word func server \n");//TODO PRINTFORTEST
-                             //String wordString = lineAsList[2];
-                             //Word word = service.stringToWord(wordString);
-                             //int score = HM.tryPlaceWord(word);
+                             //String wordString = service.getWordString(lineAsList[2]);
+                             //int score = 100;
+                             
                              //String fillTiles = "";
                              //if (score > 0) {
-                             //int count = wordString.length();
-                             //fillTiles = HM.fillTilesArray(count);
-                             //fillTiles += "/" + wordString;
-                             //}
+                               //  int count = wordString.length();
+                                // fillTiles = HM.fillTilesArray(count);
+                                // fillTiles += "/" + wordString;
+//                             HM.setPlayerpTiles(fillTiles,playerName); //TODO:return it
+//                                 HM.setPlayerScore(score,playerName);
+
+                             // }
+                             ////////////////////////////////////////////////////////////
+                             //System.out.println("send word func server \n");//TODO PRINTFORTEST
+                             String wordT = lineAsList[2];
+                             String wordString = service.getWordString(lineAsList[2]);
+                             Word word = service.stringToWord(wordT);
+                             int score = HM.tryPlaceWord(word);
+                             String fillTiles = "null";
+                             if (score > 0) {
+                                //int count = wordString.length();
+                                fillTiles = HM.fillTilesArray( wordString.length());
+                             fillTiles += "/" + wordString;
+                             }
                              System.out.println("send to" + playerName + "- try to place" + "\n");
                              host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
                              //if (score > 0) {//TODO: return it
+                             //placement the word
+                             //int row = word.getRow();
+                             //int  col = word.getCol();
+                             //for (Tile t : word.getTiles()) {
+                                // HM.gameboard.tiles[row][col] = t;
+                                 //if (word.isVertical())
+                                     //row++;
+                                 //else
+                                     //col++;
+                             //}
                              System.out.println("send to everyone the board");
                              host.notifyAll("board-" + HM.getBoardGame());
 
@@ -117,8 +129,8 @@ public class GuestHandler implements IClientHandler {
 
     @Override
   public void close()  {
-        in.close();
-        out.close();
+        //in.close();
+        //out.close();
     }
 }
 
