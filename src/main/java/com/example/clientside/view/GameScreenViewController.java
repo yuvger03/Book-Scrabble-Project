@@ -71,11 +71,14 @@ public class GameScreenViewController extends BoardViewController {
     public void update(Observable o, Object arg) {
         if ((o == GVM) && (arg instanceof String)) {
             String[] lineAsList = ((String) arg).split(",");
-            //System.out.println("theboard is "+lineAsList[0]+" the tiles is- "+lineAsList[1] );
-            String[][] board = s.stringToMatrixS(lineAsList[0]);
-            String[] tiles1 = lineAsList[1].split("");
-            boardView.reDrawTilesBoard(board);
-            tilesView.reDraw(tiles1);
+            if (lineAsList[0].equals("board")) {
+                String[][] board = s.stringToMatrixS(lineAsList[1]);
+                boardView.reDrawTilesBoard(board);
+            }
+            if (lineAsList[0].equals("tiles")) {
+                String[] tiles1 = lineAsList[1].split("");
+                tilesView.reDraw(tiles1);
+            }
         }
     }
 

@@ -104,13 +104,17 @@ public class PlayerModel extends Observable {
         if (lineAsList[0].equals("board")) {
            gameBoard=lineAsList[1];
            setChanged();
-           notifyObservers();
+           notifyObservers("board");
             //this.board_game.tiles = service.stringToMatrix(lineAsList[1]);
         } else if(lineAsList[0].equals("message")) {
             this.message=lineAsList[1];
+            setChanged();
+            notifyObservers("message");
         }
         else if(lineAsList[0].equals("turn")) {
             this.currentPlayer=lineAsList[1];
+            setChanged();
+            notifyObservers("currentPlayer");
         }
     else if (lineAsList[0].equals(name)) {
             System.out.println(message);
@@ -128,8 +132,13 @@ public class PlayerModel extends Observable {
         if (func.equals("tryToPlace")) {
             if (inputString.equals("0")) {
                 score = "YOUR SCORE - 0 : Invalid placement";
+                setChanged();
+                notifyObservers("scoreResult");
+
             } else {
                 score = "YOUR SCORE- "+inputString;
+                setChanged();
+                notifyObservers("scoreResult");
                 System.out.println(args[2]);
                 if(!args[2].equals("null")) {
                     String[] Tiles = args[2].split("/");
@@ -146,13 +155,15 @@ public class PlayerModel extends Observable {
                         p_tiles.add(missingTilesArray[i]);
                     }
                 }
+                setChanged();
+                notifyObservers("tiles");
             }
-            setChanged();
-            notifyObservers();
         }
         if (func.equals("totalScore")){
             System.out.println("total score - "+inputString);
             this.totalScore=inputString;
+            setChanged();
+            notifyObservers("totalScore");
         }
         if (func.equals("initTiles")) {
             initTiles(inputString);
@@ -164,7 +175,7 @@ public class PlayerModel extends Observable {
             System.out.println("message "+inputString);
           this.message=inputString;
             setChanged();
-            notifyObservers();
+            notifyObservers("message");
         }
 
     }
@@ -174,7 +185,7 @@ public class PlayerModel extends Observable {
             for (int i = 0; i < TileAsList.length; i++)
                 p_tiles.add(service.stringToTile(TileAsList[i]));
             setChanged();
-            notifyObservers();
+            notifyObservers("tiles");
         }
 
 
@@ -184,7 +195,7 @@ public class PlayerModel extends Observable {
         if (!valid) {
             score = "not valid placement- you don't have the tiles";
             setChanged();
-            notifyObservers();
+            notifyObservers("scoreResult");
             return;
         }
         try {
