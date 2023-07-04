@@ -8,19 +8,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostModeViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostModeViewController">
    <children>
-         <Button fx:id="port" layoutX="168.0" layoutY="356" mnemonicParsing="false" onAction="#showPort" prefWidth="125.0" text="PORT">
+         <Button fx:id="port" layoutX="168.0" layoutY="306" mnemonicParsing="false" onAction="#showPort" prefWidth="125.0" text="PORT">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="300.0" layoutY="356" mnemonicParsing="false" onAction="#checkconnectedPlayers" text="Check players">
+      <Button layoutX="300.0" layoutY="306" mnemonicParsing="false" onAction="#checkconnectedPlayers" text="Check players">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Label fx:id="hostPort" alignment="CENTER_LEFT" layoutX="168.0" layoutY="410" prefHeight="25.0" prefWidth="600.0" style="-fx-font-size: 24px;" />
+      <Label fx:id="hostPort" alignment="CENTER_LEFT" layoutX="168.0" layoutY="356" prefHeight="25.0" prefWidth="600.0" style="-fx-font-size: 24px;" />
 
 
       <Text layoutX="216.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of players" wrappingWidth="214.13671875">
@@ -29,17 +29,17 @@
          </font>
       </Text>
       <ListView fx:id="myListView" layoutX="168.0" layoutY="94.0" prefHeight="200.0" prefWidth="280.0" />
-      <Button fx:id="start" layoutX="168.0" layoutY="306.0" mnemonicParsing="false" onAction="#startGame" text="Start game">
+      <Button fx:id="start" layoutX="10.0" layoutY="94.0" mnemonicParsing="false" onAction="#startGame" prefWidth="150.0" text="Start game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="resume" layoutX="300.0" layoutY="306.0" mnemonicParsing="false" onAction="#resumeGame" text="resume game">
+      <Button fx:id="resume" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#resumeGame" prefWidth="150.0" text="resume game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="resumeGame" alignment="CENTER_LEFT" layoutX="631.0" layoutY="306.0" prefHeight="51.0" prefWidth="355.0" promptText="enter port number" style="-fx-font-size: 24px;" />
+      <TextField fx:id="resumeGame" alignment="CENTER_LEFT" layoutX="10.0" layoutY="150.0" prefHeight="51.0" prefWidth="150.0" promptText="enter port number" style="-fx-font-size: 16px;" />
 
 
    </children>
