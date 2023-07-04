@@ -37,7 +37,7 @@ public class GuestHandler implements IClientHandler {
                              HM.setPlayerScore(0,playerName);//TODO:ask Shira
                              HM.setPlayerTiles("",playerName);
                              //TODO:save to DB
-                             //host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
+                             host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
                          } else {
                              //host.notifyAll(playerName + "-" + "message-you not joind to game- ");

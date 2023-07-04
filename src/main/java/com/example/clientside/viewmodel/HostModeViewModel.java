@@ -27,21 +27,7 @@ public class HostModeViewModel extends Observable implements Observer {
         hostModel.resumeGame();
     }
    public HostModeModel getHostModel(){return hostModel;}
-    @Override
-    public void update(java.util.Observable o, Object arg) {
-        //if (o == hostModel) {
-        if (o instanceof HostModeModel) {
-            Platform.runLater(() -> {
-                hostPort.set("LISTENING ON PORT : "+hostModel.hostPort);
-                playersList.setAll(hostModel.guestHandler.HM.playersList);
 
-            });
-        }
-            System.out.println("serverPort in vm");
-            //setChanged();
-            //notifyObservers();
-       // }
-    }
 
     public void showPort() {
        hostModel.showPort();
@@ -49,5 +35,22 @@ public class HostModeViewModel extends Observable implements Observer {
 
     public void checkconnectedPlayers() {
         hostModel.checkconnectedPlayers();
+    }
+    @Override
+    public void update(java.util.Observable o, Object arg) {
+        //if (o == hostModel) {
+        if (o instanceof HostModeModel) {
+            Platform.runLater(() -> {
+                if(arg.equals("showPort"))
+                    hostPort.set("LISTENING ON PORT : "+hostModel.hostPort);
+                if(arg.equals("checkconnectedPlayers"))
+                    playersList.setAll(hostModel.guestHandler.HM.playersList);
+
+            });
+        }
+        System.out.println("serverPort in vm");
+        //setChanged();
+        //notifyObservers();
+        // }
     }
 }

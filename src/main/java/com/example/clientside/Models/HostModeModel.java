@@ -80,12 +80,12 @@ public class HostModeModel extends PlayerModel {
     public void showPort() {
         this.hostPort=String.valueOf(this.serverPort);
         setChanged();
-        notifyObservers();
+        notifyObservers("showPort");
     }
 
     public void checkconnectedPlayers() {
         setChanged();
-        notifyObservers();
+        notifyObservers("checkconnectedPlayers");
     }
 
 }

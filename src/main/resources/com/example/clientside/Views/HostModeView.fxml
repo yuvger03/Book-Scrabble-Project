@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostModeViewController">
    <children>
-      <Button fx:id="port" layoutX="150.0" layoutY="356" mnemonicParsing="false" onAction="#showPort" text="PORT">
+         <Button fx:id="port" layoutX="168.0" layoutY="356"  prefWidth="125.0" mnemonicParsing="false" onAction="#showPort" text="PORT">
          <font>
             <Font size="20.0" />
          </font>
