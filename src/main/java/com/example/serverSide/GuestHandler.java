@@ -6,7 +6,6 @@ import com.example.Service;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GuestHandler implements IClientHandler {
@@ -36,7 +35,7 @@ public class GuestHandler implements IClientHandler {
                      if (key.equals("joinToGame")) {
                          if (HM.addPlayerToGame(lineAsList[0])) {
                              HM.setPlayerScore(0,playerName);//TODO:ask Shira
-                             HM.setPlayerpTiles("",playerName);
+                             HM.setPlayerTiles("",playerName);
                              //TODO:save to DB
                              //host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
@@ -73,7 +72,7 @@ public class GuestHandler implements IClientHandler {
                                 //int count = wordString.length();
                                 fillTiles = HM.fillTilesArray( wordString.length());
                                 fillTiles += "/" + wordString;
-                                HM.setPlayerpTiles(fillTiles,playerName);
+                                HM.setPlayerTiles(fillTiles,playerName);
                              }
                              host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
 

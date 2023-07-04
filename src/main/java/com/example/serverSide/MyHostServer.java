@@ -1,17 +1,14 @@
 package com.example.serverSide;
 
-import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.bson.Document;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -108,7 +105,7 @@ public class MyHostServer {
                 //tielsString += service.TileToString(tiles.get(j)) + "/";
                 tielsString += s.TileToString(tiles.get(j));
             }
-//            guestHandler1.HM.setPlayerpTiles(tielsString,guestHandler1.HM.playersList.get(i));
+            guestHandler1.HM.setPlayerTiles(tielsString,guestHandler1.HM.playersList.get(i));
             notifyAll(guestHandler1.HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
@@ -116,7 +113,6 @@ public class MyHostServer {
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
     public void resumeGame() throws JsonProcessingException {
-//        Service s=new Service();
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(guestHandler1.HM.serverPort).getString("current_player");
@@ -135,7 +131,6 @@ public class MyHostServer {
     public void saveGame(){
         DBcom dBcom = new DBcom();
         dBcom.saveToDB(guestHandler1.HM);
-            //TODO: save HM to DB
     }
 }
 

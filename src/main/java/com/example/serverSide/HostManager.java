@@ -187,13 +187,20 @@ public class HostManager {
         }
     }
 
-    public void setPlayerpTiles(String tiles,String name) {
+    public void setPlayerTiles(String tiles,String name) {
         String modifiedString ="";
-        if(tiles != "" && tiles.contains("/")){
-            String[] Tiles=tiles.split("/"); //abc/dad r - s ddaabbabc -> abbabc
-            String charactersToDrop = Tiles[1];
-            modifiedString = pTilesMap.get(name).replaceAll(charactersToDrop, "");
-            modifiedString += Tiles[0];
+        if(!tiles.equals("") && tiles.contains("/")){
+            String start = pTilesMap.get(name);
+            String[] Tiles = tiles.split("/");
+            Tile[] word = s.StringToTilesArray(Tiles[1]);
+            for (int i = 0; i < word.length; i++) {
+                int j = 0;
+                while (start.charAt(j) != (word[i].letter)) {
+                    j++;
+                }
+                start = start.substring(0, j) + start.substring(j + 1);
+            }
+            modifiedString = start + Tiles[0];
         }
         else if(!tiles.contains("/"))
             modifiedString = tiles;
