@@ -45,38 +45,38 @@ public class DBcom {
 
     }
     public Document MaptoDocument(Map<String,String> map) {
-        Document embedded_document=new Document();
+        Document doc=new Document();
         Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             String key = entry.getKey();
-            embedded_document.append(key, map.get(key));
+            doc.append(key, map.get(key));
         }
-        return embedded_document;
+        return doc;
     }
     public Document arrayListTodocument(ArrayList<String>list) {
-        Document embedded_document=new Document();
+        Document doc=new Document();
         int i =0;
         for (String element : list){
             i++;
-            embedded_document.append(""+i,element);
+            doc.append(""+i,element);
         }
-        return embedded_document;
+        return doc;
     }
     public Document boardToDocument(Board B){
-        Document embedded_document=new Document();
+        Document doc=new Document();
         Service s = new Service();
         String board = s.matrixToString(B.tiles);
-        embedded_document.append("Board", board);
-        return embedded_document;
+        doc.append("Board", board);
+        return doc;
     }
     public Document bagToDocument(Tile.Bag bag){
-        Document embedded_document=new Document();
+        Document doc=new Document();
         String s = "";
         for(int element:bag.quantities)
             s = s + "," + element;
-        embedded_document.append("bag",s);
-        return embedded_document;
+        doc.append("bag",s);
+        return doc;
     }
     public Tile[][] getBoardFromDocument(Document document){
         Service s=new Service();
