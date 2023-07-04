@@ -71,14 +71,18 @@ public class DBcom {
     }
     public Tile[][] getBoardFromDocument(Document document){
         Service s=new Service();
-        return s.stringToMatrix((String) document.get("Board"));
+        String a = document.get("gameBoard").toString().split("=")[1].split("}}")[0];
+        return s.stringToMatrix(a);
     }
     public int[] getBagFromDocument(Document document){
         Service s=new Service();
-        String[] quantitisString = ((String) document.get("Board")).split(",");
+        String[] quantitisString = (document.get("bag")).toString().split("bag:")[0].split(",");
+        quantitisString[0] = quantitisString[0].split("=")[1];
+        quantitisString[quantitisString.length-1] = quantitisString[quantitisString.length-1].split("}}")[0];
         int[] quantities = new int[quantitisString.length];
-        for (int i =0;i<quantities.length;i++)
+        for (int i =0;i<quantities.length;i++){
             quantities[i] = Integer.parseInt(quantitisString[i]);
+        }
         return quantities;
     }
     public static Map<String,String> getMapFromJSON(Document document, String mapName) throws JsonProcessingException {
@@ -116,7 +120,9 @@ public class DBcom {
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection(collectionName);
         Document query = new Document("Game port" , serverPort);
-        return collection.find(query).first();
+        Document d =  collection.find(query).first();
+        mongoClient.close();
+        return d;
     }
 
 //    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
@@ -124,10 +130,8 @@ public class DBcom {
 //        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
 //        MongoDatabase database = mongoClient.getDatabase("mydb");
 //        MongoCollection<Document> collection = database.getCollection(collectionName);
-//        Document document = readFromDB(8080);
-//        System.out.println(getMapFromJSON(document,"scoreMap"));
-//        getArrayListFromJSON(document,"playersList");
-//
+//        Document document = readFromDB(6393);
+//        System.out.println(getMapFromJSON(document,"pTilesMap"));
 //
 //    }
 }

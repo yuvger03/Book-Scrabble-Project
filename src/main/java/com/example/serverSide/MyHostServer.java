@@ -113,14 +113,15 @@ public class MyHostServer {
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
     public void resumeGame(int port) throws JsonProcessingException {
+        System.out.println(port);
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(port).getString("current_player");
         //TODO: check that the same players connected to the DB
-        guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"pTilesMap");
-        guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"scoreMap");
-        guestHandler1.HM.gameboard.tiles = dBcom.getBoardFromDocument(dBcom.readFromDB(guestHandler1.HM.serverPort));
-        guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(guestHandler1.HM.serverPort));
+        guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"pTilesMap");
+        guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
+        guestHandler1.HM.gameboard.tiles = dBcom.getBoardFromDocument(dBcom.readFromDB(port));
+        guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(port));
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);
             notifyAll(player + "-initTiles-" + tielsString + "-null");
