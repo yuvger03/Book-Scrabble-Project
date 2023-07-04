@@ -11,13 +11,13 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <ListView layoutX="168.0" layoutY="94.0" prefHeight="200.0" prefWidth="263.0" />
-      <Button fx:id="start" layoutX="238.0" layoutY="306.0" mnemonicParsing="false" onAction="#startGame" text="Start game">
+      <ListView layoutX="168.0" layoutY="94.0" prefHeight="200.0" prefWidth="280.0" />
+      <Button fx:id="start" layoutX="168.0" layoutY="306.0" mnemonicParsing="false" onAction="#startGame" text="Start game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="resume" layoutX="368.0" layoutY="306.0" mnemonicParsing="false" onAction="#resumeGame" text="resume game">
+      <Button fx:id="resume" layoutX="300.0" layoutY="306.0" mnemonicParsing="false" onAction="#resumeGame" text="resume game">
          <font>
             <Font size="20.0" />
          </font>

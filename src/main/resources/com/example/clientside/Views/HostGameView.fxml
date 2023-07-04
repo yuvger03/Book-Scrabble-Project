@@ -3,33 +3,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <?import com.example.clientside.view.BoardView?>
 <?import com.example.clientside.view.TilesView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="639.0" styleClass="bodybg" stylesheets="@backgrounds/gameview.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostGameViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" styleClass="bodybg" stylesheets="@backgrounds/gameview.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostGameViewController">
     <children>
-        <HBox layoutX="166.0" layoutY="500.0" prefHeight="41.0" prefWidth="200.0">
+        <Label fx:id="message" layoutX="150.0" layoutY="20.0" prefHeight="25.0" prefWidth="450.0" style="-fx-font-size: 16px;" alignment="CENTER" />
+        <BoardView fx:id="boardView" height="450.0" layoutX="150.0" layoutY="60.0" width="450.0" />
+        <HBox  spacing="10.0" layoutX="150.0" layoutY="530.0" prefHeight="41.0" prefWidth="500.0" alignment="TOP_CENTER">
             <children>
-                <TilesView id="tilesView" fx:id="tilesView" height="45.0" layoutY="740.0" width="300.0" />
+                <Text fill="#0f0f23" strokeType="OUTSIDE" strokeWidth="1.0" text="TOTAL SCORE:" style="-fx-background-color: #d4c10f;"   >
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Text>
+                <Label fx:id="totalScore"  prefHeight="25.0" prefWidth="50.0" style="-fx-font-size: 16px;"  />
+
+                <TilesView id="tilesView" fx:id="tilesView" height="45.0"  width="280.0" />
+                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="add tiles" onAction="#addTile" />
             </children>
         </HBox>
-        <BoardView fx:id="boardView" height="450.0" layoutX="150.0" layoutY="10.0" width="450.0" />
-        <HBox layoutY="550.0" prefHeight="50.0" prefWidth="600.0">
+        <HBox layoutX="150.0" layoutY="580.0" prefHeight="50.0" prefWidth="600.0">
             <children>
                 <TextField fx:id="word" prefHeight="25.0" prefWidth="86.0" promptText="enter word" />
                 <TextField fx:id="row" prefHeight="25.0" prefWidth="38.0" promptText="row" />
                 <TextField fx:id="col" prefHeight="25.0" prefWidth="59.0" promptText="column" />
                 <CheckBox fx:id="vertical" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="vertical" />
-                <Button mnemonicParsing="false" text="send" onAction="#sendWord"/>
-                <Label fx:id="scoreResult" prefHeight="25.0" prefWidth="69.0" text="     result" textAlignment="CENTER" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="add tiles" onAction="#addTile" />
-                <Button fx:id="endGame" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="end and save" onAction="#endGame" />
-
+                <Button prefHeight="25.0" prefWidth="100.0" mnemonicParsing="false" text="send" onAction="#sendWord"/>
             </children>
         </HBox>
-        <VBox prefHeight="200.0" prefWidth="100.0">
+
+        <HBox layoutX="150.0" layoutY="615.0" prefHeight="41.0" prefWidth="300.0">
             <children>
+                <Label fx:id="scoreResult"  prefHeight="25.0" prefWidth="400.0" text="result" textAlignment="CENTER" style="-fx-font-size: 14px;"/>
+            </children>
+        </HBox>
+        <Button fx:id="endGame" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="end and save" onAction="#endGame" />
+
+        <VBox  layoutX="20.0" layoutY="20.0" prefHeight="250.0" prefWidth="100.0">
+            <children>
+                <Label fx:id="currentPlayer" prefHeight="25.0" prefWidth="250.0"  style="-fx-font-size: 16px;" wrapText="true" contentDisplay="CENTER" />
+                <Text fill="BLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Text>
                 <Text fill="BLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="triple letter">
                     <font>
                         <Font size="20.0" />

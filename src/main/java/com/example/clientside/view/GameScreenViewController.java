@@ -26,6 +26,12 @@ public class GameScreenViewController extends BoardViewController {
     Button sendWord;
     @FXML
     Label scoreResult;
+    @FXML
+    Label totalScore;
+    @FXML
+    Label message;
+    @FXML
+    Label currentPlayer;
     GameScreenViewModel GVM;
     BoardViewController BVC;
     Service s = new Service();
@@ -40,7 +46,9 @@ public class GameScreenViewController extends BoardViewController {
         GVM.word.bind(word.textProperty());
         GVM.vertical.bind(vertical.selectedProperty());
         scoreResult.textProperty().bind(GVM.scoreResult);
-//        boardViewProperty.bind(GVM.gameBoard);
+        totalScore.textProperty().bind(GVM.totalScore);
+        message.textProperty().bind(GVM.message);
+        currentPlayer.textProperty().bind(GVM.currentPlayer);
     }
     public void addTileToBoard(String Tile,boolean vertical){
         boardView.newTile(boardView.w,boardView.h,Integer.parseInt(row.getText()),Integer.parseInt(col.getText()),vertical,Tile);

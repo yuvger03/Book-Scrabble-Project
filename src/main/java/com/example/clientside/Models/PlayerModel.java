@@ -16,17 +16,17 @@ import java.util.concurrent.CountDownLatch;
 public class PlayerModel extends Observable {
     static final int  countTiles = 7;
     public int ipServer;
+    public String currentPlayer;
     String name;
-    int totalScore;
+    public String totalScore;
     public String score; //TODO : bind to RESULT IN GAMEsCREEM
     public String gameBoard;
     private Board board_game; //YUVAL
     public ArrayList<Tile> p_tiles;
     //public String tilesStringArray;
     public int serverPort;
-    int turn;
     String currentTurn;
-    String message;
+    public String message;
     Scanner inFromServer;
     PrintWriter outToServer;
     Service service;
@@ -38,7 +38,7 @@ public class PlayerModel extends Observable {
     //Server gameServer; each player has a instance of its gameServer.
     public PlayerModel() {
         name = null;
-        totalScore = 0;
+        totalScore = "0";
         board_game = new Board();
         p_tiles = new ArrayList<>();
         service = new Service();
@@ -109,6 +109,9 @@ public class PlayerModel extends Observable {
         } else if(lineAsList[0].equals("message")) {
             this.message=lineAsList[1];
         }
+        else if(lineAsList[0].equals("turn")) {
+            this.currentPlayer=lineAsList[1];
+        }
     else if (lineAsList[0].equals(name)) {
             System.out.println(message);
             //getFunc(lineAsList[1],lineAsList[2]);//TODO: check if it possible in try to place
@@ -124,9 +127,9 @@ public class PlayerModel extends Observable {
 
         if (func.equals("tryToPlace")) {
             if (inputString.equals("0")) {
-                score = "not valid";
+                score = "YOUR SCORE - 0 : Invalid placement";
             } else {
-                score = inputString;
+                score = "YOUR SCORE- "+inputString;
                 System.out.println(args[2]);
                 if(!args[2].equals("null")) {
                     String[] Tiles = args[2].split("/");
@@ -143,10 +146,13 @@ public class PlayerModel extends Observable {
                         p_tiles.add(missingTilesArray[i]);
                     }
                 }
-
             }
             setChanged();
             notifyObservers();
+        }
+        if (func.equals("totalScore")){
+            System.out.println("total score - "+inputString);
+            this.totalScore=inputString;
         }
         if (func.equals("initTiles")) {
             initTiles(inputString);
@@ -155,7 +161,10 @@ public class PlayerModel extends Observable {
             p_tiles.add(service.stringToTile(inputString));
         }
         if(func.equals("message")){
+            System.out.println("message "+inputString);
           this.message=inputString;
+            setChanged();
+            notifyObservers();
         }
 
     }

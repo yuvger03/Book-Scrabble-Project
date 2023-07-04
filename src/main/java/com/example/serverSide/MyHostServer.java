@@ -94,7 +94,6 @@ public class MyHostServer {
         }
 
     public void startGame() {
-
         Service s=new Service();
         System.out.println("gameStarted\n"); //TODO shira
         System.out.println("HM.index "+guestHandler1.HM.index); //TODO shira
@@ -112,6 +111,8 @@ public class MyHostServer {
             notifyAll(guestHandler1.HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
+        notifyAll("message- GAME STARTED BY HOST- ");
+        notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
     public void resumeGame() throws JsonProcessingException {
 //        Service s=new Service();
