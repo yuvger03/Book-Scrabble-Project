@@ -40,8 +40,6 @@ public class GuestHandler implements IClientHandler {
                              //TODO:save to DB
                              host.notifyAll(playerName + "-" + "message- joined to game- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
-//                        out.println(playerName + "-" + "message-you joined to game- " + "\n");
-//                          out.flush();
                          } else {
                              host.notifyAll(playerName + "-" + "message-you not joind to game- ");
 
@@ -81,9 +79,9 @@ public class GuestHandler implements IClientHandler {
                              // }
                              ////////////////////////////////////////////////////////////
                              //System.out.println("send word func server \n");//TODO PRINTFORTEST
-                             String wordT = lineAsList[2];
+                             //String wordT = lineAsList[2];
                              String wordString = service.getWordString(lineAsList[2]);
-                             Word word = service.stringToWord(wordT);
+                             Word word = service.stringToWord(lineAsList[2]);
                              int score = HM.tryPlaceWord(word);
                              String fillTiles = "null";
                              if (score > 0) {
@@ -91,7 +89,7 @@ public class GuestHandler implements IClientHandler {
                                 fillTiles = HM.fillTilesArray( wordString.length());
                              fillTiles += "/" + wordString;
                              }
-                             System.out.println("send to" + playerName + "- try to place" + "\n");
+                             //System.out.println("send to" + playerName + "- try to place" + "\n");
                              host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
                              //if (score > 0) {//TODO: return it
                              //placement the word
@@ -124,7 +122,9 @@ public class GuestHandler implements IClientHandler {
              }
         }
     }
+public void tryToPlaceForView(){
 
+}
     @Override
   public void close()  {
         //in.close();

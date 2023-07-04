@@ -24,9 +24,6 @@ public class HostManager {
     public Map<String,String> pTilesMap;
     public Map<String,String> scoreMap;
 
-    Scanner inFromServer;
-    PrintWriter outToServer;
-    Socket serverSocket;
     Service s;
     private CountDownLatch connectionLatch; // added field
 
@@ -36,39 +33,35 @@ public class HostManager {
         playersList = new ArrayList<>();
         pTilesMap = new HashMap<>();
         scoreMap = new HashMap<>();
-        this.index = 1;
+        this.index = 0;
         this.serverPort = serverPort;
         connectionLatch = new CountDownLatch(1); // initialize the latch
         this.s = new Service();
-        connectToGameServer();
     }
 
-    private void connectToGameServer() {
-        new Thread(
-                () -> {
-                    try {
-                        this.serverSocket = new Socket("localhost", serverPort);
-                        this.outToServer = new PrintWriter(serverSocket.getOutputStream());
-                        this.inFromServer = new Scanner(serverSocket.getInputStream());
-                        connectionLatch.countDown(); // signal that the connection is established
-                    } catch (Exception e) {
-                    }
-                }).start();
-    }
 
     public boolean dictionaryLegal(String word) {//TODO : how implement this func
         try {
-            connectionLatch.await(); // wait for the connection to be established
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        outToServer.println("Q,test.txt,Harry Potter.txt,"+word);
-        outToServer.flush();
-        String result = inFromServer.next();
-        if (result.equals("true"))
-            return true;
-        else
-            return false;
+            Socket serverSocket = new Socket("localhost", serverPort);
+            PrintWriter outToServer = new PrintWriter(serverSocket.getOutputStream());
+            Scanner inFromServer = new Scanner(serverSocket.getInputStream());
+            System.out.println("word- "+s.getWordString(word));
+            outToServer.println("Q,test.txt,Harry Potter.txt," + s.getWordString(word));
+            outToServer.flush();
+            String result = inFromServer.next();
+            inFromServer.close();
+            outToServer.close();
+            serverSocket.close();
+            if (result.equals("true"))
+                return true;
+            else
+                return false;
+        } catch (Exception e) {}
+        return false;
+    }
+
+    public boolean dictionaryLegalView(String word){
+        return true;
     }
 
     public int tryPlaceWord(Word w) {
@@ -87,22 +80,31 @@ public class HostManager {
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
 
         int sum = 0;
-        if (gameboard.boardLegal(test)) {
-            System.out.println("boardLegal "+ts);
-            ArrayList<Word> newWords = gameboard.getWords(test);
-            for (Word nw : newWords) {
 
-                if (dictionaryLegal(nw.toString()))
+         if (gameboard.boardLegal(test)) { //TODO return
+            System.out.println("boardLegal "+ts);
+             ArrayList<Word> newWords = gameboard.getWords(test);
+             System.out.println("newWords "+newWords.size());
+             System.out.println("board2  host manager "+getBoardGame());
+             for (Word nw : newWords) {
+                 System.out.println(dictionaryLegal(s.WordToString(nw)));
+                if (dictionaryLegalView(s.WordToString(nw)))
                     sum += gameboard.getScore(nw);
-                else
+                else {
+                    System.out.println("board1  host manager "+getBoardGame());
+                    System.out.println("else forloop return 0");
                     return 0;
-            }
+                }
+            } //TODO return
         }
         else {
             System.out.println("else return 0");
-            return 0;
+             System.out.println("boarf d host manager "+getBoardGame());
+
+             return 0;
         }
         // the placement
+        System.out.println("put on board");
         row = w.getRow();
         col = w.getCol();
         for (Tile t : w.getTiles()) {

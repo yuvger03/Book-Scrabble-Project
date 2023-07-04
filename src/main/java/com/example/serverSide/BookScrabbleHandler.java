@@ -20,16 +20,20 @@ public class BookScrabbleHandler implements IClientHandler {
 			in = new BufferedReader(new InputStreamReader(inFromclient)); // remove the letter
 			out = new PrintWriter(outToClient, true);
 			String line = in.readLine();
+			System.out.println("line "+line);
+
 			char key = line.charAt(0);
 			// String[] args = line.split(",");
 			String[] lineAsList = line.split(",");
+			System.out.println("lineAsList[0] "+lineAsList[0]);
+
 			String[] args = Arrays.copyOfRange(lineAsList, 1, lineAsList.length);
 			if (key == 'Q') {
-				// System.out.println("Q");
+				System.out.println("Q");
 				// System.out.println("args:");
 				// for(String arg: args)
 				// System.out.print(arg + " ");
-				// System.out.println(" ");
+				//System.out.println("DM.query(args) "+DM.query(args));
 				out.println(DM.query(args));
 			} else if (key == 'C') {
 				// System.out.println("C");
