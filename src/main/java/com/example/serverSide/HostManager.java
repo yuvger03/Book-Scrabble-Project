@@ -53,10 +53,7 @@ public class HostManager {
             inFromServer.close();
             outToServer.close();
             serverSocket.close();
-            if (result.equals("true"))
-                return true;
-            else
-                return false;
+            return result.equals("true");
         } catch (Exception e) {}
         return false;
     }
@@ -189,21 +186,22 @@ public class HostManager {
 
     public void setPlayerTiles(String tiles,String name) {
         String modifiedString ="";
-        if(!tiles.equals("") && tiles.contains("/")){
+        if(tiles.contains("/")){
             String start = pTilesMap.get(name);
             String[] Tiles = tiles.split("/");
             Tile[] word = s.StringToTilesArray(Tiles[1]);
-            for (int i = 0; i < word.length; i++) {
+            for (Tile tile : word) {
                 int j = 0;
-                while (start.charAt(j) != (word[i].letter)) {
+                while (start.charAt(j) != (tile.letter)) {
                     j++;
                 }
                 start = start.substring(0, j) + start.substring(j + 1);
             }
             modifiedString = start + Tiles[0];
         }
-        else if(!tiles.contains("/"))
+        else {
             modifiedString = tiles;
+        }
         this.pTilesMap.put(name,modifiedString);
     }
 }

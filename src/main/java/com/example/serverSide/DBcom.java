@@ -15,14 +15,7 @@ import static java.lang.Thread.sleep;
 
 public class DBcom {
 
-    // Create a MongoDB client
-//    public static MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-
-    // Access the database
-//    public static MongoDatabase database = mongoClient.getDatabase("mydb");
     public static String collectionName = "games";
-//    public static MongoCollection<Document> collection = database.getCollection(collectionName);
-
     public DBcom() {
     }
 
@@ -46,9 +39,7 @@ public class DBcom {
     }
     public Document MaptoDocument(Map<String,String> map) {
         Document doc=new Document();
-        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> entry = iterator.next();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             doc.append(key, map.get(key));
         }
@@ -59,7 +50,7 @@ public class DBcom {
         int i =0;
         for (String element : list){
             i++;
-            doc.append(""+i,element);
+            doc.append(String.valueOf(i),element);
         }
         return doc;
     }
@@ -72,9 +63,9 @@ public class DBcom {
     }
     public Document bagToDocument(Tile.Bag bag){
         Document doc=new Document();
-        String s = "";
-        for(int element:bag.quantities)
-            s = s + "," + element;
+        String s = String.valueOf(bag.quantities[0]);
+        for(int i=1;i< bag.quantities.length;i++)
+            s += "," + bag.quantities[i];
         doc.append("bag",s);
         return doc;
     }
@@ -85,10 +76,10 @@ public class DBcom {
     public int[] getBagFromDocument(Document document){
         Service s=new Service();
         String[] quantitisString = ((String) document.get("Board")).split(",");
-        int[] quantitis = new int[quantitisString.length];
-        for (int i =0;i<quantitis.length;i++)
-            quantitis[i] = Integer.parseInt(quantitisString[i]);
-        return quantitis;
+        int[] quantities = new int[quantitisString.length];
+        for (int i =0;i<quantities.length;i++)
+            quantities[i] = Integer.parseInt(quantitisString[i]);
+        return quantities;
     }
     public static Map<String,String> getMapFromJSON(Document document, String mapName) throws JsonProcessingException {
         Map<String, String> map = new HashMap<>();
@@ -125,22 +116,7 @@ public class DBcom {
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection(collectionName);
         Document query = new Document("Game port" , serverPort);
-        Document document = collection.find(query).first();
-        return document;
-// Iterate over the result set
-
-
-//        Document query = new Document("current player", searchKey); // Replace 'your_key' with the actual key in your document
-//        FindIterable<Document> documents = collection.find(query);
-//
-//
-//        if (fieldValue != null) {
-//            String serverValue = (String) fieldValue;
-//            System.out.println("Value of 'Game port:" + server + "': " + serverValue);
-//        } else
-//            System.out.println("Field 'Game port:" + server + "' not found in the document.");
-//
-//        mongoClient.close();
+        return collection.find(query).first();
     }
 
 //    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
@@ -155,51 +131,3 @@ public class DBcom {
 //
 //    }
 }
-//    Method to save the GameState document to MongoDB collection(table)
-//    public void saveToMongoDB(MongoCollection<Document> collection) {
-//        Document document = this.toDocument();
-//        collection.insertOne(document);
-//    }
-    // Method to retrieve the GameState from a MongoDB document
-//    public static GameState  readGameStatefromDocument(Document game_document) {
-//        GameState game = new GameState();
-//        //getting the simple fields
-//        game.indexOfCurrentTurnPlayer=game_document.getInteger("indexOfCurrentTurnPlayer");
-//        game.gameSaveName=game_document.getString("gameSaveName");
-//        //getting the complex object fields
-//        try {
-//            // game.hashmap_name_to_id=(HashMap<String,Integer>)game_document.get("hashmap_name_to_id", HashMap.class);
-//            //game.hashmap_name_to_id = new HashMap<String,Integer>(game_document.get("hashmap_name_to_id", Document.class));
-//            Document hashMapDoc=game_document.get("hashmap_name_to_id",Document.class);
-//            game.hashmap_name_to_id=getHashmapFromDocument(hashMapDoc);
-//            //bag:
-//            Document bag_document=game_document.get("bag",Document.class);
-//            game.bag=Bag.fromDocument(bag_document);
-//            //listOfplayers:
-//            Document playerListDoc=game_document.get("listOfPlayers", Document.class);
-//            game.listOfPlayers=getListOfPlayersFromDocument(playerListDoc);
-//            //gameBoard:
-//            Document gameBoardDoc=game_document.get("gameBoard", Document.class);
-//            game.gameBoard=ConnectedBoard.fromDocument(gameBoardDoc);
-//
-//
-//
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return game;
-//    //        MongoCursor<Document> cursor = documents.iterator();
-////
-////        while (cursor.hasNext()) {
-////            Document document1 = cursor.next();
-////            String json = document1.toJson();
-////            System.out.println(json);
-////        }
-////        PlayerModel p = document.toJson();
-//    // Close the connection
-//    public static void main(String[] args) {
-//
-//    }
-//}
