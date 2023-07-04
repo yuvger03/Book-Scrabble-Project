@@ -43,7 +43,7 @@ public class Service {
         return s;
     }
 
-    public Word stringToWord(String wordString) {
+    public Word stringToWord(String wordString) { //word,row-1,col-1,vertical
         int length = wordString.length();
         String[] array = wordString.split(",");
         String wordText=array[0];
@@ -53,17 +53,13 @@ public class Service {
             score = calculateScore(wordText.charAt(i));
             tiles[i] = new Tile(wordText.charAt(i), score);
         }
-        int row = Integer.parseInt(array[1]);
-        int col=Integer.parseInt(array[2]);
-        //int row = Character.getNumericValue(wordString.charAt(length - 4));
-        //int col = Character.getNumericValue(wordString.charAt(length - 3));
+        int row = Integer.parseInt(array[1])-1;
+        int col=Integer.parseInt(array[2])-1;
         boolean vertical;
         if(array[3].equals("F"))
             vertical = false;
         else vertical=true;
-        //String wordText = wordString.substring(0, length - 4);
-
-        Word word = new Word(tiles,row, col, vertical);
+        Word word = new Word(tiles,row, col,vertical);
         return word;
     }
 

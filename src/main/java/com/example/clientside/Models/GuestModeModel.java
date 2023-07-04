@@ -15,7 +15,8 @@ public class GuestModeModel extends PlayerModel {
     }
 
     public void enterToGame() {
-        this.serverPort=8081;//for test
+        //this.serverPort=8081;//for test
+        System.out.println("serverPort- "+serverPort);
         connectServer();
     }
 }

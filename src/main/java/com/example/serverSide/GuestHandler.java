@@ -64,6 +64,7 @@ public class GuestHandler implements IClientHandler {
                          if (key.equals("tryToPlace")) {
                              System.out.println("send word func server \n");//TODO PRINTFORTEST
                              String wordString = service.getWordString(lineAsList[2]);
+                             System.out.println("the server word "+lineAsList[2]);//TODO PRINTFORTEST
                              Word word = service.stringToWord(lineAsList[2]);
                              int score = HM.tryPlaceWord(word);
                              HM.setPlayerScore(score,playerName);

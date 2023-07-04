@@ -47,7 +47,8 @@ public class MenuViewModel extends Observable implements Observer {
         HostModeModel hm = mm.startHostMode(name.get());
         //hm.setName(name.get());
         HostModeViewModel hvm = new HostModeViewModel(hm);
-        hm.addObserver(hvm);
+
+        //hm.addObserver(hvm);
         return hvm;
     }
 
