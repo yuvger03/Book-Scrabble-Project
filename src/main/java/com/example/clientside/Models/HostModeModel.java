@@ -49,8 +49,8 @@ public class HostModeModel extends PlayerModel {
         //hostServer.notifyAll(this.name + "-startGame" + "-");
         //System.out.println("start game " + outToServer);
     }
-    public void resumeGame() throws JsonProcessingException { //TODO
-        this.hostServer.resumeGame();
+    public void resumeGame(int port) throws JsonProcessingException { //TODO
+        this.hostServer.resumeGame(port);
         //outToServer.println(this.name+ "-startGame-");
         //hostServer.notifyAll(this.name + "-startGame" + "-");
         //System.out.println("start game " + outToServer);

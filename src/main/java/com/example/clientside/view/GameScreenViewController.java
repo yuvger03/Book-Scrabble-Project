@@ -33,7 +33,6 @@ public class GameScreenViewController extends BoardViewController {
     @FXML
     Label currentPlayer;
     GameScreenViewModel GVM;
-    BoardViewController BVC;
     Service s = new Service();
 
 //TODO: add button end game &add button save game (only for host)

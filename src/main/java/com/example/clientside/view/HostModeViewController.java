@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +30,8 @@ public class HostModeViewController implements Observer {
     Label hostPort;
     @FXML
     ListView<String> myListView;
+    @FXML
+    TextField resumeGame;
 public void setHostViewModel(HostModeViewModel hvm){
     this.HVM=hvm;
     this.HVM.addObserver(this);
@@ -71,7 +74,7 @@ public void setHostViewModel(HostModeViewModel hvm){
         HostGameViewController gvc=fxmlLoader.getController();
         gvc.setGameVM(hgvm);
         hgvm.addObserver(gvc);
-        HVM.resumeGame();
+        HVM.resumeGame(Integer.parseInt(resumeGame.textProperty().get()));
     }
 
     public void showPort() {

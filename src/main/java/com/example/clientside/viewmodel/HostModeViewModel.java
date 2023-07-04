@@ -23,8 +23,8 @@ public class HostModeViewModel extends Observable implements Observer {
    public void startGame(){
        hostModel.startGame();
    }
-    public void resumeGame() throws JsonProcessingException {
-        hostModel.resumeGame();
+    public void resumeGame(int port) throws JsonProcessingException {
+        hostModel.resumeGame(port);
     }
    public HostModeModel getHostModel(){return hostModel;}
 

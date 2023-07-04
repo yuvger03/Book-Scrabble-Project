@@ -26,13 +26,12 @@ public class GuestModeViewModel extends Observable implements Observer {
         guestModel.enterToGame(  );
 
     }
-    public void resumeGame() {
-        guestModel.serverPort= Integer.parseInt(port.get());
-        guestModel.ipServer=Integer.parseInt(ip.get());
-        //TODO:read from DB pTiles & score
-        guestModel.enterToGame(  );
-
-    }
+//    public void resumeGame() {
+//        guestModel.serverPort= Integer.parseInt(port.get());
+//        guestModel.ipServer=Integer.parseInt(ip.get());
+//        guestModel.enterToGame(  );
+//
+//    }
 
     @Override
     public void update(java.util.Observable o, Object arg) {

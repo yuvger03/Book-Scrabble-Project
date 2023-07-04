@@ -112,10 +112,10 @@ public class MyHostServer {
         notifyAll("message- GAME STARTED BY HOST- ");
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
-    public void resumeGame() throws JsonProcessingException {
+    public void resumeGame(int port) throws JsonProcessingException {
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
-        guestHandler1.HM.current_player =  dBcom.readFromDB(guestHandler1.HM.serverPort).getString("current_player");
+        guestHandler1.HM.current_player =  dBcom.readFromDB(port).getString("current_player");
         //TODO: check that the same players connected to the DB
         guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"pTilesMap");
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(guestHandler1.HM.serverPort),"scoreMap");
