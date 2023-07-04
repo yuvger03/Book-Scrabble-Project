@@ -18,6 +18,7 @@ public class HostManager {
     public Tile.Bag b;
     public Board gameboard;
     int serverPort; //of GameServer
+    public int hostPort;
     public ArrayList<String> playersList;
     public String current_player;
     public int index; //for check the current turn;

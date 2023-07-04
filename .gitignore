@@ -8,7 +8,9 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/uiDesigner.xml
-.idea/libraries/
+.idea/libraries
+.idea/.name
+
 *.iws
 *.iml
 *.ipr

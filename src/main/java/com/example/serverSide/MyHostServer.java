@@ -95,6 +95,7 @@ public class MyHostServer {
 
     public void startGame() {
         Service s=new Service();
+        guestHandler1.HM.hostPort = port;
         System.out.println("gameStarted\n"); //TODO shira
         System.out.println("HM.index "+guestHandler1.HM.index); //TODO shira
         guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
