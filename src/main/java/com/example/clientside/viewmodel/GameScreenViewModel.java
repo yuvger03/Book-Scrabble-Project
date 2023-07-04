@@ -46,7 +46,8 @@ public class GameScreenViewModel extends Observable implements Observer {
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
         System.out.println("send word func vm \n");//TODO PRINTFORTEST
         String w;
-        if (vertical.equals(true)) {
+        System.out.println("vertical send word- "+vertical);
+        if (vertical.get()==true) {
             w = word.get() + "," + row.get() + "," + col.get() + ",T";
             System.out.println(w);
         } else

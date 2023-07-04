@@ -15,6 +15,7 @@ import java.util.Observer;
 public class HostGameViewModel extends GameScreenViewModel {
     HostModeModel player;
 
+
     public HostGameViewModel(HostModeModel pm) {
         super(pm);
         this.player = pm;

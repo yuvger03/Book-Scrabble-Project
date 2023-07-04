@@ -179,15 +179,14 @@ public class PlayerModel extends Observable {
 
 
     public void tryToPlace(String word) {
-        //String s=word.toString();
-        System.out.println(this.name+"send word func model \n");//TODO PRINTFORTEST
-       // String s = service.WordToString(word);
-
-        //boolean valid = service.validateWord(s, p_tiles);TODO RETURN
-        //if (!valid) {TODO RETURN
-        //    score = "not_valid";TODO RETURN
-        //    return;TODO RETURN
-       // }TODO RETURN
+        String justWord=service.getWordString(word);
+        boolean valid = service.validateWord( justWord, p_tiles);
+        if (!valid) {
+            score = "not valid placement- you don't have the tiles";
+            setChanged();
+            notifyObservers();
+            return;
+        }
         try {
             connectionLatch.await(); // wait for the connection to be established
         } catch (InterruptedException e) {

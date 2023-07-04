@@ -17,6 +17,7 @@ import java.util.Observer;
 public class HostGameViewController extends GameScreenViewController {
     @FXML
     Button endGame;
+
     HostGameViewModel hvm;
 
 

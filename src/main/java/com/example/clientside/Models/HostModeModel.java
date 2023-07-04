@@ -10,55 +10,27 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HostModeModel extends PlayerModel {
     MyHostServer hostServer;
     int gameServer;
+    public String hostPort;
     ArrayList<Socket> sockets;
-    GuestHandler guestHandler;
 
-  //  public HostModeModel(int gameServer) {
-    //    super();
-   ///     this.gameServer = gameServer;
-  //  }
-//    public HostModeModel(int gameServer) {
-//        super();
-//        this.gameServer = gameServer;
-//        Random r = new Random();
-//        //this.serverPort = 6000 + r.nextInt(1000);
-//        this.serverPort = 8081;
-//        this.sockets = new ArrayList<Socket>();
-//
-//        Thread serverThread = new Thread(() -> {
-//            MyServer hostServer = new MyServer(serverPort, new GuestHandler(gameServer), 4);
-//            hostServer.start();
-//            // System.out.println("server started");
-//            Scanner s = new Scanner(System.in);
-//            String input;
-//            do {
-//                input = s.next();
-//            } while (!input.equals("stop"));
-//            s.close();
-//            hostServer.close();
-//            System.out.println("server stopped");
-//        });
-//        serverThread.start();
-//        connectServer(); //TODO return back
-//    }
+    public GuestHandler guestHandler;
 
     public HostModeModel(int gameServer, GuestHandler guestHandler1,String name) {
         super();
         this.name = name;
         this.gameServer = gameServer;
         this.sockets = new ArrayList<Socket>();
-//        Random r = new Random();
-//        this.serverPort = 6000 + r.nextInt(1000);
-        this.serverPort = 8081;
+        Random r = new Random();
+        this.serverPort = 6000 + r.nextInt(1000);
+        System.out.println("serverPort "+serverPort);
         this.guestHandler = guestHandler1;
-        //this.guestHandler.HM.playersList.add("host");
-        //this.guestHandler.host = this;
         System.out.println("im here");
         startServer();
         connectServer();
@@ -104,6 +76,18 @@ public class HostModeModel extends PlayerModel {
         outToServer.close();
         hostServer.close();
     }
+
+    public void showPort() {
+        this.hostPort=String.valueOf(this.serverPort);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void checkconnectedPlayers() {
+        setChanged();
+        notifyObservers();
+    }
+
 }
 
 
