@@ -125,12 +125,7 @@ public class MyHostServer {
             for (int j=0;j<guestHandler1.HM.gameboard.tiles.length;j++){
                 Character a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
                 guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
-                //System.out.println(guestHandler1.HM.gameboard.tiles[i][j].letter);
             }
-//        for (Tile[]a:guestHandler1.HM.gameboard.tiles)
-//            for (Tile b:a)
-//                if (b !=null)
-//                    System.out.print(b.letter);
         guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(port));
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);

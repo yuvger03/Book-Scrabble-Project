@@ -1,16 +1,35 @@
 package com.example.Tests;
 
 
-import org.junit.jupiter.api.*;
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import org.junit.jupiter.api.*;
+//
+//
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class checkTest {
 
-    @Test
-    public void testAddition() {
-        int result = 2 + 2;
-        assertEquals(4, result);
+
+    private String firstName;
+    private String lastName;
+
+    public checkTest() {
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getFullName(){
+        return firstName.toUpperCase()+" "+lastName.toUpperCase();
+    }
+
 }
