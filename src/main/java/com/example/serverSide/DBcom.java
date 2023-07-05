@@ -69,10 +69,11 @@ public class DBcom {
         doc.append("bag",s);
         return doc;
     }
-    public Tile[][] getBoardFromDocument(Document document){
+    public String getBoardFromDocument(Document document){
         Service s=new Service();
         String a = document.get("gameBoard").toString().split("=")[1].split("}}")[0];
-        return s.stringToMatrix(a);//TODO:check service
+        return a;
+//        return s.stringToMatrix(a);//TODO:check service
     }
     public int[] getBagFromDocument(Document document){
         Service s=new Service();

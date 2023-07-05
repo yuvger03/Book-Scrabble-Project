@@ -121,7 +121,7 @@ public class Service {
     }
 
 
-    private int calculateScore(char c) {
+    public int calculateScore(char c) {
         {
             switch (Character.toUpperCase(c)) {
                 case 'A', 'L', 'E', 'I', 'N', 'O', 'R', 'S', 'T', 'U':

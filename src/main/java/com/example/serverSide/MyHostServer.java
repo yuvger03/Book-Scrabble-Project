@@ -114,13 +114,19 @@ public class MyHostServer {
     }
     public void resumeGame(int port) throws JsonProcessingException {
         System.out.println(port);
+        Service s = new Service();
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(port).getString("current_player");
         //TODO: check that the same players connected to the DB
         guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"pTilesMap");
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
-        guestHandler1.HM.gameboard.tiles = dBcom.getBoardFromDocument(dBcom.readFromDB(port));
+        for (int i=0;i<guestHandler1.HM.gameboard.tiles.length;i++)
+            for (int j=0;j<guestHandler1.HM.gameboard.tiles.length;j++){
+                Character a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
+                guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
+                System.out.println(guestHandler1.HM.gameboard.tiles[i][j].letter);
+            }
 //        for (Tile[]a:guestHandler1.HM.gameboard.tiles)
 //            for (Tile b:a)
 //                if (b !=null)
