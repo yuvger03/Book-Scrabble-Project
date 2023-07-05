@@ -72,7 +72,7 @@ public class DBcom {
     public Tile[][] getBoardFromDocument(Document document){
         Service s=new Service();
         String a = document.get("gameBoard").toString().split("=")[1].split("}}")[0];
-        return s.stringToMatrix(a);
+        return s.stringToMatrix(a);//TODO:check service
     }
     public int[] getBagFromDocument(Document document){
         Service s=new Service();

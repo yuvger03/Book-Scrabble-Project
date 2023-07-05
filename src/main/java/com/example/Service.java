@@ -88,12 +88,12 @@ public class Service {
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if(input.charAt(index)!='n') {
-                    matrix[row][col].letter = input.charAt(index++);
-                    matrix[row][col].score = input.charAt(index++);
+                    matrix[row][col]=new Tile(input.charAt(index),calculateScore(input.charAt(index)));
                 }
                 else {
                     matrix[row][col]=null;
                 }
+                index++;
             }
         }
         return matrix;

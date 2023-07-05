@@ -121,6 +121,10 @@ public class MyHostServer {
         guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"pTilesMap");
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
         guestHandler1.HM.gameboard.tiles = dBcom.getBoardFromDocument(dBcom.readFromDB(port));
+//        for (Tile[]a:guestHandler1.HM.gameboard.tiles)
+//            for (Tile b:a)
+//                if (b !=null)
+//                    System.out.print(b.letter);
         guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(port));
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);
