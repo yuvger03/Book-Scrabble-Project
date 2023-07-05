@@ -125,7 +125,7 @@ public class MyHostServer {
             for (int j=0;j<guestHandler1.HM.gameboard.tiles.length;j++){
                 Character a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
                 guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
-                System.out.println(guestHandler1.HM.gameboard.tiles[i][j].letter);
+                //System.out.println(guestHandler1.HM.gameboard.tiles[i][j].letter);
             }
 //        for (Tile[]a:guestHandler1.HM.gameboard.tiles)
 //            for (Tile b:a)
@@ -135,9 +135,11 @@ public class MyHostServer {
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);
             notifyAll(player + "-initTiles-" + tielsString + "-null");
-            notifyAll(player + "-initScore-" + guestHandler1.HM.scoreMap.get(player) + "-null");
+            notifyAll(player + "-totalScore-" + guestHandler1.HM.scoreMap.get(player) + "-null");
         }
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
+        notifyAll("message- GAME RESUME BY HOST- ");
+        notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
     public void saveGame(){
         DBcom dBcom = new DBcom();

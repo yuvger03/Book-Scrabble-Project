@@ -21,14 +21,11 @@ public class GuestHandler implements IClientHandler {
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
         Scanner in = new Scanner(inFromclient); // remove the letter
          while(in.hasNext()){
-             System.out.println("line 28\n");
              if (in.hasNextLine()) {
-                 System.out.println("line 29\n");
                  try {
                      System.out.println("line-server\n");//TODO
                      String line = in.nextLine();
                      System.out.println("server " + line);
-                     //System.out.println(line);//TODO
                      String[] lineAsList = line.split("-");
                      String playerName = lineAsList[0];
                      String key = lineAsList[1];
@@ -40,26 +37,8 @@ public class GuestHandler implements IClientHandler {
                              host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
                          } else {
-                             //host.notifyAll(playerName + "-" + "message-you not joind to game- ");
-
-
                          }
                      }
-//                     if (key.equals("startGame")) {
-//                         System.out.println("gameStarted\n"); //TODO shira
-//                         HM.current_player = HM.playersList.get(HM.index);
-//                         System.out.println("HM.current_player "+ HM.playersList.get(HM.index)); //TODO shira
-//                         for (int i = 0; i < HM.playersList.size(); i++) {
-//                             ArrayList<Tile> tiles = HM.initTileArray();
-//                             String tielsString = "";
-//                             for (int j = 0; j < tiles.size(); j++) {
-//                                 //tielsString += service.TileToString(tiles.get(j)) + "/";
-//                                 tielsString += service.TileToString(tiles.get(j));
-//                             }
-//                             host.notifyAll(HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
-//                         }
-//                         host.notifyAll("board-" + HM.getBoardGame());
-//                     }
                      if (playerName.equals(HM.current_player)) {
                          if (key.equals("tryToPlace")) {
                              System.out.println("send word func server \n");//TODO PRINTFORTEST

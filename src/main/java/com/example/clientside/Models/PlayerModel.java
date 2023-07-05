@@ -27,8 +27,8 @@ public class PlayerModel extends Observable {
     public int serverPort;
     String currentTurn;
     public String message;
-    Scanner inFromServer;
-    PrintWriter outToServer;
+    public Scanner inFromServer;
+    public PrintWriter outToServer;
     Service service;
     boolean itsTurn = false;
     CountDownLatch connectionLatch; // added field
@@ -96,11 +96,7 @@ public class PlayerModel extends Observable {
     }
     private void processMessage(String message) {
         String[] lineAsList = message.split("-");
-//        if(lineAsList[1].equals("startGame")) {
-//            outToServer.println(this.name + "-" + "startGame" + "-");
-//            outToServer.flush();
-//            System.out.println(this.name+ "outToServer startGame-"+outToServer);//TODO PRINTFORTEST
-//        }
+
         if (lineAsList[0].equals("board")) {
            gameBoard=lineAsList[1];
            setChanged();
@@ -168,7 +164,8 @@ public class PlayerModel extends Observable {
         if (func.equals("initTiles")) {
             initTiles(inputString);
         }
-        if(func.equals("getTileFromBag")){
+
+            if(func.equals("getTileFromBag")){
             p_tiles.add(service.stringToTile(inputString));
         }
         if(func.equals("message")){

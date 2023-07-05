@@ -175,7 +175,7 @@ public class HostManager {
     }
 
     public void setPlayerScore(int score,String name) {
-        if (score == 0){
+        if (this.scoreMap.get(name)==null){
             this.scoreMap.put(name, "0");
         }
         else {
