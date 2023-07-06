@@ -78,17 +78,32 @@ public class MyHostServer {
                 outToServer.flush();
             }
         }
-        public void close() {
-            stop = true;
-            try {
-                executorService.shutdown();
-                if (serverSocket != null && !serverSocket.isClosed()) {
-                    serverSocket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+    public synchronized void close() {
+        stop = true;
+        try {
+            executorService.shutdown();
+            for (Socket socket : clientSockets) {
+                socket.close();
             }
+            clientSockets.clear();
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+//        public void close() {
+//            stop = true;
+//            try {
+//                executorService.shutdown();
+//                if (serverSocket != null && !serverSocket.isClosed()) {
+//                    serverSocket.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
     public void startGame() {
         Service s=new Service();
@@ -139,9 +154,19 @@ public class MyHostServer {
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
         guestHandler1.HM.hostPort = port;
     }
-    public void saveGame(){
+    public void saveGame()  {
         DBcom dBcom = new DBcom();
         dBcom.saveToDB(guestHandler1.HM);
+        notifyAll("message-GAME OVER BY THE HOST - BYE BYE");
+        //stop=true;
+        try {
+            Thread.sleep(1000); // Sleep for 2 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        notifyAll("closeGame-");
+        System.exit(0);
+
     }
 }
 

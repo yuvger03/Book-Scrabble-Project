@@ -1,16 +1,14 @@
 package com.example.clientside.viewmodel;
 
-import com.example.Game.Word;
 import com.example.Service;
-import com.example.clientside.Models.HostModeModel;
-import com.example.clientside.Models.MenuModel;
 import com.example.clientside.Models.PlayerModel;
-import com.example.clientside.view.BoardView;
 import javafx.application.Platform;
-import javafx.beans.property.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.util.Observable;
-
 import java.util.Observer;
 
 public class GameScreenViewModel extends Observable implements Observer {
@@ -87,6 +85,10 @@ public class GameScreenViewModel extends Observable implements Observer {
                 message.set(player.message);
                 if(arg.equals("currentPlayer"))
                 currentPlayer.set(player.currentPlayer);
+                if(arg.equals("closeGame")){
+                    setChanged();
+                    notifyObservers("closeGame");
+                }
 
             });
         }

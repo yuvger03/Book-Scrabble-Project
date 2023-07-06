@@ -2,7 +2,6 @@ package com.example.clientside.Models;
 
 import com.example.Game.Board;
 import com.example.Game.Tile;
-import com.example.Game.Word;
 import com.example.Service;
 
 import java.io.PrintWriter;
@@ -112,6 +111,12 @@ public class PlayerModel extends Observable {
             setChanged();
             notifyObservers("currentPlayer");
         }
+        else if(lineAsList[0].equals("closeGame")){
+            stop=true;
+            setChanged();
+            notifyObservers("closeGame");
+            System.exit(0);
+        }
     else if (lineAsList[0].equals(name)) {
             System.out.println(message);
             //getFunc(lineAsList[1],lineAsList[2]);//TODO: check if it possible in try to place
@@ -184,7 +189,6 @@ public class PlayerModel extends Observable {
             setChanged();
             notifyObservers("tiles");
         }
-
 
     public void tryToPlace(String word) {
         String justWord=service.getWordString(word);
