@@ -1,5 +1,8 @@
+package com.example.Tests;
+
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.MyHostServer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,7 +87,7 @@ public class MyHostServerTest {
     }
 
     @Test
-    public void testResumeGame() {
+    public void testResumeGame() throws JsonProcessingException {
         int port = 5678;
         hostServer.resumeGame(port);
         // Add assertions here to check the expected behavior

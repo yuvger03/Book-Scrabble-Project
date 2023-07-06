@@ -1,3 +1,6 @@
+package com.example.Tests;
+//add -ea --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED to configurations
+import com.example.clientside.HelloApplication;
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.view.menuViewController;
 import com.example.clientside.viewmodel.MenuViewModel;
@@ -12,6 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
+
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,7 +38,7 @@ public class MenuViewDataBindingTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Views/MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("src/main/resources/com/example/clientside/Views/MenuView.fxml"));
         Parent root = fxmlLoader.load();
         viewController = fxmlLoader.getController();
         viewModel = new MenuViewModel(new MenuModel());
@@ -55,4 +60,5 @@ public class MenuViewDataBindingTest extends ApplicationTest {
         // Assert that the ViewModel's name property is updated correctly
         assertEquals("John Doe", viewModel.getName());
     }
+
 }

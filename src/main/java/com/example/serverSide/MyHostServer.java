@@ -16,10 +16,10 @@ public class MyHostServer {
     public int port;
         GuestHandler guestHandler1;
         private int maxThreads;
-        protected ServerSocket serverSocket;
-        private ExecutorService executorService;
+        public ServerSocket serverSocket;
+        public ExecutorService executorService;
         protected volatile boolean stop;
-        private List<Socket> clientSockets;
+        public List<Socket> clientSockets;
         public MyHostServer(int port, GuestHandler guestHandler1, int maxThreads) {
             this.port = port;
             this.guestHandler1 = guestHandler1;
@@ -33,7 +33,7 @@ public class MyHostServer {
             stop = false;
             executorService.execute(this::startServer);
         }
-        protected void startServer() {
+        public void startServer() {
             try {
                 serverSocket = new ServerSocket(port);
                 System.out.println("Server started on port " + port);
@@ -58,7 +58,7 @@ public class MyHostServer {
                 e.printStackTrace();
             }
         }
-        private void handleClient(Socket clientSocket) {
+        public void handleClient(Socket clientSocket) {
             try {
                 guestHandler1.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
             } catch (IOException e) {
