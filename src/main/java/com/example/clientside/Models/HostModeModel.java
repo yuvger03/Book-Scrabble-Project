@@ -4,15 +4,9 @@ import com.example.serverSide.GuestHandler;
 import com.example.serverSide.MyHostServer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class HostModeModel extends PlayerModel {
     MyHostServer hostServer;
@@ -58,6 +52,7 @@ public class HostModeModel extends PlayerModel {
 
     public void saveGame() {
         this.hostServer.saveGame();
+        close();
     }
     //    public void notifyAll(String update) {
 //        for (Socket s : sockets) {

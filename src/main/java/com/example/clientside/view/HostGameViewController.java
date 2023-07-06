@@ -1,18 +1,9 @@
 package com.example.clientside.view;
 
-import com.example.Service;
-import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.HostGameViewModel;
-import com.example.clientside.viewmodel.MenuViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-
-import java.util.Observable;
-import java.util.Observer;
+import javafx.stage.Stage;
 
 public class HostGameViewController extends GameScreenViewController {
     @FXML
@@ -28,5 +19,7 @@ public class HostGameViewController extends GameScreenViewController {
 
     public void endGame(){
         hvm.endGame();
+        Stage stage = (Stage) endGame.getScene().getWindow();
+        stage.close();
     }
 }

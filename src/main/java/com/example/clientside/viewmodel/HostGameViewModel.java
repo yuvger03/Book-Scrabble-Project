@@ -1,16 +1,6 @@
 package com.example.clientside.viewmodel;
 
-import com.example.Game.Word;
-import com.example.Service;
 import com.example.clientside.Models.HostModeModel;
-import com.example.clientside.Models.MenuModel;
-import com.example.clientside.Models.PlayerModel;
-import com.example.clientside.view.BoardView;
-import javafx.beans.property.*;
-
-import java.util.Observable;
-
-import java.util.Observer;
 
 public class HostGameViewModel extends GameScreenViewModel {
     HostModeModel player;
@@ -78,7 +68,8 @@ public class HostGameViewModel extends GameScreenViewModel {
 //    public void addTile() {
 //        player.getTileFromBag();
 //    }
-    public void endGame(){player.saveGame();}
+    public void endGame(){
+        player.saveGame();}
 
 }
 
