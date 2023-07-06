@@ -26,6 +26,7 @@ Book Scrabble Project has been programmed by the MVVM design with client-server 
 
 3. After the host clicks on the button Host he should check what is the port of the game using the port buuton,
    and the guests will enter this port and click start game.
+   
    <img width="405" alt="image" src="https://github.com/yuvger03/clientSide/assets/56202649/e957802e-2352-4b30-bcbf-3e7f0559ca02">
 
 5.  All the gusets will enter to game, the host can check how joined everytime by clicking the button check players.
