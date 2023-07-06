@@ -21,17 +21,18 @@ Book Scrabble Project has been programmed by the MVVM design with client-server 
 
 ### How to run the game?
 1. Run the helloAplication Main up to 4 times for a single game
-2. One of the players should be the host and also be named so (The Host will determine when to start the game and when to end it). <img width="513" alt="image" src="https://github.com/yuvger03/clientSide/assets/56202649/7ea44fca-429e-4424-bfc7-741a55cee71e">
-
+2. One of the players should be the host and also be named so (The Host will determine when to start the game and when to end it).
+  
+<img width="513" alt="image" src="https://github.com/yuvger03/clientSide/assets/56202649/7ea44fca-429e-4424-bfc7-741a55cee71e">
 
 3. After the host clicks on the button Host he should check what is the port of the game using the port buuton,
    and the guests will enter this port and click start game.
    
    <img width="405" alt="image" src="https://github.com/yuvger03/clientSide/assets/56202649/e957802e-2352-4b30-bcbf-3e7f0559ca02">
 
-5.  All the gusets will enter to game, the host can check how joined everytime by clicking the button check players.
-6.  The host will start the game after clicking the start button.
-7.  Enjoy the game!
+4.  All the gusets will enter to game, the host can check how joined everytime by clicking the button check players.
+5.  The host will start the game after clicking the start button.
+6.  Enjoy the game!
 
 
 #### How to save a game
