@@ -66,10 +66,10 @@ public class Service {
     public String matrixToString(Tile [][] t) {
         StringBuilder sb = new StringBuilder();
         //Tile [][] t = board.getTiles();
-        for (int row = 0; row < t.length; row++) {
-            for (int col = 0; col < t[row].length; col++) {
-                if (t[row][col] != null) {
-                    sb.append(t[row][col].letter);
+        for (Tile[] tiles : t) {
+            for (int col = 0; col < tiles.length; col++) {
+                if (tiles[col] != null) {
+                    sb.append(tiles[col].letter);
                 } else {
                     sb.append("n");
                 }
@@ -78,26 +78,25 @@ public class Service {
         return sb.toString();
     }
 
-    public Tile[][] stringToMatrix(String input) {
-        if (input.length() != 225) {
-            throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
-        }
-
-        Tile[][] matrix = new Tile[15][15];
-        int index = 0;
-        for (int row = 0; row < matrix.length; row++) {
-            for (int col = 0; col < matrix[row].length; col++) {
-                if(input.charAt(index)!='n') {
-                    matrix[row][col]=new Tile(input.charAt(index),calculateScore(input.charAt(index)));
-                }
-                else {
-                    matrix[row][col]=null;
-                }
-                index++;
-            }
-        }
-        return matrix;
-    }
+//    public Tile[][] stringToMatrix(String input) {
+//        if (input.length() != 225) {
+//            throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
+//        }
+//        Tile[][] matrix = new Tile[15][15];
+//        int index = 0;
+//        for (int row = 0; row < matrix.length; row++) {
+//            for (int col = 0; col < matrix[row].length; col++) {
+//                if(input.charAt(index)!='n') {
+//                    matrix[row][col]=new Tile(input.charAt(index),calculateScore(input.charAt(index)));
+//                }
+//                else {
+//                    matrix[row][col]=null;
+//                }
+//                index++;
+//            }
+//        }
+//        return matrix;
+//    }
     public String[][] stringToMatrixS(String input) {
         if (input.length() != 225) {
             throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
@@ -188,20 +187,6 @@ public class Service {
             stringBuilder.append(pTiles.get(i).letter);
         }
         return stringBuilder.toString();
-    }
-    public String[][] StringTOString2DAraay(String s1 ,int row,int col) {
-        System.out.println("the servcie string- "+s1);//
-        String[][] array = new String[row][col];
-        int index = 0;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                array[i][j] = String.valueOf(s1.charAt(index));
-                System.out.println(array[i][j]);//
-            }
-            index++;
-
-        }
-        return array;
     }
 
     public String getWordString(String word) { //get the word string from string in struct word- "word,row,col,vertical"

@@ -31,7 +31,7 @@ public class PlayerModel extends Observable {
     Service service;
     boolean itsTurn = false;
     CountDownLatch connectionLatch; // added field
-    boolean stop= false;
+    public boolean stop= false;
 
     //TODO: understand how gameServer connection works
     //Server gameServer; each player has a instance of its gameServer.
@@ -93,7 +93,7 @@ public class PlayerModel extends Observable {
         outToServer.println(this.name + "-" + "joinToGame" + "-");
         outToServer.flush();
     }
-    private void processMessage(String message) {
+    public void processMessage(String message) {
         String[] lineAsList = message.split("-");
 
         if (lineAsList[0].equals("board")) {
@@ -124,7 +124,7 @@ public class PlayerModel extends Observable {
         }
 
         }
-    private void getFunc(String... args) {
+    public void getFunc(String... args) {
         String func=args[0];
         String inputString=args[1];
         System.out.println("inputString of player "+name+" "+inputString);

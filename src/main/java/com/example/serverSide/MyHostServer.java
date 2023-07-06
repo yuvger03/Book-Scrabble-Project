@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 public class MyHostServer {
     public int port;
-        GuestHandler guestHandler1;
+        public GuestHandler guestHandler1;
         private int maxThreads;
         public ServerSocket serverSocket;
         public ExecutorService executorService;
