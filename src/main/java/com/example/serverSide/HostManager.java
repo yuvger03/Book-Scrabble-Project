@@ -78,7 +78,7 @@ public class HostManager {
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
 
         int sum = 0;
-
+//        System.out.println("BoardLegal    " + test.toString() );
          if (gameboard.boardLegal(test)) { //TODO return
             System.out.println("boardLegal "+ts);
              ArrayList<Word> newWords = gameboard.getWords(test);

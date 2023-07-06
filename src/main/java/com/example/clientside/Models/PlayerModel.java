@@ -209,6 +209,7 @@ public class PlayerModel extends Observable {
         System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
 
+
     public void getTileFromBag() {
         if(p_tiles.size()<countTiles) {
             outToServer.println(this.name + "-" + "getTileFromBag-");

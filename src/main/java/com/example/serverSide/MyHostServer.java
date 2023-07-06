@@ -113,19 +113,21 @@ public class MyHostServer {
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
     }
     public void resumeGame(int port) throws JsonProcessingException {
-        System.out.println(port);
         Service s = new Service();
         DBcom dBcom = new DBcom();
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(port).getString("current_player");
+        guestHandler1.HM.index = guestHandler1.HM.playersList.indexOf(guestHandler1.HM.current_player);
         //TODO: check that the same players connected to the DB
         guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"pTilesMap");
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
         for (int i=0;i<guestHandler1.HM.gameboard.tiles.length;i++)
             for (int j=0;j<guestHandler1.HM.gameboard.tiles.length;j++){
                 Character a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
-                guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
+                if(a!='n')
+                    guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
             }
+        guestHandler1.HM.gameboard.isEmpty = false;
         guestHandler1.HM.b.quantities = dBcom.getBagFromDocument(dBcom.readFromDB(port));
         for (String player :  guestHandler1.HM.playersList) {
             String tielsString = guestHandler1.HM.pTilesMap.get(player);
@@ -135,6 +137,7 @@ public class MyHostServer {
         notifyAll("board-" +  guestHandler1.HM.getBoardGame());
         notifyAll("message- GAME RESUME BY HOST- ");
         notifyAll("turn-"+"TURN OF: "+ guestHandler1.HM.current_player);
+        guestHandler1.HM.hostPort = port;
     }
     public void saveGame(){
         DBcom dBcom = new DBcom();
