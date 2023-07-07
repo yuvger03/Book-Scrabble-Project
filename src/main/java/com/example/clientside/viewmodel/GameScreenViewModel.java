@@ -45,14 +45,12 @@ public class GameScreenViewModel extends Observable implements Observer {
         System.out.println("send word func vm \n");//TODO PRINTFORTEST
         String w;
         System.out.println("vertical send word- "+vertical);
-        if (vertical.get()==true) {
+        if (vertical.get()) {
             w = word.get() + "," + row.get() + "," + col.get() + ",T";
             System.out.println(w);
         } else
             w = word.get() + "," + row.get() + "," + col.get() + ",F";
         player.tryToPlace(w);
-        // Word wd = s.stringToWord(w);
-        //player.tryToPlace(wd);
     }
 
     public void addTile() {
@@ -80,11 +78,11 @@ public class GameScreenViewModel extends Observable implements Observer {
                 if(arg.equals("scoreResult"))
                     scoreResult.set(player.score);
                 if(arg.equals("totalScore"))
-                totalScore.set(player.totalScore);
+                    totalScore.set(player.totalScore);
                 if(arg.equals("message"))
-                message.set(player.message);
+                    message.set(player.message);
                 if(arg.equals("currentPlayer"))
-                currentPlayer.set(player.currentPlayer);
+                    currentPlayer.set(player.currentPlayer);
                 if(arg.equals("closeGame")){
                     setChanged();
                     notifyObservers("closeGame");
@@ -95,7 +93,6 @@ public class GameScreenViewModel extends Observable implements Observer {
     }
 
 
-}//end class
-
+}
 
 

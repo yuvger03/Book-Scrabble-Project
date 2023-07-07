@@ -38,7 +38,6 @@ public class HostModeViewModel extends Observable implements Observer {
     }
     @Override
     public void update(java.util.Observable o, Object arg) {
-        //if (o == hostModel) {
         if (o instanceof HostModeModel) {
             Platform.runLater(() -> {
                 if(arg.equals("showPort"))
@@ -49,8 +48,5 @@ public class HostModeViewModel extends Observable implements Observer {
             });
         }
         System.out.println("serverPort in vm");
-        //setChanged();
-        //notifyObservers();
-        // }
     }
 }

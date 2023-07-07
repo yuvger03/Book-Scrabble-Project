@@ -3,7 +3,6 @@ package com.example.clientside.view;
 import com.example.clientside.HelloApplication;
 import com.example.clientside.viewmodel.HostGameViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,18 +36,7 @@ public void setHostViewModel(HostModeViewModel hvm){
 
 }
     public void startGame() throws IOException {
-        HostGameViewModel hgvm=new HostGameViewModel(HVM.getHostModel());
-        Stage stage = (Stage) start.getScene().getWindow();
-        stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/HostGameView.fxml"));
-
-        stage = new Stage();
-        Scene scene = new Scene(fxmlLoader.load(), 700, 650);
-        stage.setScene(scene);
-        stage.show();
-        HostGameViewController gvc=fxmlLoader.getController();
-        gvc.setGameVM(hgvm);
-        hgvm.addObserver(gvc);
+        game();
         HVM.startGame();
 
     }
@@ -59,7 +47,7 @@ public void setHostViewModel(HostModeViewModel hvm){
 
     }
 
-    public void resumeGame(ActionEvent actionEvent) throws IOException {
+    public void game() throws IOException {
         HostGameViewModel hgvm=new HostGameViewModel(HVM.getHostModel());
         Stage stage = (Stage) start.getScene().getWindow();
         stage.close();
@@ -71,6 +59,9 @@ public void setHostViewModel(HostModeViewModel hvm){
         HostGameViewController gvc=fxmlLoader.getController();
         gvc.setGameVM(hgvm);
         hgvm.addObserver(gvc);
+    }
+    public void resumeGame() throws IOException {
+        game();
         HVM.resumeGame(Integer.parseInt(resumeGame.textProperty().get()));
     }
 

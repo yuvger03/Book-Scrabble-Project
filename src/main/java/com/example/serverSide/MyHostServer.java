@@ -116,10 +116,8 @@ public class MyHostServer {
         for (int i = 0; i <  guestHandler1.HM.playersList.size(); i++) {
             ArrayList<Tile> tiles =  guestHandler1.HM.initTileArray();
             String tielsString = "";
-            for (int j = 0; j < tiles.size(); j++) {
-                //tielsString += service.TileToString(tiles.get(j)) + "/";
-                tielsString += s.TileToString(tiles.get(j));
-            }
+            for (Tile tile : tiles)
+                tielsString += s.TileToString(tile);
             guestHandler1.HM.setPlayerTiles(tielsString,guestHandler1.HM.playersList.get(i));
             notifyAll(guestHandler1.HM.playersList.get(i) + "-initTiles-" + tielsString + "-null");
         }
@@ -138,7 +136,7 @@ public class MyHostServer {
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
         for (int i=0;i<guestHandler1.HM.gameboard.tiles.length;i++)
             for (int j=0;j<guestHandler1.HM.gameboard.tiles.length;j++){
-                Character a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
+                char a = dBcom.getBoardFromDocument(dBcom.readFromDB(port)).charAt(i*15+j);
                 if(a!='n')
                     guestHandler1.HM.gameboard.tiles[i][j] = new Tile(a,s.calculateScore(a));
             }

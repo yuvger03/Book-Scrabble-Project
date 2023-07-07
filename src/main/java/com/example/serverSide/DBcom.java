@@ -8,11 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.client.*;
 import org.bson.Document;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.util.*;
-
-import static java.lang.Thread.sleep;
-
 public class DBcom {
 
     public static String collectionName = "games";
@@ -70,13 +66,9 @@ public class DBcom {
         return doc;
     }
     public String getBoardFromDocument(Document document){
-        Service s=new Service();
-        String a = document.get("gameBoard").toString().split("=")[1].split("}}")[0];
-        return a;
-//        return s.stringToMatrix(a);//TODO:check service
+        return document.get("gameBoard").toString().split("=")[1].split("}}")[0];
     }
     public int[] getBagFromDocument(Document document){
-        Service s=new Service();
         String[] quantitisString = (document.get("bag")).toString().split("bag:")[0].split(",");
         quantitisString[0] = quantitisString[0].split("=")[1];
         quantitisString[quantitisString.length-1] = quantitisString[quantitisString.length-1].split("}}")[0];
@@ -86,7 +78,7 @@ public class DBcom {
         }
         return quantities;
     }
-    public static Map<String,String> getMapFromJSON(Document document, String mapName) throws JsonProcessingException {
+    public Map<String,String> getMapFromJSON(Document document, String mapName) throws JsonProcessingException {
         Map<String, String> map = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(document);
@@ -101,7 +93,7 @@ public class DBcom {
         }
         return map;
     }
-    public static ArrayList<String> getArrayListFromJSON(Document document, String listName) throws JsonProcessingException {
+    public ArrayList<String> getArrayListFromJSON(Document document, String listName) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayList<String> arrayList = new ArrayList<>();
         String json = objectMapper.writeValueAsString(document);
@@ -116,7 +108,7 @@ public class DBcom {
         return arrayList;
     }
 
-    public static Document readFromDB(int serverPort) {
+    public Document readFromDB(int serverPort) {
         MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection(collectionName);
@@ -125,14 +117,4 @@ public class DBcom {
         mongoClient.close();
         return d;
     }
-
-//    public static void main(String[] args) throws InterruptedException, JsonProcessingException {
-//
-//        MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-//        MongoDatabase database = mongoClient.getDatabase("mydb");
-//        MongoCollection<Document> collection = database.getCollection(collectionName);
-//        Document document = readFromDB(6393);
-//        System.out.println(getMapFromJSON(document,"pTilesMap"));
-//
-//    }
 }

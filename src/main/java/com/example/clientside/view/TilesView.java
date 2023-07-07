@@ -7,7 +7,6 @@ import javafx.scene.text.Font;
 
 
 public class TilesView extends Canvas {
-    private String[] tiles;
     public final int cellSize = 30;
     private String[] tilesArray= new String[]{""};
     public TilesView() {

@@ -1,12 +1,9 @@
 package com.example.clientside.view;
-import com.example.Game.Board;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class BoardView extends Canvas {
@@ -25,23 +22,22 @@ public class BoardView extends Canvas {
     public void setBoard(String [][] board,String[][] boardTiles){
         this.boardTiles=boardTiles;
         this.board = board;
-        this.gc = gc;
         this.W = getWidth();
         this.H = getHeight();
         this.w = W/board[0].length;
-        this.h = H/board.length;;
+        this.h = H/board.length;
         reDraw();
 
     }
     public void newTile(double boardWidth,double h,int i,int j,boolean vertical,String text){
         if (vertical)
             for(char c: text.toCharArray()){
-                fillText(this.gc,boardWidth,h,i,j,""+c);
+                fillText(this.gc,boardWidth,h,i,j, String.valueOf(c));
                 i++;
             }
         else
             for(char c: text.toCharArray()){
-                fillText(this.gc,boardWidth,h,i,j,""+c);
+                fillText(this.gc,boardWidth,h,i,j, String.valueOf(c));
                 j++;
             }
     }
@@ -54,10 +50,8 @@ public class BoardView extends Canvas {
         gc.fillText(text, j * boardWidth + (boardWidth /4), i * h + (2*h / 3));
     }
     public void reDrawTilesBoard(String[][]board1) {
-        if (this.boardTiles.equals(board1)) {
+        if (this.boardTiles.equals(board1))
             System.out.println("this.boardTiles.equals(board)");
-            return;
-        }
         else {
             //System.out.println("else this.boardTiles.equals(board)");
             for (int i = 0; i < board1.length; i++) {
@@ -72,9 +66,7 @@ public class BoardView extends Canvas {
         }
     }
     private void reDraw() {
-        if(board == null)
-            return;
-        else{
+        if(board != null) {
             for (int i =0; i<board.length; i++)
                 for (int j =0; j< board[i].length; j++){
                     switch (board[i][j]) {

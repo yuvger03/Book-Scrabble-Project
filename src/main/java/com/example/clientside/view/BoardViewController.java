@@ -1,11 +1,8 @@
 package com.example.clientside.view;
 
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,8 +16,7 @@ public class BoardViewController implements Observer, Initializable {
     BoardView boardView;
     @FXML
     TilesView tilesView;
-//    @FXML
-//    Button doneButton;
+
 
     public String[][] boardData;
     public String[] tilesArray;
@@ -76,8 +72,4 @@ public class BoardViewController implements Observer, Initializable {
         // Update logic here
     }
 
-    public void checkBoard() {
-        System.out.println("checkBoard");
-        // check that all the words on the board are legal
-    }
 }
