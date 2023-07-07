@@ -49,10 +49,11 @@ public class GuestHandler implements IClientHandler {
                              HM.setPlayerScore(score,playerName);
                              String fillTiles = "null";
                              if (score > 0) {
-                                //int count = wordString.length();
-                                fillTiles = HM.fillTilesArray( wordString.length());
-                                fillTiles += "/" + wordString;
-                                HM.setPlayerTiles(fillTiles,playerName);
+                                 //int count = wordString.length();
+                                 String updatedString = wordString.replace("_", "");
+                                 fillTiles = HM.fillTilesArray(updatedString);
+                                 fillTiles += "/" + updatedString;
+                                 HM.setPlayerTiles(fillTiles,playerName);
                              }
                              host.notifyAll(playerName + "-tryToPlace-" + String.valueOf(score) + "-" + fillTiles);
 
@@ -68,6 +69,8 @@ public class GuestHandler implements IClientHandler {
                              Tile t = HM.getRand();
                              String s = service.TileToString(t);
                              host.notifyAll(playerName + "-getTileFromBag-" + s + "- ");
+                             HM.nextPlayer();
+                             host.notifyAll("turn-" + "TURN OF:"+HM.current_player);
                          }
                      } else if (!key.equals("startGame") && !key.equals("joinToGame"))
                          host.notifyAll(playerName + "-" + "message-NOT YOUR TURN, PLEASE WAIT TO YOUR TURN- ");

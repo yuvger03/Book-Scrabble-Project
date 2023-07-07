@@ -134,9 +134,8 @@ public class PlayerModel extends Observable {
                 setChanged();
                 notifyObservers("scoreResult");
 
-            } else if(inputString.equals("not valid")){
-                score="invalid placement, you don't have a tiles for this word";
             }
+
             else{
                 score = "YOUR SCORE- "+inputString;
                 setChanged();
@@ -160,7 +159,6 @@ public class PlayerModel extends Observable {
                 setChanged();
                 notifyObservers("tiles");
             }
-            score="YOUR SCORE-0 ";
 
         }
         if (func.equals("totalScore")){

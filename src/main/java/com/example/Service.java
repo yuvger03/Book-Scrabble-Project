@@ -50,8 +50,13 @@ public class Service {
         int score;
         Tile[] tiles = new Tile[wordText.length()];
         for (int i = 0; i < wordText.length(); i++) {
-            score = calculateScore(wordText.charAt(i));
-            tiles[i] = new Tile(wordText.charAt(i), score);
+            if(wordText.charAt(i)=='_'){
+                tiles[i]=null;
+            }
+            else {
+                score = calculateScore(wordText.charAt(i));
+                tiles[i] = new Tile(wordText.charAt(i), score);
+            }
         }
         int row = Integer.parseInt(array[1])-1;
         int col=Integer.parseInt(array[2])-1;
@@ -149,17 +154,34 @@ public class Service {
             char character = tile.letter;
             tileFrequencyMap.put(character, tileFrequencyMap.getOrDefault(character, 0) + 1);
         }
-
         // Check if all letters in the word are present in tiles
         for (int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
+            if(letter=='_')
+                continue;
             if (!tileFrequencyMap.containsKey(letter) || tileFrequencyMap.get(letter) == 0) {
                 return false;
             }
             tileFrequencyMap.put(letter, tileFrequencyMap.get(letter) - 1);
         }
-
         return true;
+    }
+
+    public String getWordStringWithoutExistingTiles(Word word,Tile[][]gameboard){
+        StringBuilder newWord=new StringBuilder();
+        int row= word.getRow();
+        int col=word.getCol();
+        for(int i=0;i<word.getTiles().length;i++){
+            if(gameboard[row][col]==null){
+                newWord.append(word.getTiles()[i].letter);
+            if(word.isVertical())
+                row++;
+            else
+                col++;
+            }
+        }
+        System.out.println("newWord= "+newWord.toString());
+        return newWord.toString();
     }
 
     public String TileToString(Tile tile) {

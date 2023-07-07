@@ -76,6 +76,7 @@ public class HostManager {
         }
 
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
+        System.out.println("try to place word222= "+test.toString());
 
         int sum = 0;
 //        System.out.println("BoardLegal    " + test.toString() );
@@ -165,9 +166,12 @@ public class HostManager {
     public void startGame() {
     }
 
-    public String fillTilesArray(int count) {
+    public String fillTilesArray(String word) {
         String s = "";
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < word.length(); i++) {
+            if(word.charAt(i)=='_'){
+                continue;
+            }
             String c = String.valueOf(getRand().letter);
             s += c;
         }

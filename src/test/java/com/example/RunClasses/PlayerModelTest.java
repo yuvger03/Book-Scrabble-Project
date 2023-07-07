@@ -60,7 +60,7 @@ public class PlayerModelTest {
         playerModel.p_tiles = new ArrayList<>();
         playerModel.p_tiles.add(new Tile('A',1));
         playerModel.p_tiles.add(new Tile('B',3));
-        String[] args = {"tryToPlace", "1", "CD/AB"};
+        String[] args = {"tryToPlace","1", "CD/AB"};
 
         // Invoke the getFunc method
         playerModel.getFunc(args);
@@ -76,7 +76,7 @@ public class PlayerModelTest {
     public void testGetFunc_tryToPlaceInvalidWord() {
         // Set up initial state
         playerModel.score = "";
-        String[] args = {"tryToPlace", "0", ""};
+        String[] args = {"tryToPlace", "0", "null"};
 
         // Invoke the getFunc method
         playerModel.getFunc(args);
