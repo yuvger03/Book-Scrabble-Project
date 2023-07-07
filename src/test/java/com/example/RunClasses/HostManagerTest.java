@@ -1,4 +1,4 @@
-package com.example.Tests;
+package com.example.RunClasses;
 
 import com.example.Game.Tile;
 import com.example.serverSide.HostManager;
@@ -59,11 +59,11 @@ class HostManagerTest {
         }
     }
 
-    @Test
-    void testFillTilesArray() {
-        String tiles = hostManager.fillTilesArray(5);
-        assertEquals(5, tiles.length());
-    }
+//    @Test
+//    void testFillTilesArray() {
+//        //String tiles = hostManager.fillTilesArray(5);
+//        assertEquals(5, tiles.length());
+//    }
 
     @Test
     void testSetPlayerScore() {

@@ -1,4 +1,4 @@
-package com.example.Tests;
+package com.example.RunClasses;
 
 import com.example.clientside.Models.PlayerModel;
 import com.example.clientside.viewmodel.GameScreenViewModel;

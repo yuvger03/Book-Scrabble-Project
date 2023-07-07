@@ -52,7 +52,11 @@ public class HostModeModel extends PlayerModel {
 
     public void saveGame() {
         this.hostServer.saveGame();
-        close();
+        //close();
+    }
+    public void endGame() {
+        this.hostServer.endGame();
+        //close();
     }
     //    public void notifyAll(String update) {
 //        for (Socket s : sockets) {

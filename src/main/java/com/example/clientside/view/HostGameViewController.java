@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 public class HostGameViewController extends GameScreenViewController {
     @FXML
     Button endGame;
-
+    @FXML
+    Button saveGame;
     HostGameViewModel hvm;
 
 
@@ -16,10 +17,14 @@ public class HostGameViewController extends GameScreenViewController {
         super.setGameVM(gvm);
         this.hvm = gvm;
     }
+    public void saveGame(){
+        hvm.saveGame();
 
+    }
     public void endGame(){
         hvm.endGame();
         Stage stage = (Stage) endGame.getScene().getWindow();
         stage.close();
     }
+
 }

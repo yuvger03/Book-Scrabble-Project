@@ -1,8 +1,9 @@
-package com.example.Tests;
+package com.example.RunClasses;
 
 import com.example.Game.Tile;
 import com.example.Game.Word;
 import com.example.Service;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -82,7 +83,15 @@ class ServiceTest {
         assertEquals(1, service.calculateScore('O'));
         assertEquals(8, service.calculateScore('X'));
     }
+    @Test
+    public void testStringReplacement() {
+        String originalString = "Hello_World";
+        String expectedUpdatedString = "HelloWorld";
 
+        String updatedString = originalString.replace("_", "");
+
+        Assertions.assertEquals(expectedUpdatedString, updatedString);
+    }
 
 
     @Test

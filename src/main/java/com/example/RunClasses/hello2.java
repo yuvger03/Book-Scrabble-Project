@@ -1,24 +1,17 @@
-package com.example.Tests;
+package com.example.RunClasses;
 
 import com.example.clientside.HelloApplication;
-import com.example.clientside.Models.HostModeModel;
 import com.example.clientside.Models.MenuModel;
-import com.example.clientside.view.HostModeViewController;
 import com.example.clientside.view.menuViewController;
-import com.example.clientside.viewmodel.HostModeViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
 import javafx.application.Application;
-import java.util.Observable;
-import java.util.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Observer;
 
-public class hello3 extends Application {
+public class hello2 extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         MenuModel mm = new MenuModel();

@@ -157,6 +157,10 @@ public class MyHostServer {
     public void saveGame()  {
         DBcom dBcom = new DBcom();
         dBcom.saveToDB(guestHandler1.HM);
+
+
+    }
+    public void endGame(){
         notifyAll("message-GAME OVER BY THE HOST - BYE BYE");
         //stop=true;
         try {
@@ -166,7 +170,15 @@ public class MyHostServer {
         }
         notifyAll("closeGame-");
         System.exit(0);
-
+    }
+    public void gameOver(){
+        try {
+            Thread.sleep(1000); // Sleep for 2 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        notifyAll("closeGame-");
+        System.exit(0);
     }
 }
 

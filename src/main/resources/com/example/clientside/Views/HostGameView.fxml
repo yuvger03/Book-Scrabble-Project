@@ -38,11 +38,12 @@
                 <Label fx:id="scoreResult"  prefHeight="25.0" prefWidth="400.0" text="result" textAlignment="CENTER" style="-fx-font-size: 14px;"/>
             </children>
         </HBox>
-        <Button fx:id="endGame" layoutX="580.0" layoutY="20.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="end and save" onAction="#endGame" />
+        <Button fx:id="endGame" layoutX="610.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="end game" onAction="#endGame" />
+        <Button fx:id="saveGame" layoutX="610.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="save game" onAction="#saveGame" />
 
         <VBox  layoutX="20.0" layoutY="20.0" prefHeight="250.0" prefWidth="100.0">
             <children>
-                <Label fx:id="currentPlayer" prefHeight="25.0" prefWidth="250.0"  style="-fx-font-size: 16px;" wrapText="true" contentDisplay="CENTER" />
+                <Label fx:id="currentPlayer"  prefHeight="25.0" prefWidth="250.0"  style="-fx-font-size: 16px;" wrapText="true" contentDisplay="CENTER" />
                 <Text fill="BLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="">
                     <font>
                         <Font size="12.0" />

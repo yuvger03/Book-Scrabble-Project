@@ -68,8 +68,9 @@ public class HostGameViewModel extends GameScreenViewModel {
 //    public void addTile() {
 //        player.getTileFromBag();
 //    }
-    public void endGame(){
+    public void saveGame(){
         player.saveGame();}
-
+    public void endGame(){
+        player.endGame();}
 }
 

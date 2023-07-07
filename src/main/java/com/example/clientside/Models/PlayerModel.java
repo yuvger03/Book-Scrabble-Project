@@ -22,19 +22,17 @@ public class PlayerModel extends Observable {
     public String gameBoard;
     private Board board_game; //YUVAL
     public ArrayList<Tile> p_tiles;
-    //public String tilesStringArray;
+
     public int serverPort;
-    String currentTurn;
+
     public String message;
     public Scanner inFromServer;
     public PrintWriter outToServer;
     Service service;
-    boolean itsTurn = false;
     CountDownLatch connectionLatch; // added field
+
     public boolean stop= false;
 
-    //TODO: understand how gameServer connection works
-    //Server gameServer; each player has a instance of its gameServer.
     public PlayerModel() {
         name = null;
         totalScore = "0";
@@ -136,7 +134,10 @@ public class PlayerModel extends Observable {
                 setChanged();
                 notifyObservers("scoreResult");
 
-            } else {
+            } else if(inputString.equals("not valid")){
+                score="invalid placement, you don't have a tiles for this word";
+            }
+            else{
                 score = "YOUR SCORE- "+inputString;
                 setChanged();
                 notifyObservers("scoreResult");
@@ -159,6 +160,8 @@ public class PlayerModel extends Observable {
                 setChanged();
                 notifyObservers("tiles");
             }
+            score="YOUR SCORE-0 ";
+
         }
         if (func.equals("totalScore")){
             System.out.println("total score - "+inputString);
@@ -172,6 +175,8 @@ public class PlayerModel extends Observable {
 
             if(func.equals("getTileFromBag")){
             p_tiles.add(service.stringToTile(inputString));
+                setChanged();
+                notifyObservers("tiles");
         }
         if(func.equals("message")){
             System.out.println("message "+inputString);
@@ -190,6 +195,7 @@ public class PlayerModel extends Observable {
             notifyObservers("tiles");
         }
 
+
     public void tryToPlace(String word) {
         String justWord=service.getWordString(word);
         boolean valid = service.validateWord( justWord, p_tiles);
@@ -204,18 +210,13 @@ public class PlayerModel extends Observable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("TRY SEND SERVER \n");//TODO PRINTFORTEST
-        //System.out.println(word);
-        //System.out.println(this.name+ "-tryToPlace" + "-" + word);
         outToServer.println(this.name+ "-tryToPlace" + "-" + word);
         outToServer.flush();
-        System.out.println("outToServer try to place-"+outToServer);//TODO PRINTFORTEST
-        System.out.println("TRY SEND SERVER777 \n");//TODO PRINTFORTEST
     }
 
 
     public void getTileFromBag() {
-        if(p_tiles.size()<countTiles) {
+        if(p_tiles.size()<countTiles+3) {
             outToServer.println(this.name + "-" + "getTileFromBag-");
             outToServer.flush();
         }

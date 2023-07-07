@@ -1,4 +1,4 @@
-package com.example.Tests;
+package com.example.RunClasses;
 //
 //import com.example.Game.Tile;
 //import com.example.Game.Word;
