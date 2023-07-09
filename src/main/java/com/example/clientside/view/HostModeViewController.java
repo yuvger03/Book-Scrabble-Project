@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.clientside.HelloApplication;
+import com.example.clientside.StartHost;
 import com.example.clientside.viewmodel.HostGameViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
 import javafx.fxml.FXML;
@@ -51,7 +51,7 @@ public void setHostViewModel(HostModeViewModel hvm){
         HostGameViewModel hgvm=new HostGameViewModel(HVM.getHostModel());
         Stage stage = (Stage) start.getScene().getWindow();
         stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/HostGameView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/HostGameView.fxml"));
         stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);

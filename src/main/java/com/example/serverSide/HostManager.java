@@ -47,8 +47,7 @@ public class HostManager {
             Socket serverSocket = new Socket("localhost", serverPort);
             PrintWriter outToServer = new PrintWriter(serverSocket.getOutputStream());
             Scanner inFromServer = new Scanner(serverSocket.getInputStream());
-            System.out.println("word- "+s.getWordString(word));
-            outToServer.println("C,test.txt," + s.getWordString(word));
+            outToServer.println("C,Harray Potter.txt,alice_in_wonderland.txt,test.txt," + s.getWordString(word));
             outToServer.flush();
             result = inFromServer.next();
             inFromServer.close();
@@ -80,30 +79,22 @@ public class HostManager {
         }
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
         int sum = 0;
-        if (gameboard.boardLegal(test)) { //TODO return
-            System.out.println("boardLegal "+ts);
+        if (gameboard.boardLegal(test)) {
              ArrayList<Word> newWords = gameboard.getWords(test);
 
-//             System.out.println("newWords "+newWords.size());
-            System.out.println("board2  host manager "+getBoardGame());
              for (Word nw : newWords) {
-                 System.out.println(dictionaryLegal(s.WordToString(nw)));
                 if (dictionaryLegal(s.WordToString(nw))) {
-                    System.out.println("this word is in the dict");
                     sum += gameboard.getScore(nw);
                 }
                 else {
-                    System.out.println("this word is not in dict");
                     return 0;
                 }
-            } //TODO return
+            }
         }
         else {
-            System.out.println("board is not legal");
              return 0;
         }
         // the placement
-        System.out.println("put on board");
         row = w.getRow();
         col = w.getCol();
         for (Tile t : w.getTiles()) {

@@ -1,6 +1,6 @@
 package com.example.RunClasses;
 
-import com.example.clientside.HelloApplication;
+import com.example.clientside.StartHost;
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.view.menuViewController;
 import com.example.clientside.viewmodel.MenuViewModel;
@@ -20,7 +20,7 @@ public class hello3 extends Application {
         //HostModeModel hm=new HostModeModel(8080);
         //HostModeViewModel hvm=new HostModeViewModel(hm);
         //hm.addObserver(hvm);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

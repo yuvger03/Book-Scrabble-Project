@@ -1,5 +1,6 @@
-package com.example.clientside;
+package com.example.RunClasses;
 
+import com.example.clientside.StartHost;
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.view.menuViewController;
 import com.example.clientside.viewmodel.MenuViewModel;
@@ -7,15 +8,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class StartGuest extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         MenuModel mm = new MenuModel();
         MenuViewModel menuVM = new MenuViewModel(mm);
         mm.addObserver(menuVM);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

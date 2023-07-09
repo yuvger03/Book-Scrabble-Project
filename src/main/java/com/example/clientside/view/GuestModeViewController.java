@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.clientside.HelloApplication;
+import com.example.clientside.StartHost;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.GuestModeViewModel;
 import javafx.fxml.FXML;
@@ -31,7 +31,7 @@ public class GuestModeViewController implements Observer {
         GameScreenViewModel gvm = new GameScreenViewModel(guestVm.getGuestModel());
         Stage stage = (Stage) start.getScene().getWindow();
         stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GameScreenView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/GameScreenView.fxml"));
         stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);

@@ -109,7 +109,6 @@ public class PlayerModel extends Observable {
             System.exit(0);
         }
     else if (lineAsList[0].equals(name)) {
-            System.out.println(message);
             getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);
         }
 
@@ -117,9 +116,6 @@ public class PlayerModel extends Observable {
     public void getFunc(String... args) {
         String func=args[0];
         String inputString=args[1];
-        System.out.println("inputString of player "+name+" "+inputString);
-        System.out.println("func of player "+name+" "+func);
-
         if (func.equals("tryToPlace")) {
             if (inputString.equals("0")) {
                 score = "YOUR SCORE - 0 : Invalid placement";
@@ -130,7 +126,6 @@ public class PlayerModel extends Observable {
                 score = "YOUR SCORE- "+inputString;
                 setChanged();
                 notifyObservers("scoreResult");
-                System.out.println(args[2]);
                 if(!args[2].equals("null")) {
                     String[] Tiles = args[2].split("/");
                     Tile[] missingTilesArray = service.StringToTilesArray(Tiles[0]);
@@ -150,7 +145,6 @@ public class PlayerModel extends Observable {
 
         }
         if (func.equals("totalScore")){
-            System.out.println("total score - "+inputString);
             this.totalScore=inputString;
             setChanged();
             notifyObservers("totalScore");
@@ -165,7 +159,6 @@ public class PlayerModel extends Observable {
                 notifyObservers("tiles");
         }
         if(func.equals("message")){
-            System.out.println("message "+inputString);
           this.message=inputString;
             setChanged();
             notifyObservers("message");

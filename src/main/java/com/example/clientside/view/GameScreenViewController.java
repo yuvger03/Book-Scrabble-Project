@@ -30,8 +30,6 @@ public class GameScreenViewController extends BoardViewController {
     GameScreenViewModel GVM;
     Service s = new Service();
 
-//TODO: add button end game &add button save game (only for host)
-
     public void setGameVM(GameScreenViewModel gvm){
         this.GVM = gvm;
         this.GVM.addObserver(this);

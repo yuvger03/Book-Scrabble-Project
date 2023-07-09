@@ -37,7 +37,6 @@ public class MyHostServer {
         public void startServer() {
             try {
                 serverSocket = new ServerSocket(port);
-                System.out.println("Server started on port " + port);
                 while (!stop) {
                     Socket clientSocket = serverSocket.accept();
                     clientSockets.add(clientSocket);
@@ -74,7 +73,6 @@ public class MyHostServer {
                     throw new RuntimeException(e);
                 }
                 outToServer.println(message);
-                System.out.println("notify all "+message);
                 outToServer.flush();
             }
         }

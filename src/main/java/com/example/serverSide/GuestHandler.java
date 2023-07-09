@@ -24,7 +24,6 @@ public class GuestHandler implements IClientHandler {
              if (in.hasNextLine()) {
                  try {
                      String line = in.nextLine();
-                     System.out.println("server " + line);
                      String[] lineAsList = line.split("-");
                      String playerName = lineAsList[0];
                      String key = lineAsList[1];
@@ -33,7 +32,6 @@ public class GuestHandler implements IClientHandler {
                              HM.setPlayerScore(0,playerName);
                              HM.setPlayerTiles("",playerName);
                              host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
-                             System.out.println("server " + playerName + "-" + "joined to game");
                          } else {
                          }
                      }

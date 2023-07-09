@@ -25,7 +25,6 @@ public class HostModeModel extends PlayerModel {
         this.serverPort = 6000 + r.nextInt(1000);
         System.out.println("serverPort "+serverPort);
         this.guestHandler = guestHandler1;
-        System.out.println("im here");
         startServer();
         connectServer();
     }

@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.clientside.HelloApplication;
+import com.example.clientside.StartHost;
 import com.example.clientside.viewmodel.GuestModeViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
@@ -29,7 +29,7 @@ public class menuViewController implements Observer {
         HostModeViewModel hvm=menuVM.pressedHost();
         Stage stage = (Stage) name.getScene().getWindow();
         stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/HostModeView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/HostModeView.fxml"));
         stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
@@ -42,7 +42,7 @@ public class menuViewController implements Observer {
         GuestModeViewModel guestvm = menuVM.pressedGuest();
         Stage stage = (Stage) name.getScene().getWindow();
         stage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Views/GuestModeView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/GuestModeView.fxml"));
         stage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);

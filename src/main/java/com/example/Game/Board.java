@@ -116,21 +116,15 @@ public class Board {
 			eCol = col + w.getTiles().length - 1;
 		}
 		if (!inBoard(eRow, eCol)){
-			System.out.println(eRow + " !inBoard(eRow, eCol) " + eCol);
 			return false;}
 
 		if (isEmpty && !onStar(w)){
-			System.out.println(isEmpty + " isEmpty && !onStar(w) " + onStar(w));
-			System.out.println(eRow + " isEmpty && !onStar(w) " + eCol);
 			return false;}
 
 		if (!isEmpty && !crossTile(w)){
-
-			System.out.println("!isEmpty && !crossTile(w)");
 			return false;}
 
 		if (changesTile(w)){
-			System.out.println("changesTile(w)");
 			return false;
 		}
 
