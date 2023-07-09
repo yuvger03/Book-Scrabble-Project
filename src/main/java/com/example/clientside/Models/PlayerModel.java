@@ -1,8 +1,6 @@
 package com.example.clientside.Models;
 
-import com.example.Game.Board;
 import com.example.Game.Tile;
-import com.example.Service;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -18,9 +16,9 @@ public class PlayerModel extends Observable {
     public String currentPlayer;
     String name;
     public String totalScore;
-    public String score; //TODO : bind to RESULT IN GAMEsCREEM
+    public String score;
     public String gameBoard;
-    private Board board_game; //YUVAL
+    //private Board board_game;
     public ArrayList<Tile> p_tiles;
 
     public int serverPort;
@@ -36,7 +34,7 @@ public class PlayerModel extends Observable {
     public PlayerModel() {
         name = null;
         totalScore = "0";
-        board_game = new Board();
+       // board_game = new Board();
         p_tiles = new ArrayList<>();
         service = new Service();
         connectionLatch = new CountDownLatch(1); // initialize the latch
@@ -44,7 +42,6 @@ public class PlayerModel extends Observable {
         for(int i=0;i<225;i++){
             gameBoard+="n";
         }
-        System.out.println(gameBoard);
     }
 
     public String getName() {
@@ -72,12 +69,9 @@ public class PlayerModel extends Observable {
                 @Override
                 public void run() {
                     while (!stop) {
-                        //if (inFromServer.hasNextLine()) {
                             String message = inFromServer.nextLine();
-                            //System.out.println(message);
                             if(!message.equals(""))
                                 processMessage(message);
-                        //}
                     }
                 }
             });
@@ -98,7 +92,6 @@ public class PlayerModel extends Observable {
            gameBoard=lineAsList[1];
            setChanged();
            notifyObservers("board");
-            //this.board_game.tiles = service.stringToMatrix(lineAsList[1]);
         } else if(lineAsList[0].equals("message")) {
             this.message=lineAsList[1];
             setChanged();
@@ -117,8 +110,7 @@ public class PlayerModel extends Observable {
         }
     else if (lineAsList[0].equals(name)) {
             System.out.println(message);
-            //getFunc(lineAsList[1],lineAsList[2]);//TODO: check if it possible in try to place
-            getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);//TODO: check if it possible in try to place
+            getFunc(lineAsList[1],lineAsList[2],lineAsList[3]);
         }
 
         }
@@ -133,9 +125,7 @@ public class PlayerModel extends Observable {
                 score = "YOUR SCORE - 0 : Invalid placement";
                 setChanged();
                 notifyObservers("scoreResult");
-
             }
-
             else{
                 score = "YOUR SCORE- "+inputString;
                 setChanged();
@@ -145,8 +135,6 @@ public class PlayerModel extends Observable {
                     String[] Tiles = args[2].split("/");
                     Tile[] missingTilesArray = service.StringToTilesArray(Tiles[0]);
                     Tile[] word = service.StringToTilesArray(Tiles[1]);
-                    ;
-                    //service.stringToWord();
                     for (int i = 0; i < word.length; i++) {
                         int j = 0;
                         while (p_tiles.get(j).letter != (word[i].letter)) {
@@ -185,7 +173,6 @@ public class PlayerModel extends Observable {
 
     }
     public void initTiles(String tilesString) {
-            //tilesStringArray=tilesString;
             String[] TileAsList = tilesString.split("");
             for (int i = 0; i < TileAsList.length; i++)
                 p_tiles.add(service.stringToTile(TileAsList[i]));
@@ -223,19 +210,6 @@ public class PlayerModel extends Observable {
             inFromServer.close();
             outToServer.close();
         }
-//TODO:implement the gameServer connection funcs.
-//    public abstract void connectServer();
-//    public boolean isWordValid(ArrayList<> word)
-//    public int isLocationValid(ArrayList<> Location) -list [x,y] or (int x, int y)
-//    public int getScoreFromServer(){};- no need for now-getting score from location func.
-        // the flow of connection:
-        // pre game- all players get from gameServer 7 random tiles from bag
-        // a player want to locate word-> sent word to gameServer
-        //gameServer returns valid/not valid
-        //if valid- player wants so locate word-> player send location
-        //gameServer returns valid/not valid for location of the word.
-        // if location is valid gameServer returns the score that the player gets after locating this word. if not valid-gameServer return -1.
-        // gameServer completes the players tiles to 7 tiles.
 
     }
 

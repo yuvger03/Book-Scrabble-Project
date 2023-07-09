@@ -4,13 +4,14 @@ import com.example.clientside.HelloApplication;
 import com.example.clientside.viewmodel.GuestModeViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;
-import java.io.IOException;
-import java.util.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Observer;
 
 public class menuViewController implements Observer {
     @FXML

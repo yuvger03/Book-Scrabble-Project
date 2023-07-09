@@ -2,7 +2,7 @@ package com.example.RunClasses;
 
 import com.example.Game.Tile;
 import com.example.Game.Word;
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

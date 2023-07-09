@@ -1,4 +1,4 @@
-package com.example;
+package com.example.clientside.Models;
 
 import com.example.Game.Tile;
 import com.example.Game.Word;
@@ -83,25 +83,6 @@ public class Service {
         return sb.toString();
     }
 
-//    public Tile[][] stringToMatrix(String input) {
-//        if (input.length() != 225) {
-//            throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
-//        }
-//        Tile[][] matrix = new Tile[15][15];
-//        int index = 0;
-//        for (int row = 0; row < matrix.length; row++) {
-//            for (int col = 0; col < matrix[row].length; col++) {
-//                if(input.charAt(index)!='n') {
-//                    matrix[row][col]=new Tile(input.charAt(index),calculateScore(input.charAt(index)));
-//                }
-//                else {
-//                    matrix[row][col]=null;
-//                }
-//                index++;
-//            }
-//        }
-//        return matrix;
-//    }
     public String[][] stringToMatrixS(String input) {
         if (input.length() != 225) {
             throw new IllegalArgumentException("Invalid input string length. Expected length: 225");
@@ -117,13 +98,11 @@ public class Service {
                 else {
                     matrix[row][col]="n";
                 }
-                //System.out.println( matrix[row][col]);
                 index++;
             }
         }
         return matrix;
     }
-
 
     public int calculateScore(char c) {
         {
@@ -165,23 +144,6 @@ public class Service {
             tileFrequencyMap.put(letter, tileFrequencyMap.get(letter) - 1);
         }
         return true;
-    }
-
-    public String getWordStringWithoutExistingTiles(Word word,Tile[][]gameboard){
-        StringBuilder newWord=new StringBuilder();
-        int row= word.getRow();
-        int col=word.getCol();
-        for(int i=0;i<word.getTiles().length;i++){
-            if(gameboard[row][col]==null){
-                newWord.append(word.getTiles()[i].letter);
-            if(word.isVertical())
-                row++;
-            else
-                col++;
-            }
-        }
-        System.out.println("newWord= "+newWord.toString());
-        return newWord.toString();
     }
 
     public String TileToString(Tile tile) {

@@ -2,7 +2,7 @@ package com.example.serverSide;
 
 import com.example.Game.Board;
 import com.example.Game.Tile;
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.mongodb.client.*;

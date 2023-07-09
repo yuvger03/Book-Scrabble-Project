@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;

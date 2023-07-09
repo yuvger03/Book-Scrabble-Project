@@ -1,6 +1,6 @@
 package com.example.clientside.viewmodel;
 
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import com.example.clientside.Models.PlayerModel;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -42,9 +42,7 @@ public class GameScreenViewModel extends Observable implements Observer {
     }
 
     public void SendWord() {//make obj WORD to string- "word,row,col,vertical"
-        System.out.println("send word func vm \n");//TODO PRINTFORTEST
         String w;
-        System.out.println("vertical send word- "+vertical);
         if (vertical.get()) {
             w = word.get() + "," + row.get() + "," + col.get() + ",T";
             System.out.println(w);

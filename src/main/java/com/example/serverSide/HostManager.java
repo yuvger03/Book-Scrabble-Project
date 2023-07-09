@@ -3,7 +3,7 @@ package com.example.serverSide;
 import com.example.Game.Board;
 import com.example.Game.Tile;
 import com.example.Game.Word;
-import com.example.Service;
+import com.example.clientside.Models.Service;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -76,7 +76,7 @@ public class HostManager {
         }
 
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
-        System.out.println("try to place word222= "+test.toString());
+        //System.out.println("try to place word222= "+test.toString());
 
         int sum = 0;
 //        System.out.println("BoardLegal    " + test.toString() );

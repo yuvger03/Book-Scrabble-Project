@@ -36,7 +36,7 @@ package com.example.RunClasses;
 
 import com.example.Game.Tile;
 import com.example.Game.Word;
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import com.example.clientside.Models.HostModeModel;
 import com.example.serverSide.GuestHandler;
 import com.example.serverSide.HostManager;

@@ -6,7 +6,6 @@ public class GuestModeModel extends PlayerModel {
 
     }
 
-
     public GuestModeModel(int port, String name) {
         super();
         this.serverPort = port;
@@ -15,7 +14,6 @@ public class GuestModeModel extends PlayerModel {
     }
 
     public void enterToGame() {
-        //this.serverPort=8081;//for test
         System.out.println("serverPort- "+serverPort);
         connectServer();
     }

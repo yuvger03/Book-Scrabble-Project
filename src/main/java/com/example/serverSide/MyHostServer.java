@@ -1,7 +1,7 @@
 package com.example.serverSide;
 
 import com.example.Game.Tile;
-import com.example.Service;
+import com.example.clientside.Models.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +18,7 @@ public class MyHostServer {
         private int maxThreads;
         public ServerSocket serverSocket;
         public ExecutorService executorService;
+
         protected volatile boolean stop;
         public List<Socket> clientSockets;
         public MyHostServer(int port, GuestHandler guestHandler1, int maxThreads) {
@@ -37,7 +38,6 @@ public class MyHostServer {
             try {
                 serverSocket = new ServerSocket(port);
                 System.out.println("Server started on port " + port);
-                //serverSocket.setSoTimeout(1000);
                 while (!stop) {
                     Socket clientSocket = serverSocket.accept();
                     clientSockets.add(clientSocket);
@@ -93,17 +93,6 @@ public class MyHostServer {
             e.printStackTrace();
         }
     }
-//        public void close() {
-//            stop = true;
-//            try {
-//                executorService.shutdown();
-//                if (serverSocket != null && !serverSocket.isClosed()) {
-//                    serverSocket.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
 
     public void startGame() {
         Service s=new Service();

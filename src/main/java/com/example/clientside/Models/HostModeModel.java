@@ -39,15 +39,9 @@ public class HostModeModel extends PlayerModel {
 
     public void startGame() {
         this.hostServer.startGame();
-        //outToServer.println(this.name+ "-startGame-");
-        //hostServer.notifyAll(this.name + "-startGame" + "-");
-        //System.out.println("start game " + outToServer);
     }
     public void resumeGame(int port) throws JsonProcessingException { //TODO
         this.hostServer.resumeGame(port);
-        //outToServer.println(this.name+ "-startGame-");
-        //hostServer.notifyAll(this.name + "-startGame" + "-");
-        //System.out.println("start game " + outToServer);
     }
 
     public void saveGame() {
@@ -58,18 +52,6 @@ public class HostModeModel extends PlayerModel {
         this.hostServer.endGame();
         //close();
     }
-    //    public void notifyAll(String update) {
-//        for (Socket s : sockets) {
-//            try {
-//                outToServer = new PrintWriter(s.getOutputStream());
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            outToServer.println(update);
-//            //outToServer.flush();
-//        }
-//    }
-
     public void close() {
         inFromServer.close();
         outToServer.close();
