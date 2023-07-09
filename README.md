@@ -44,12 +44,13 @@ Book Scrabble Project has been programmed by the MVVM design with client-server 
 
 
 #### How to resume an existing game
-1. Run the helloAplication Main up to 4 times for a single game
-2. The names of the players will stay the same.
-3. After the host clicks on the button Host he should check what is the port of the game
+1. Run the StartHost.java to start a new game.
+2. Run the StartGuest.java to enter to the game as guests.
+3. The names of the players will stay the same.
+4. After the host clicks on the button Host he should check what is the port of the game
    and the guests will enter this port.
-4. The host will enter the old port's number to the resume game Text Field and will click the resume game button.
-5. Now the game will start from the point it ended.
+5. The host will enter the old port's number to the resume game Text Field and will click the resume game button.
+6. Now the game will start from the point it ended.
 
 ## Documentation
 
