@@ -50,6 +50,6 @@ Book Scrabble Project has been programmed by the MVVM design with client-server 
 4. The host will enter the old port's number to the resume game Text Field and will click the resume game button.
 5. Now the game will start from the point it ended.
 
-##Documentation
+## Documentation
 
 The Documentation and the UML class diagram of the project is available at the https://github.com/yuvger03/clientSide/tree/master/documantation directory
