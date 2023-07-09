@@ -19,7 +19,7 @@ public class DBcom {
         MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
         MongoDatabase database = mongoClient.getDatabase("mydb");
         MongoCollection<Document> collection = database.getCollection(collectionName);
-        int server = hm.hostPort; //TODO: take the server port of the guest not the host
+        int server = hm.hostPort;
         Document document = new Document("Game port" , server);
         document.append("current_player" ,hm.current_player);
         document.append("pTilesMap" ,MaptoDocument(hm.pTilesMap));

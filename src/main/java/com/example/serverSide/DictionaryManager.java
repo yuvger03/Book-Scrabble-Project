@@ -23,7 +23,6 @@ public class DictionaryManager {
 		// System.out.println("args len is: " + args.length);
 		String[] books = Arrays.copyOfRange(args, 0, args.length - 1);
 		for (String book : books) {
-			System.out.println(book);
 			if (!Dictionaries.containsKey(book)) {
 				// System.out.println("New book-" + book);
 				Dictionaries.put(book, new Dictionary(book));

@@ -41,21 +41,25 @@ public class HostManager {
     }
 
 
-    public boolean dictionaryLegal(String word) {//TODO : how implement this func
+    public boolean dictionaryLegal(String word) {
+        String result="";
         try {
             Socket serverSocket = new Socket("localhost", serverPort);
             PrintWriter outToServer = new PrintWriter(serverSocket.getOutputStream());
             Scanner inFromServer = new Scanner(serverSocket.getInputStream());
             System.out.println("word- "+s.getWordString(word));
-            outToServer.println("Q,test.txt,Harry Potter.txt," + s.getWordString(word));
+            outToServer.println("C,test.txt," + s.getWordString(word));
             outToServer.flush();
-            String result = inFromServer.next();
+            result = inFromServer.next();
             inFromServer.close();
             outToServer.close();
             serverSocket.close();
-            return result.equals("true");
+
         } catch (Exception e) {}
-        return false;
+        if(result.equals("true"))
+            return true;
+        else
+            return false;
     }
 
     public boolean dictionaryLegalView(String word){
@@ -74,32 +78,28 @@ public class HostManager {
             else
                 col++;
         }
-
         Word test = new Word(ts, w.getRow(), w.getCol(), w.isVertical());
-        //System.out.println("try to place word222= "+test.toString());
-
         int sum = 0;
-//        System.out.println("BoardLegal    " + test.toString() );
-         if (gameboard.boardLegal(test)) { //TODO return
+        if (gameboard.boardLegal(test)) { //TODO return
             System.out.println("boardLegal "+ts);
              ArrayList<Word> newWords = gameboard.getWords(test);
-             System.out.println("newWords "+newWords.size());
-             System.out.println("board2  host manager "+getBoardGame());
+
+//             System.out.println("newWords "+newWords.size());
+            System.out.println("board2  host manager "+getBoardGame());
              for (Word nw : newWords) {
                  System.out.println(dictionaryLegal(s.WordToString(nw)));
-                if (dictionaryLegalView(s.WordToString(nw)))
+                if (dictionaryLegal(s.WordToString(nw))) {
+                    System.out.println("this word is in the dict");
                     sum += gameboard.getScore(nw);
+                }
                 else {
-                    System.out.println("board1  host manager "+getBoardGame());
-                    System.out.println("else forloop return 0");
+                    System.out.println("this word is not in dict");
                     return 0;
                 }
             } //TODO return
         }
         else {
-            System.out.println("else return 0");
-             System.out.println("boarf d host manager "+getBoardGame());
-
+            System.out.println("board is not legal");
              return 0;
         }
         // the placement
@@ -129,7 +129,7 @@ public class HostManager {
         return b.getRand();
     }
 
-    public String getPlayerTurn() { // TODO: implementation this func
+    public String getPlayerTurn() {
 
         return playersList.get(index);
     }
@@ -159,12 +159,6 @@ public class HostManager {
         return array;
     }
 
-    public Board getGameboard() {
-        return gameboard;
-    }
-
-    public void startGame() {
-    }
 
     public String fillTilesArray(String word) {
         String s = "";

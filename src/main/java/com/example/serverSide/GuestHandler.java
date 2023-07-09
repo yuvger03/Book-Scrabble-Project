@@ -32,7 +32,6 @@ public class GuestHandler implements IClientHandler {
                          if (HM.addPlayerToGame(lineAsList[0])) {
                              HM.setPlayerScore(0,playerName);
                              HM.setPlayerTiles("",playerName);
-                             //TODO:save to DB
                              host.notifyAll(playerName + "-" + "message- YOU JOIN GAME:) PLEASE WAIT THE GAME STARTED BY HOST- ");
                              System.out.println("server " + playerName + "-" + "joined to game");
                          } else {

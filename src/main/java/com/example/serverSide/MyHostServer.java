@@ -97,11 +97,8 @@ public class MyHostServer {
     public void startGame() {
         Service s=new Service();
         guestHandler1.HM.hostPort = port;
-        System.out.println("gameStarted\n"); //TODO shira
-        System.out.println("HM.index "+guestHandler1.HM.index); //TODO shira
+
         guestHandler1.HM.current_player =  guestHandler1.HM.playersList.get( guestHandler1.HM.index);
-        System.out.println("HM.current_player "+ guestHandler1.HM.playersList.get(guestHandler1.HM.index));
-        System.out.println("guestHandler1.HM.playersList.size()- "+guestHandler1.HM.playersList.size());
         for (int i = 0; i <  guestHandler1.HM.playersList.size(); i++) {
             ArrayList<Tile> tiles =  guestHandler1.HM.initTileArray();
             String tielsString = "";
@@ -120,7 +117,7 @@ public class MyHostServer {
         System.out.println("game resumed\n");
         guestHandler1.HM.current_player =  dBcom.readFromDB(port).getString("current_player");
         guestHandler1.HM.index = guestHandler1.HM.playersList.indexOf(guestHandler1.HM.current_player);
-        //TODO: check that the same players connected to the DB
+
         guestHandler1.HM.pTilesMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"pTilesMap");
         guestHandler1.HM.scoreMap = dBcom.getMapFromJSON(dBcom.readFromDB(port),"scoreMap");
         for (int i=0;i<guestHandler1.HM.gameboard.tiles.length;i++)

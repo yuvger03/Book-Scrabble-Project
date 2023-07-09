@@ -18,5 +18,7 @@ module com.example.clientside {
     opens com.example.clientside.Models to javafx.fxml;
     exports com.example.RunClasses;
     opens com.example.RunClasses to javafx.fxml;
+    exports com.example.serverSide;
+    opens com.example.serverSide to javafx.fxml;
 
 }

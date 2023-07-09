@@ -38,7 +38,14 @@ public class Board {
 	}
 
 	public Tile[][] getTiles() {
-		return tiles.clone();
+		Tile[][] new_tiles = new Tile[15][15];
+		for(int i = 0; i<15; i++) {
+			for (int j = 0; j < 15; j++)
+				if(this.tiles[i][j]!=null)
+					new_tiles[i][j] = new Tile(tiles[i][j].letter, tiles[i][j].score);
+		}
+		return new_tiles;
+
 	}
 
 	private boolean inBoard(int row, int col) {

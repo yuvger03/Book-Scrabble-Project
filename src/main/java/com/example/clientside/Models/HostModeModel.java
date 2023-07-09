@@ -40,7 +40,7 @@ public class HostModeModel extends PlayerModel {
     public void startGame() {
         this.hostServer.startGame();
     }
-    public void resumeGame(int port) throws JsonProcessingException { //TODO
+    public void resumeGame(int port) throws JsonProcessingException {
         this.hostServer.resumeGame(port);
     }
 
