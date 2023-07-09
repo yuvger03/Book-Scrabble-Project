@@ -17,7 +17,7 @@ public class StartGuest extends Application {
         MenuModel mm = new MenuModel();
         MenuViewModel menuVM = new MenuViewModel(mm);
         mm.addObserver(menuVM);
-        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuViewGuest.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

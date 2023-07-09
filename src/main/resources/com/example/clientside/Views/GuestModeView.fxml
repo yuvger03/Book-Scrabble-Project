@@ -6,21 +6,18 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.GuestModeViewController">
    <bottom>
-      <Button fx:id="start" mnemonicParsing="false" prefHeight="148.0" prefWidth="152.0" text="Start" onAction="#joinToGame" BorderPane.alignment="CENTER">
+      <Button fx:id="start" mnemonicParsing="false" onAction="#joinToGame" prefHeight="148.0" prefWidth="152.0" text="Start" BorderPane.alignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
    </bottom>
    <top>
+
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="ipServer" prefHeight="100.0" prefWidth="336.0" promptText="Enter host IP">
-               <font>
-                  <Font size="42.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="serverPort" prefHeight="108.0" prefWidth="319.0" promptText="Enter port">
+
+            <TextField fx:id="serverPort" layoutX="150.0" layoutY="530.0" prefHeight="100.0" prefWidth="303.0" promptText="Enter port">
                <font>
                   <Font size="42.0" />
                </font>

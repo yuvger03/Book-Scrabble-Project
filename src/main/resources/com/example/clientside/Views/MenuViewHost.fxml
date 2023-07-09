@@ -13,20 +13,11 @@
       </Text>
    </top>
    <center>
-      <ButtonBar prefHeight="382.0" prefWidth="460.0" BorderPane.alignment="CENTER">
-        <buttons>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedGuest" prefHeight="39.0" prefWidth="221.0" text="Guest Mode - Join game">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
           <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedHost" prefHeight="39.0" prefWidth="421.0" text="Host Mode - Start new game">
                <font>
                   <Font size="17.0" />
                </font>
             </Button>
-        </buttons>
-      </ButtonBar>
    </center>
    <bottom>
       <TextField fx:id="name" alignment="CENTER" onInputMethodTextChanged="#gotName" prefHeight="143.0" prefWidth="603.0" promptText="enter your name" BorderPane.alignment="CENTER">

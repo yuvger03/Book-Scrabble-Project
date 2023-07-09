@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class hello3 extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         MenuModel mm = new MenuModel();
@@ -20,7 +21,7 @@ public class hello3 extends Application {
         //HostModeModel hm=new HostModeModel(8080);
         //HostModeViewModel hvm=new HostModeViewModel(hm);
         //hm.addObserver(hvm);
-        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartHost.class.getResource("Views/MenuViewHost.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 650);
         stage.setScene(scene);
         stage.show();

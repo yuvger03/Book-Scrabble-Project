@@ -7,12 +7,16 @@ import java.util.Observable;
 public class MenuModel extends Observable {
     PlayerModel player;
     String name;
+    int gamePort;
+    public MenuModel(int gamePort){
+        this.gamePort=gamePort;
+    }
     public MenuModel(){
 
     }
     public HostModeModel startHostMode(String name){
-        GuestHandler guestHandler = new GuestHandler(8080);
-        this.player = new HostModeModel(8080, guestHandler,name); //enter game port
+        GuestHandler guestHandler = new GuestHandler(gamePort);
+        this.player = new HostModeModel(gamePort, guestHandler,name); //enter game port
         return (HostModeModel)player;
     }
     public GuestModeModel startGuestMode(){

@@ -18,14 +18,12 @@ public class GuestModeViewController implements Observer {
     GuestModeViewModel guestVm;
     @FXML
     TextField serverPort;
-    @FXML
-    TextField ipServer;
+
     @FXML
     Button start;
     public void setGuestViewModel(GuestModeViewModel guestvm) {
         this.guestVm=guestvm;
         guestVm.port.bind(serverPort.textProperty());
-        guestVm.ip.bind(ipServer.textProperty());
     }
     public void joinToGame() throws IOException {
         GameScreenViewModel gvm = new GameScreenViewModel(guestVm.getGuestModel());
