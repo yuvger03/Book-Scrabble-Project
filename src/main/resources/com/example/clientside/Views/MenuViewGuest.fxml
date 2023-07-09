@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="603.0" styleClass="bodybg" stylesheets="@backgrounds/Menu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.menuViewController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our game!" textAlignment="CENTER" wrappingWidth="389.84941601753235" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Text>
+   </top>
+   <center>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#pressedGuest" prefHeight="39.0" prefWidth="221.0" text="Guest Mode - Join game">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+   </center>
+   <bottom>
+      <TextField fx:id="name" alignment="CENTER" onInputMethodTextChanged="#gotName" prefHeight="143.0" prefWidth="603.0" promptText="enter your name" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Italic" size="34.0" />
+         </font>
+      </TextField>
+   </bottom>
+</BorderPane>
