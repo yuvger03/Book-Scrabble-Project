@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.GuestModeViewController">
-   <bottom>
-      <Button fx:id="start" mnemonicParsing="false" onAction="#joinToGame" prefHeight="148.0" prefWidth="152.0" text="Start" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/waitingRoom.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.GuestModeViewController">
+   <children>
+      <Button fx:id="start" layoutX="232.0" layoutY="302.0" mnemonicParsing="false" onAction="#joinToGame" text="Start" BorderPane.alignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
       </Button>
-   </bottom>
-   <top>
-
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-
-            <TextField fx:id="serverPort" layoutX="150.0" layoutY="530.0" prefHeight="100.0" prefWidth="303.0" promptText="Enter port">
-               <font>
-                  <Font size="42.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-   </top>
-</BorderPane>
+         <TextField fx:id="serverPort" layoutX="180.0" layoutY="14.0" prefHeight="90.0" prefWidth="242.0" promptText="Enter port">
+            <font>
+               <Font size="42.0" />
+            </font>
+         </TextField>
+   </children>
+</AnchorPane>
