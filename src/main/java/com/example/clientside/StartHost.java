@@ -1,4 +1,4 @@
-package com.example.RunClasses;
+package com.example.clientside;
 
 import com.example.clientside.Models.MenuModel;
 import com.example.clientside.view.menuViewController;

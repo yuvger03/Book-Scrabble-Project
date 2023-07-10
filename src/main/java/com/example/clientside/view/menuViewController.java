@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.RunClasses.StartHost;
+import com.example.clientside.StartHost;
 import com.example.clientside.viewmodel.GuestModeViewModel;
 import com.example.clientside.viewmodel.HostModeViewModel;
 import com.example.clientside.viewmodel.MenuViewModel;

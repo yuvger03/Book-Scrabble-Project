@@ -145,7 +145,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>com.example.clientside/com.example.RunClasses.StartHost</mainClass>
+          <mainClass>com.example.clientside/com.example.clientside.StartHost</mainClass>
           <launcher>app</launcher>
           <jlinkZipName>app</jlinkZipName>
           <jlinkImageName>app</jlinkImageName>

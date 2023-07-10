@@ -1,6 +1,7 @@
 package com.example.RunClasses;
 
 import com.example.clientside.Models.MenuModel;
+import com.example.clientside.StartHost;
 import com.example.clientside.view.menuViewController;
 import com.example.clientside.viewmodel.MenuViewModel;
 import javafx.application.Application;
