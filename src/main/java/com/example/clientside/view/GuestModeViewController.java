@@ -1,6 +1,6 @@
 package com.example.clientside.view;
 
-import com.example.clientside.StartHost;
+import com.example.RunClasses.StartHost;
 import com.example.clientside.viewmodel.GameScreenViewModel;
 import com.example.clientside.viewmodel.GuestModeViewModel;
 import javafx.fxml.FXML;
