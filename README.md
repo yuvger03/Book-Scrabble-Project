@@ -1,7 +1,7 @@
 # Book Scrabble Project 
 Link to github-https://github.com/yuvger03/clientSide
 
-Link for the presentation of Desktop App and flow explanation: https://www.youtube.com/watch?v=0Rmro8iu6vs
+Link for the presentation of Desktop App and flow explanation: https://www.youtube.com/watch?v=oO03EZIiMGI
 
 A Desktop app which simulates a Book Scrabble game played by a host and up to three guests.
 
@@ -33,7 +33,8 @@ The host listens on a random port, game supports local players only (socket conn
    <img width="405" alt="image" src="https://github.com/yuvger03/clientSide/assets/56202649/e957802e-2352-4b30-bcbf-3e7f0559ca02">
 
 5.  All gusets will enter to game, the host can check who joined the game by clicking the button check players.
-6.  The host will start the game after clicking the start button, only then, all players will get tiles from bag and will have the option to play.
+6.  The host will start the game after clicking the start button, only then, all players will get tiles from bag and will have the option to play. ![image](https://github.com/yuvger03/clientSide/assets/56202649/33353dc4-76ad-4c3d-b469-102837ef535a)
+
 7.  GAME RULES AND BASIC ASSAMPTIONS:
     * The host has the first turn. The turn order is determined by the order in which players join the game.
     * Players should enter new words in uppercase letters, e.g., "HELLO."
