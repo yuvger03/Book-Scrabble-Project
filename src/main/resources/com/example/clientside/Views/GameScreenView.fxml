@@ -9,8 +9,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" styleClass="bodybg" stylesheets="@backgrounds/gameview.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientside.view.HostGameViewController">
   <children>
     <Label fx:id="message" layoutX="150.0" layoutY="20.0" prefHeight="25.0" prefWidth="450.0" style="-fx-font-size: 16px;" alignment="CENTER" />
-    <BoardView fx:id="boardView" height="450.0" layoutX="150.0" layoutY="60.0" width="450.0" />
-    <HBox  spacing="10.0" layoutX="150.0" layoutY="530.0" prefHeight="41.0" prefWidth="500.0" alignment="TOP_CENTER">
+    <BoardView fx:id="boardView" height="450.0" layoutX="150.0" layoutY="60.0" width="450.0" starImage="C:\Users\shira\IdeaProjects\src\main\resources\com\example\clientside\Views\star.jpg" />    <HBox  spacing="10.0" layoutX="150.0" layoutY="530.0" prefHeight="41.0" prefWidth="500.0" alignment="TOP_CENTER">
       <children>
         <Text fill="#0f0f23" strokeType="OUTSIDE" strokeWidth="1.0" text="TOTAL SCORE:" style="-fx-background-color: #d4c10f;"   >
           <font>

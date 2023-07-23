@@ -1,9 +1,14 @@
 package com.example.clientside.view;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class BoardView extends Canvas {
@@ -12,11 +17,18 @@ public class BoardView extends Canvas {
     double H ;
     double w ;
     String[][] boardTiles;
-
+    private StringProperty starImage;
     double h ;
     GraphicsContext gc = getGraphicsContext2D();
-    public BoardView(){
 
+    public String getStarImage() {
+        return starImage.get();
+    }
+    public void setStarImage(String starImage) {
+        this.starImage.set(starImage);
+    }
+    public BoardView(){
+        this.starImage = new SimpleStringProperty();
     }
 
     public void setBoard(String [][] board,String[][] boardTiles){
@@ -85,6 +97,16 @@ public class BoardView extends Canvas {
                         case "4":
                             fillGC(this.gc, w, h, i, j, Color.YELLOW);
                             break;
+                        case "5":
+                            Image star=null;
+                            try {
+                                star=new Image(new FileInputStream(starImage.get()));
+                            } catch (FileNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+                            gc.drawImage(star,i*h,j*w,w,h);
+                            break;
+
                         default: //Add number of rows and columns
                             fillGC(this.gc, w, h, i, j, Color.WHITE);
                             fillText(this.gc, w, h, i, j, board[i][j]);
