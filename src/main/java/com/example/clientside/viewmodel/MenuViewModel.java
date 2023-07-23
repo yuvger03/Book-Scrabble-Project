@@ -2,7 +2,7 @@ package com.example.clientside.viewmodel;
 
 import com.example.clientside.Models.GuestModeModel;
 import com.example.clientside.Models.HostModeModel;
-import com.example.clientside.Models.MenuModel;
+import com.example.clientside.Models.IModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -10,15 +10,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class MenuViewModel extends Observable implements Observer {
-    private MenuModel mm;
+public class MenuViewModel extends Observable implements Observer,IViewModel {
+    private IModel mm;
     public StringProperty name;
 
 //    public MenuViewModel(){
 //        this.mm = new MenuModel();
 //        name = new SimpleStringProperty();
 //    }
-    public MenuViewModel(MenuModel m){
+    public MenuViewModel(IModel m){
         this.mm=m;
         name = new SimpleStringProperty();
     }
@@ -35,7 +35,6 @@ public class MenuViewModel extends Observable implements Observer {
         setChanged();
         notifyObservers();
     }
-
 
     public HostModeViewModel pressedHost() {
         HostModeModel hm = mm.startHostMode(name.get());

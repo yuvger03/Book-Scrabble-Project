@@ -4,7 +4,7 @@ import com.example.serverSide.GuestHandler;
 
 import java.util.Observable;
 
-public class MenuModel extends Observable {
+public class MenuModel extends Observable implements IModel{
     PlayerModel player;
     String name;
     int gamePort;
