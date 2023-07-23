@@ -1,7 +1,7 @@
 # Book Scrabble Project 
 Link to github-https://github.com/yuvger03/clientSide
 
-Link for the presentation of Desktop App and flow explanation are attached below
+Link for the presentation of Desktop App and flow explanation: https://www.youtube.com/watch?v=0Rmro8iu6vs
 
 A Desktop app which simulates a Book Scrabble game played by a host and up to three guests.
 
