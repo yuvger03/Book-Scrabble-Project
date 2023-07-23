@@ -34,8 +34,13 @@ The host listens on a random port, game supports local players only (socket conn
 
 5.  All gusets will enter to game, the host can check who joined the game by clicking the button check players.
 6.  The host will start the game after clicking the start button, only then, all players will get tiles from bag and will have the option to play.
-7.  Enjoy the game!
-8.  IMPORTANT: we added a txt file that consist all combinations of letters(eg. A, B, AB, AA, BB .. ) so we can demonstrate the game flow without having hard life to find words that exists in Harry Potter or other dicts.
+7.  GAME RULES AND BASIC ASSAMPTIONS:
+    * The host has the first turn. The turn order is determined by the order in which players join the game.
+    * Players should enter new words in uppercase letters, e.g., "HELLO."
+    * If a player wants to use tiles that already exist on the board, they should replace the tile's letter with an underscore ('_'). For example, if "DAD" is already on the         board, a player can place "_OG" and use the "D" from "DAD."
+    * The game is over if the host decides to end it or if any player reaches 100 points and wins.
+9.  Enjoy the game!
+10.  IMPORTANT: we added a txt file that consist all combinations of letters(eg. A, B, AB, AA, BB .. ) so we can demonstrate the game flow without having hard life to find words that exists in Harry Potter or other dicts.
 
 
 ## PART 3
