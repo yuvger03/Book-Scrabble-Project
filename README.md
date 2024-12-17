@@ -1,5 +1,5 @@
 # Book Scrabble Project 
-Link to github-https://github.com/yuvger03/clientSide
+Link to github-https://github.com/yuvger03/Book-Scrabble-Project
 
 A Desktop app which simulates a Book Scrabble game played by a host and up to three guests.
 
